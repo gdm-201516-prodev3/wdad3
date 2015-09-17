@@ -13,7 +13,7 @@
 |Info|  |
 |----|---|
 |Werktitel|Let's|
-|Subtitel|The World Bank Data Catalog|
+|Subtitel|Local Exchange and Trading System|
 |Milestone 1|**Week 4** Presentatie tussentijds productiedossier|
 |Milestone 2|**Week 6** Presentatie visual designs|
 |Milestone 3|**Week 11** Presentatie alpha versie|
