@@ -37,10 +37,35 @@ Ontwerp en ontwikkel **individueel** een databasegebaseerd softwaresysteem gemaa
 
 Situatie in de praktijk (persona): 
 > Eva knipt mijn haar. Precies zoals ik het wil. Gewoon thuis in mijn keuken, terwijl we kletsen over LETS en andere ditjes en datjes. Dat bespaart me heel wat saaie bezoekjes aan het kapperssalon, een hoop tijd en een geforceerde babbel. Ik laat Richard wel eens genieten van een heerlijke maaltijd. Ik kook voor hem dan een extra portie. Voor mij geen werk en voor hem een aangename afwisseling. Richard tuiniert graag. Hij helpt samen met Theo bij Marko de tuin heraanleggen. Een zware klus als je het alleen wil doen, en een onvergetelijke dag met z'n allen. Diezelfde Marko kan dan weer goed sleutelen. Hij herstelt de fiets van Eva in een handomdraai. Eva doet iets voor mij. Ik doe iets voor Richard. Richard en Theo helpen Marko. Marko doet iets voor Eva. Zo werkt LETS.
+>
+> "Voor mij is het het leukste dat je dingen sámen kan doen. Sámen naar toneel met een even grote fan als ik. Maar ook samen schoonmaken. Dat is én plezant, én het gaat veel sneller.
+Ik vind het ook tof dat je een natuurlijke uitwisseling in geven en ontvangen ervaart." - Jonathan.
+>
+> "Ik ben een alleenstaande moeder. Ik kan lekker koken en ik organiseer kinderfeestjes. Soms voelde ik me wat alleen. Ik moet met weinig zien rond te komen. Babysit kost geld, dus ik ging niet vaak uit. Via LETS kook ik nu af en toe voor een feestje of receptie en ik hou leuke kindernamiddagen. In ruil komt Philip babysitten en krijg ik planten en struiken uit de tuin van Stef. In kan weer meer uit en heb vaker een leuke babbel." - Malika.
 
 
 Functionele specificaties
 -------------------------
+
+Een LETS-systeem bestaat uit de volgende basiselementen:
+
+1. Een groep mensen met een vraag- en aanbodlijst. Hoe groot de groep moet zijn om het systeem te laten werken is afhankelijk van de groep en het doel van het systeem. Met een minimum van 10 mensen kan een groep meestal vrij vlot starten. In die eerste periode is het DOEN belangrijk, en leren aanvoelen of het goed werkt voor iedereen.
+2. Een eenheden-stelsel. Bij de opstart van een LETS-systeem moet je de waarde van een LETS-eenheid bepalen. Als maatstaf voor dit stelsel kan alles dienen, zolang de mensen binnen deze gemeenschap deze afspraak onderschrijven. Een voor de hand liggende en veelgebruikte mogelijkheid in Vlaanderen is om de waarde gelijk te maken aan een tijdgebonden gegeven (vb. een uur werken is 20 eenheden). Dat maakt de LETS-groepen zoals wij die kennen eigenlijk tot "tijdbanken".
+3. Een softwaresysteem voor de administratie. Afhankelijk van de grootte van de LETS-groep kan je dit in het begin al dan niet per computer bijhouden. Als je een LETS-groep wil opzetten die flexibel is, dan moet je administratie op termijn wel makkelijk kunnen werken voor iedereen.
+4. Een gids of krant waarin de LETS-leden kenbaar maken wat ze aan te bieden of nodig hebben. Deze gids wordt regelmatig herzien en opnieuw (eventueel via de online software) beschikbaar gesteld. Alle LETS-leden kunnen gratis hun vraag en aanbod aanpassen en beheren. En iedereen kan in de software zoeken naar goederen of diensten die hij/zij nodig heeft of hebben wil. In het begin volstaan soms enkele kopietjes en raak je zo makkelijk gestart.
+5. Een manier om diensten te waarderen. Omdat LETS-eenheden alleen online, in de computer of het notitieboekje bestaan heb je geen papierengeld of munten nodig om te ruilen. Je waardeert of je wordt gewaardeerd aan de hand van een uitgeschreven bon of een online formulier die centraal verwerkt wordt. Een dienst die jij voor iemand verricht hebt, wordt op jouw stand bijgeteld en bij de ontvanger afgetrokken.
+6. Een kerngroep. Net als in elk systeem moet er gecoördineerd worden. Het werk moet verdeeld worden, taken moeten opgenomen, enzovoort. De manier waarop deze kerngroep samengesteld wordt hangt af van de afspraken die er binnen de LETS-groep worden gemaakt. Maak het in het begin niet te moeilijk en leer stapsgewijs. Overregulering werkt voor niemand prettig.
+
+Los zoveel mogelijk de huidige LETS-problemen op:
+
+- Het aantrekkelijke van LETS is meteen ook de achillespees. Het is immers in principe mogelijk dat een LETS-lid te ver onder nul gaat - met andere woorden een flinke verplichting ten opzichte van de andere LETS-leden opbouwt - en niet goed weet hoe het andere mensen iets kan teruggeven. Soms besluiten leden op dat moment de groep te verlaten.
+- LETS is geen alles-oplossend wondermiddel. Bij mensen blijven bepaalde remmingen en weerstanden bestaan. Timide mensen zullen binnen LETS ook moeilijker de eerste drempels over geraken. Mensen die moeilijk neen kunnen zeggen, zullen wellicht ook niet het eerste uur assertiever worden.
+- LETS-groepen draaien vrijblijvend. Het aanbod is soms beperkt en de vraag groot. Leden met een positief saldo kunnen van anderen niet 'eisen' dat op bepaalde vragen onmiddellijk wordt ingegaan.
+- Mensen moeten vaak zelf het initiatief nemen om bepaalde vragen opgelost te krijgen. En soms kan het lang duren vooraleer anderen op een bepaald aanbod ingaan.
+- Diensten binnen LETS zijn niet professioneel en dus bij voorbaat op individueel vertrouwen. 
+
+
+
 
 
 Technische specificaties
