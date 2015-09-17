@@ -64,24 +64,22 @@ Los zoveel mogelijk de huidige LETS-problemen op:
 - Mensen moeten vaak zelf het initiatief nemen om bepaalde vragen opgelost te krijgen. En soms kan het lang duren vooraleer anderen op een bepaald aanbod ingaan.
 - Diensten binnen LETS zijn niet professioneel en dus bij voorbaat op individueel vertrouwen. 
 
-
-
-
-
 Technische specificaties
 ------------------------
 
-###Frontend
+### Rollen
 
-- Core technologies: HTML5, CSS3 en JavaScript
-- Template engines: Jade, Haml, Swig of Handlebars
-- Storage: JSON bestanden, localstorage en/of IndexedDB
-- Bibliotheken: jQuery, underscore.js, lodash.js, crossroads.js, js-signals, Hasher.js, ...
-- Andere bibliotheken worden hierin aangevuld tijdens het semester!
-- Uitzonderingen mogelijk betreffende JavaScript bibliotheken mogelijk mits toelating!
+- Lid
+- Groepscoördinator
+- Regiocoördinator
+- Landcoördinator
+- Administrator
 
-> Webapplicatie moet responsive zijn! Het responsive framework alsook alle andere bestanden moeten zelf geïmplementeerd worden.
-  
+> - Het LETS- systeem is automatisch een gesloten systeem dat alleen door de leden gebruikt kan worden. Enkel de LETS-leden hebben afgesproken om met elkaar te handelen en de transacties te waarderen met LETS-eenheden. Voor mensen buiten het LETS-systeem hebben LETS-eenheden geen waarde. Ze zullen ze niet accepteren omdat ze er niets mee zijn.
+> - LETS-leden ruilen onderling hun aanbiedingen en vragen uit. De LETS-groep organiseert enkel het kader waarbinnen het ruilen zich kan ontplooien. Zij stelt de middelen ter beschikking waarbinnen leden met elkaar tot uitwisselingen komen.
+> - Als lid van een LETS-groep ga je eerst nadenken over je aanbiedingen en vragen. Het verloop van een lidmaatschap kan tussen verschillende groepen onderling sterk verschillen. Vanaf je lidmaatschap kan je 'letsen' of concreet: kan je je diensten aanbieden en van andere diensten gebruik maken. Afspraken over uitwisselingen van diensten of producten maken de LETS-leden onderling. Ook dit kan van groep tot groep erg verschillen. Het waarderen van een dienst gebeurt tegenwoordig met online software. De software verrekent de transacties op de standen van de vrager en de gever. Het netto-resultaat van alle verrichtingen is steeds nul. Alles wat op een rekening wordt bijgeteld, gaat er immers op een andere rekening af. Binnen een LETS-groep zijn er dus evenveel schulden als tegoeden
+
+> Nog aan te vullen!
 
 Timesheet
 ---------
