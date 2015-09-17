@@ -34,12 +34,9 @@ Ontwerp en ontwikkel **individueel** een databasegebaseerd softwaresysteem gemaa
 
 > LETS staat voor **"Local Exchange and Trading System"**. Vrij vertalen we dit wel eens als "lokaal uitwisselings systeem". Het ruilsysteem in deze vorm ontstond in een plaats in Canada waar op korte termijn de werkverschaffing en dus rechtstreeks de inkomsten van mensen wegtrok. Uit noodzaak gingen zij weer ruilen, maar dan wel op een eigentijdse manier. Nadien heeft het idee zich snel verspreid over de hele wereld.
 
-> Situatie in de praktijk (persona):
->  
-> Eva knipt mijn haar. Precies zoals ik het wil. Gewoon thuis in mijn keuken, terwijl we kletsen over LETS en andere ditjes en datjes. Dat bespaart me heel wat saaie bezoekjes aan het kapperssalon, een hoop tijd en een geforceerde babbel. Ik laat Richard wel eens genieten van een heerlijke maaltijd. Ik kook voor hem dan een extra portie. Voor mij geen werk en voor hem een aangename afwisseling. Richard tuiniert graag. Hij helpt samen met Theo bij Marko de tuin heraanleggen. Een zware klus als je het alleen wil doen, en een onvergetelijke dag met z'n allen. Diezelfde Marko kan dan weer goed sleutelen. Hij herstelt de fiets van Eva in een handomdraai.
- 
 
-Eva doet iets voor mij. Ik doe iets voor Richard. Richard en Theo helpen Marko. Marko doet iets voor Eva. Zo werkt LETS.
+Situatie in de praktijk (persona): 
+> Eva knipt mijn haar. Precies zoals ik het wil. Gewoon thuis in mijn keuken, terwijl we kletsen over LETS en andere ditjes en datjes. Dat bespaart me heel wat saaie bezoekjes aan het kapperssalon, een hoop tijd en een geforceerde babbel. Ik laat Richard wel eens genieten van een heerlijke maaltijd. Ik kook voor hem dan een extra portie. Voor mij geen werk en voor hem een aangename afwisseling. Richard tuiniert graag. Hij helpt samen met Theo bij Marko de tuin heraanleggen. Een zware klus als je het alleen wil doen, en een onvergetelijke dag met z'n allen. Diezelfde Marko kan dan weer goed sleutelen. Hij herstelt de fiets van Eva in een handomdraai. Eva doet iets voor mij. Ik doe iets voor Richard. Richard en Theo helpen Marko. Marko doet iets voor Eva. Zo werkt LETS.
 
 
 Functionele specificaties
