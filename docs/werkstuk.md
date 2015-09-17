@@ -46,15 +46,6 @@ Functionele specificaties
 Technische specificaties
 ------------------------
 
-###Versiebeheer
-
-- Maak een Team aan op **Bitbucket** met als team id het academiejaar gevolgd door de groepsnummer, bv.: **2015-16_2MMPA-01**.
-- Voeg vervolgens de groepsleden hieraan toe.
-- Maak een groepsfoto en voeg deze toe als avatar van het team.
-- Maak in dit team de volgende repositories aan:
-    - **open_the_gates_for_data_app**. Bevat de applicatie volgens de opgelegde mappenstructuur.
-    - **open_the_gates_for_data_docs**. Bevat productiedossier, screenshots, ... volgens de opgelegde structuur.
-
 ###Frontend
 
 - Core technologies: HTML5, CSS3 en JavaScript
@@ -65,29 +56,7 @@ Technische specificaties
 - Uitzonderingen mogelijk betreffende JavaScript bibliotheken mogelijk mits toelating!
 
 > Webapplicatie moet responsive zijn! Het responsive framework alsook alle andere bestanden moeten zelf geïmplementeerd worden.
-
-Mappen en bestanden
--------------------
-
-- **lets_app** (folder)
-    
-    
-- **lets_docs** (folder)
-    - dossier.md
-    - dossier.pdf
-    - poster.pdf
-    - presentatie.pdf
-    - README.md (Bevat een synopsis van de applicatie + relatieve links naar de andere bestanden binnen deze folder)
-    - screencast.mpeg
-    - screenshot_320.png
-    - screenshot_480.png
-    - screenshot_640.png
-    - screenshot_800.png
-    - screenshot_960.png
-    - screenshot_1024.png
-    - screenshot_1280.png  
-    - timesheet.xslx      
-
+  
 
 Timesheet
 ---------
@@ -108,6 +77,29 @@ Houd dagelijks een timesheet bij in Excel en post naar je Bitbucket-repository. 
     
 Source Code Management
 ----------------------
+
+- Maak de volgende repositories aan:
+    - **lets_app**. Bevat de applicatie volgens de opgelegde mappenstructuur.
+    - **lets_docs**. Bevat productiedossier, screenshots, ... volgens de opgelegde structuur.
+
+### Mappen en bestanden
+
+- **lets_app** (folder) 
+- **lets_docs** (folder)
+    - dossier.md
+    - dossier.pdf
+    - poster.pdf
+    - presentatie.pdf
+    - README.md (Bevat een synopsis van de applicatie + relatieve links naar de andere bestanden binnen deze folder)
+    - screencast.mpeg
+    - screenshot_320.png
+    - screenshot_480.png
+    - screenshot_640.png
+    - screenshot_800.png
+    - screenshot_960.png
+    - screenshot_1024.png
+    - screenshot_1280.png  
+    - timesheet.xslx    
 
 ### Branches
 
@@ -131,7 +123,7 @@ Branch `account-feature`:
  - [FEATURE] Add user registration form and save data to db
  - [TASK] Rename field `lastname` to `familyname` 
  
- Dossier
+Dossier
 ---------
 >  - Moet geschreven worden in Markdown
 >  - Ook PDF safe-for-web versie door export via In-Design. Het toevoegen van dit bestand aan de repo doe je pas in laatste instantie.
