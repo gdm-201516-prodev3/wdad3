@@ -32,24 +32,12 @@ Ontwerp en ontwikkel **individueel** een databasegebaseerd softwaresysteem gemaa
  1. *Frontoffice*
  2. *Backoffice* 
 
-Dossier
--------
->  - Moet geschreven worden in Markdown
->  - Ook Websafe PDF versie door export via In-Design
+> LETS staat voor **"Local Exchange and Trading System"**. Vrij vertalen we dit wel eens als "lokaal uitwisselings systeem". Het ruilsysteem in deze vorm ontstond in een plaats in Canada waar op korte termijn de werkverschaffing en dus rechtstreeks de inkomsten van mensen wegtrok. Uit noodzaak gingen zij weer ruilen, maar dan wel op een eigentijdse manier. Nadien heeft het idee zich snel verspreid over de hele wereld.
 
-- Briefing
-- Analyse
-- Technische specificaties
-- Functionele specificaties
-- Persona's (+ scenario): Gebruiker (User) (3x)
-- Indeëenborden + keuze uit ideëenborden resulterend in een Moodboard
-- Sitemap
-- Wireframes
-- Style Tiles (2x)
-- Visual designs
-- Screenshots eindresultaat
-- Screenshots snippets HTML (1x), CSS (1x) en JavaScript (3x)
-- Tijdsbesteding per student
+
+Functionele specificaties
+-------------------------
+
 
 Technische specificaties
 ------------------------
@@ -74,16 +62,6 @@ Technische specificaties
 
 > Webapplicatie moet responsive zijn! Het responsive framework alsook alle andere bestanden moeten zelf geïmplementeerd worden.
 
-Milestones
-----------
-
-- Milestone 1: Presentatie tussentijds productiedossier
-- Milestone 2: Presentatie visual designs
-- Milestone 3: Presentatie alpha versie app
-- Deadline: Presentatie release condidate-versie app
-
-Dit wil niet zeggen dat je moet wachten tot de voorgaande milestone voltooid is om aan de volgende te beginnen!
-
 Mappen en bestanden
 -------------------
 
@@ -104,4 +82,102 @@ Mappen en bestanden
     - screenshot_960.png
     - screenshot_1024.png
     - screenshot_1280.png  
-    - timesheet.xslx       
+    - timesheet.xslx      
+
+
+Timesheet
+---------
+
+> Klanten/werkgevers weten graag hoe lang je aan iets zal werken en hoe lang je er effectief aan gewerkt hebt. Een realistische inschatting maken van hoelang iets zal duren kan enkel op basis van (lange) werkervaring. Daarom is het belangrijk dat je nu al bijhoudt hoe lang iets duurt, zodat je deze skill leert. Dit is geen plezante bezigheid, maar maak er een gewoonte van om dit fequent bij te houden. Achteraf nog weten hoelang je aan iets gewerkt hebt is vaak nog lastiger.
+
+Houd dagelijks een timesheet bij in Excel en post naar je Bitbucket-repository. Vermeld **per dag** de (deel)functionaliteit(en) waaraan je gewerkt hebt en hoe lang (de kleinste opdeling is een kwartier: 0,25 uur). 
+
+### Voorbeeld
+
+| Datum      |   Taak                        |         Tijd   |
+|-----------:|:------------------------------|---------------:|
+| 2015-09-22 |   Doctrinemigration voor user |     0,25 uur   |
+| 2015-09-22 |   Registratieformulier        |     3,75 uur   |
+| â€¦          |   â€¦                           |            â€¦   |
+| 2015-12-21 | **Totaal**                    | **137,00 uur** |
+  
+    
+Source Code Management
+----------------------
+
+### Branches
+
+Gebruik git met de [Feature Branch Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow).
+
+Nieuwe branch per functionaliteit, nadat de functionaliteit klaar is voor productie (nadat alle testen succesvol verlopen zijn), dan wordt de branch in de master branch gemerged.
+
+#### Commit Prefixes
+
+| Prefix    | Verklaring                                                                         |
+|:----------|:-----------------------------------------------------------------------------------|
+| [FEATURE] | deelfunctionaliteit                                                                |
+| [FIX]     | Bugfix                                                                             |
+| [TASK]    | Bijv. refactoring (structuur, naamgeving aanpassen), updates van derden toepassen. |
+| [WIP]     | *Work in Progress,* voor tussentijdse commits van iets wat nog niet af is.         |
+
+### Voorbeeld
+
+Branch `account-feature`:
+
+ - [FEATURE] Add user registration form and save data to db
+ - [TASK] Rename field `lastname` to `familyname` 
+ 
+ Dossier
+---------
+>  - Moet geschreven worden in Markdown
+>  - Ook PDF safe-for-web versie door export via In-Design. Het toevoegen van dit bestand aan de repo doe je pas in laatste instantie.
+
+- Briefing
+- Analyse
+- Technische specificaties
+- Functionele specificaties
+- Persona's (+ scenario): Gebruiker (User) (3x)
+- Indeëenborden + keuze uit ideëenborden resulterend in een Moodboard (sfeer die het visuele ontwerp moet uitstralen)
+- Sitemap
+- Wireframes
+- Style Tiles (Minstens 2x en duid aan welke gekozen werd)
+- Visual designs
+- Screenshots eindresultaat
+- Screenshots snippets HTML (1x), CSS (1x) en JavaScript (3x)
+- Tijdsbesteding per student
+
+Academische Poster
+------------------
+
+> **Afgedrukt op A2**, in te dienen op het mondeling examen.
+> **Controleer extra goed op spellingsfouten!**
+
+Een afgedrukte A2-poster die de presentatie moet ondersteunen. De academische poster moet een leek duidelijk maken wat het project was:
+
+ - Synopsis
+ - Doel van de opdracht
+ - Resultaat (ondersteund met schermafbeeldingen)
+ - Gebruikte technologieën (gebuik officiële logo's indien mogelijk, maar vermijd specifieke versienummers zodat het niet te snel verouderd overkomt)
+
+> Niet vergeten te vermelden: voornaam, naam, naam van het opleidingsonderdeel, academiejaar, Bachelor in de grafische en digitale media, Multimediaproductie, proDEV, Arteveldehogeschool.
+> Bijvoorbeeld:
+> 
+> Philippe De Pauw - Waterschoot
+> New Media Design & Development III, Academiejaar 2015-16
+> Bachelor in de grafische en digitale media, Multimediaproductie (proDEV)
+> Arteveldehogeschool
+
+Presentatie
+-----------------
+
+Tijdens de presentie toon je aan:
+
+- dat de frontoffice en de backoffice correct werken;
+- dat het project een geautomatiseerde workflow bevat;
+- dat alle items op de checklist aanwezig zijn;
+- of er eventuele extra's toegevoegd zijn.
+
+Zorg voor een grafisch verzorgde presentatie en verzorgd taalgebruik. Gebruik PowerPoint (of alternatieven), screencasts en live demonstraties
+
+> Indien je werkstuk delen of werk van andere studenten bevat, geef je dit duidelijk aan!
+> **Controleer extra goed op spellingsfouten!**
