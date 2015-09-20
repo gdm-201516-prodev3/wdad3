@@ -20,6 +20,30 @@
 |Deadline|**23-12-2015** Opleveren opdracht (Bitbucket)|
 |Examen|Afgedrukt dossier, Poster, Bitbucket, Online werkende applicatie|
 
+Studenten
+---------
+
+|Student|
+|-------|
+|Balcaen Charlotte|
+|Beelprez Seppe|
+|Bultynck Laurens|
+|Chanterie Neeltje|
+|Denys Nick|
+|Goetynck Gertjan|
+|Goossens Bert|
+|Knockaert Jeroen|
+|Mares Quinten|
+|Mergan Lien|
+|Simoen Enzo|
+|Tang Cheng|
+|Vanbrabant Wesley|
+|Vanhove Maxim|
+|Van Wienendaele Stef|
+|Verplanken Valérie|
+|Vervaet Ellen|
+
+
 Omschrijving
 ------------
 
