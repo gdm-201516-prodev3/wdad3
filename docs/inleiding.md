@@ -143,3 +143,12 @@ Studenten
 |Van Wienendaele Stef||||||||||||||
 |Verplanken Valérie||||||||||||||
 |Vervaet Ellen||||||||||||||
+
+**Nog in te schrijven:**
+
+|Student|1|2|3|4|5|6|7|8|9|10|11|12|13|
+|-------||||||||||||||
+|Beeckman Pieter-Jan||||||||||||||
+|Decorte Bart||||||||||||||
+|Geerolf Rutger||||||||||||||
+|Meert Sander||||||||||||||
