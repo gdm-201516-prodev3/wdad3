@@ -79,7 +79,21 @@ Technische specificaties
 > - LETS-leden ruilen onderling hun aanbiedingen en vragen uit. De LETS-groep organiseert enkel het kader waarbinnen het ruilen zich kan ontplooien. Zij stelt de middelen ter beschikking waarbinnen leden met elkaar tot uitwisselingen komen.
 > - Als lid van een LETS-groep ga je eerst nadenken over je aanbiedingen en vragen. Het verloop van een lidmaatschap kan tussen verschillende groepen onderling sterk verschillen. Vanaf je lidmaatschap kan je 'letsen' of concreet: kan je je diensten aanbieden en van andere diensten gebruik maken. Afspraken over uitwisselingen van diensten of producten maken de LETS-leden onderling. Ook dit kan van groep tot groep erg verschillen. Het waarderen van een dienst gebeurt tegenwoordig met online software. De software verrekent de transacties op de standen van de vrager en de gever. Het netto-resultaat van alle verrichtingen is steeds nul. Alles wat op een rekening wordt bijgeteld, gaat er immers op een andere rekening af. Binnen een LETS-groep zijn er dus evenveel schulden als tegoeden
 
-> Nog aan te vullen!
+> Groepscoördinator kan:
+> - leden uit de eigen groep beheren
+> - alle inhoud uit deze groep bekijken (tekst, cijfers en grafieken)
+
+> Regiocoördinator kan:
+> - groepscoördinatoren beheren
+> - alle inhoud uit de groepen binnen de regio bekijken (tekst, cijfers en grafieken)
+
+> Landcoördinator kan:
+> - regiocoördinatoren beheren
+> - alle inhoud uit alle regio's bekijken (tekst, cijfers en grafieken)
+
+> Administrator kan:
+> - alle inhoud beheren en bekijken
+
 
 Timesheet
 ---------
@@ -109,12 +123,13 @@ Source Code Management
 
 - **lets_app** (folder) 
 - **lets_docs** (folder)
+    - images (folder, bevat afbeeldingen die relatief gelinkt zijn in dossier.md)
     - dossier.md
-    - dossier.pdf
-    - poster.pdf
-    - presentatie.pdf
+    - dossier.pdf (pas toevoegen net voor de deadline)
+    - poster.pdf (pas toevoegen net voor de deadline)
+    - presentatie.pdf (pas toevoegen net voor de deadline)
     - README.md (Bevat een synopsis van de applicatie + relatieve links naar de andere bestanden binnen deze folder)
-    - screencast.mpeg
+    - screencast.mpeg (pas toevoegen net voor de deadline)
     - screenshot_320.png
     - screenshot_480.png
     - screenshot_640.png
