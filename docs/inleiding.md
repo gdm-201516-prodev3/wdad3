@@ -120,3 +120,26 @@ Software
 - **Micorsoft Visual Studio 2015 RC**
 - ...
 - Code PHPStorm: Zie chamilo bij de aankondigingen cursus New Media Design & Development I
+
+Studenten
+---------
+
+|Student|1|2|3|4|5|6|7|8|9|10|11|12|13|
+|-------||||||||||||||
+|Balcaen Charlotte||||||||||||||
+|Beelprez Seppe||||||||||||||
+|Bultynck Laurens||||||||||||||
+|Chanterie Neeltje||||||||||||||
+|Denys Nick||||||||||||||
+|Goetynck Gertjan||||||||||||||
+|Goossens Bert||||||||||||||
+|Knockaert Jeroen||||||||||||||
+|Mares Quinten||||||||||||||
+|Mergan Lien||||||||||||||
+|Simoen Enzo||||||||||||||
+|Tang Cheng||||||||||||||
+|Vanbrabant Wesley||||||||||||||
+|Vanhove Maxim||||||||||||||
+|Van Wienendaele Stef||||||||||||||
+|Verplanken Valérie||||||||||||||
+|Vervaet Ellen||||||||||||||
