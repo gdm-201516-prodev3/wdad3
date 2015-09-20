@@ -68,7 +68,7 @@ Aantal lestijden: 4
 
 |Lesweek|Omschrijving|
 |-------|------------|
-|1||
+|1|Inleiding, Werkstuk, Groepsindeling werkstuk, ASP.NET5|
 |2||
 |3||
 |4||

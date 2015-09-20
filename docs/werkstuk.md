@@ -20,6 +20,26 @@
 |Deadline|**23-12-2015** Opleveren opdracht (Bitbucket)|
 |Examen|Afgedrukt dossier, Poster, Bitbucket, Online werkende applicatie|
 
+Groepsindeling
+--------------
+
+|Groep|Studenten|
+|-----|---------|
+|3PRODEV-01||
+|3PRODEV-02||
+|3PRODEV-03||
+|3PRODEV-04||
+|3PRODEV-05||
+|3PRODEV-06||
+|3PRODEV-07||
+|3PRODEV-08||
+|3PRODEV-09||
+|3PRODEV-10||
+|3PRODEV-11||
+|3PRODEV-12||
+|3PRODEV-13||
+
+
 Omschrijving
 ------------
 
@@ -115,7 +135,10 @@ Houd dagelijks een timesheet bij in Excel en post naar je Bitbucket-repository. 
 Source Code Management
 ----------------------
 
-- Maak de volgende repositories aan:
+- Maak een team aan in bitbucket:
+    - gdm-1516-3prodev-01
+    - 01 = groepsnummer en is dus variabel
+- Maak hierin de volgende repositories aan:
     - **lets_app**. Bevat de applicatie volgens de opgelegde mappenstructuur.
     - **lets_docs**. Bevat productiedossier, screenshots, ... volgens de opgelegde structuur.
 
