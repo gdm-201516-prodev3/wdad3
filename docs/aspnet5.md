@@ -36,3 +36,7 @@ Installatie van de .NET executieomgeving (execution environment)
 **Installatie DNX voor mono (MAC):**
 
 `dnvm upgrade -r mono`
+
+**Oplijsten aanwezige executieomgevingen:**
+
+`dnvm list`
