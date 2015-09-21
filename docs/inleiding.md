@@ -38,7 +38,7 @@ Evaluatie
 |   20 %    |   6. Backoffice                        |
 |   15 %    |   7. Databasemodel                     |
 
-> **Ontbrekend onderdeel bovenvermelde lijst** betekent maximaal 9/20 op de eindscore van het opleidingsonderdeel NMDAD I!
+> **Ontbrekend onderdeel bovenvermelde lijst** betekent maximaal 9/20 op de eindscore van het opleidingsonderdeel WDAD IV!
 - Met weinig complexiteit wordt bedoeld dat het werkstuk niet verder gaat dan de eenvoudige voorbeelden uit de les. De eindscore wordt berekend en afgerond.
 - Als een vereist item uit de checklist ontbreekt, kan de eindscore nog maximaal 8/20 zijn.
 - Spellingsfouten in werkstuk, presentatie en/of poster: -1 (op 20) op eindscore.
@@ -68,7 +68,7 @@ Aantal lestijden: 4
 
 |Lesweek|Omschrijving|
 |-------|------------|
-|1|Inleiding, Werkstuk, Groepsindeling werkstuk, ASP.NET5|
+|1|Inleiding, Werkstuk, Groepsindeling werkstuk, ASP.NET5 Commandline|
 |2||
 |3||
 |4||
@@ -127,31 +127,26 @@ Studenten
 |Student|1|2|3|4|5|6|7|8|9|10|11|12|13|
 |-------|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |Balcaen Charlotte|x|||||||||||||
+|Beeckman Pieter-Jan|x|||||||||||||
 |Beelprez Seppe|x|||||||||||||
 |Bultynck Laurens|x|||||||||||||
 |Chanterie Neeltje|x|||||||||||||
+|Decorte Bart||||||||||||||
 |Denys Nick||||||||||||||
+|Geerolf Rutger||||||||||||||
 |Goetynck Gertjan|x|||||||||||||
 |Goossens Bert|x|||||||||||||
 |Knockaert Jeroen|x|||||||||||||
+|Lierman Benjamin|x|||||||||||||
 |Mares Quinten|x|||||||||||||
+|Meert Sander|x|||||||||||||
 |Mergan Lien|x|||||||||||||
+|Sas Pieter-Jan|x|||||||||||||
 |Simoen Enzo|x|||||||||||||
 |Tang Cheng|x|||||||||||||
 |Vanbrabant Wesley|x|||||||||||||
+|Vandewalle Michiel|x|||||||||||||
 |Vanhove Maxim||||||||||||||
 |Van Wienendaele Stef|x|||||||||||||
 |Verplanken Valérie|x|||||||||||||
 |Vervaet Ellen|x|||||||||||||
-
-**Nog in te schrijven:**
-
-|Student|1|2|3|4|5|6|7|8|9|10|11|12|13|
-|-------|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|Beeckman Pieter-Jan|x|||||||||||||
-|Decorte Bart||||||||||||||
-|Geerolf Rutger||||||||||||||
-|Meert Sander|x|||||||||||||
-|Vandewalle Michiel|x|||||||||||||
-|Lierman Benjamin|x|||||||||||||
-|Sas Pieter-Jan|x|||||||||||||
