@@ -119,7 +119,7 @@ Software
 - **Microsoft Visual Code**
 - **Micorsoft Visual Studio 2015 RC**
 - ...
-- Code PHPStorm: Zie chamilo bij de aankondigingen cursus New Media Design & Development I
+- Code PHPStorm: Zie chamilo bij de aankondigingen cursus Web Design & Development IV
 
 Studenten
 ---------

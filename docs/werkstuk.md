@@ -219,7 +219,7 @@ Een afgedrukte A2-poster die de presentatie moet ondersteunen. De academische po
 > Bijvoorbeeld:
 > 
 > Philippe De Pauw - Waterschoot
-> New Media Design & Development III, Academiejaar 2015-16
+> Web Design & Development IV, Academiejaar 2015-16
 > Bachelor in de grafische en digitale media, Multimediaproductie (proDEV)
 > Arteveldehogeschool
 
