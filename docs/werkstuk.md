@@ -25,19 +25,18 @@ Groepsindeling
 
 |Groep|Studenten|
 |-----|---------|
-|3PRODEV-01||
-|3PRODEV-02||
-|3PRODEV-03||
-|3PRODEV-04||
-|3PRODEV-05||
-|3PRODEV-06||
-|3PRODEV-07||
-|3PRODEV-08||
-|3PRODEV-09||
-|3PRODEV-10||
-|3PRODEV-11||
-|3PRODEV-12||
-|3PRODEV-13||
+|3PRODEV-01|Van Wienendaele Stef|
+|3PRODEV-02|Vandewalle Michiel, Goossens Bert|
+|3PRODEV-03|Mergan Lien, Vervaet Ellen|
+|3PRODEV-04|Vanbrabant Wesley, Lierman Benjamin|
+|3PRODEV-05|Beelprez Seppe, Mares Quinten|
+|3PRODEV-06|Verplanken Valérie, Chanterie Neeltje|
+|3PRODEV-07|Goetynck Gertjan|
+|3PRODEV-08|Bultynck Laurens, Knockaert Jeroen|
+|3PRODEV-09|Sas Pieter-Jan, Tang Cheng
+|3PRODEV-10|Simoen Enzo, Beeckman Pieter-Jan|
+|3PRODEV-11|Meert Sander|
+|3PRODEV-12|Balcaen Charlotte|
 
 
 Omschrijving
@@ -136,7 +135,7 @@ Source Code Management
 ----------------------
 
 - Maak een team aan in bitbucket:
-    - gdm-1516-3prodev-01
+    - gdm-1516-3prodev-01 
     - 01 = groepsnummer en is dus variabel
 - Maak hierin de volgende repositories aan:
     - **lets_app**. Bevat de applicatie volgens de opgelegde mappenstructuur.

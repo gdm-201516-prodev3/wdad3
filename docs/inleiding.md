@@ -126,29 +126,32 @@ Studenten
 
 |Student|1|2|3|4|5|6|7|8|9|10|11|12|13|
 |-------|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|Balcaen Charlotte||||||||||||||
-|Beelprez Seppe||||||||||||||
-|Bultynck Laurens||||||||||||||
-|Chanterie Neeltje||||||||||||||
+|Balcaen Charlotte|x|||||||||||||
+|Beelprez Seppe|x|||||||||||||
+|Bultynck Laurens|x|||||||||||||
+|Chanterie Neeltje|x|||||||||||||
 |Denys Nick||||||||||||||
-|Goetynck Gertjan||||||||||||||
-|Goossens Bert||||||||||||||
-|Knockaert Jeroen||||||||||||||
-|Mares Quinten||||||||||||||
-|Mergan Lien||||||||||||||
-|Simoen Enzo||||||||||||||
-|Tang Cheng||||||||||||||
-|Vanbrabant Wesley||||||||||||||
+|Goetynck Gertjan|x|||||||||||||
+|Goossens Bert|x|||||||||||||
+|Knockaert Jeroen|x|||||||||||||
+|Mares Quinten|x|||||||||||||
+|Mergan Lien|x|||||||||||||
+|Simoen Enzo|x|||||||||||||
+|Tang Cheng|x|||||||||||||
+|Vanbrabant Wesley|x|||||||||||||
 |Vanhove Maxim||||||||||||||
-|Van Wienendaele Stef||||||||||||||
-|Verplanken Valérie||||||||||||||
-|Vervaet Ellen||||||||||||||
+|Van Wienendaele Stef|x|||||||||||||
+|Verplanken Valérie|x|||||||||||||
+|Vervaet Ellen|x|||||||||||||
 
 **Nog in te schrijven:**
 
 |Student|1|2|3|4|5|6|7|8|9|10|11|12|13|
 |-------|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|Beeckman Pieter-Jan||||||||||||||
+|Beeckman Pieter-Jan|x|||||||||||||
 |Decorte Bart||||||||||||||
 |Geerolf Rutger||||||||||||||
-|Meert Sander||||||||||||||
+|Meert Sander|x|||||||||||||
+|Vandewalle Michiel|x|||||||||||||
+|Lierman Benjamin|x|||||||||||||
+|Sas Pieter-Jan|x|||||||||||||
