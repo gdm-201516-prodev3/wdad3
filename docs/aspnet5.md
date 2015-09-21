@@ -1,7 +1,8 @@
 ASP.NET5
 ========
 
-Microsoft Visual COde
+
+Microsoft Visual Code
 ---------------------
 
 **User Settings:**
@@ -12,3 +13,13 @@ Microsoft Visual COde
 	"markdown.styles": []
 }
 ```
+
+
+Install .NET on a MAC
+---------------------
+
+[Install .NET on a MAC](http://docs.asp.net/en/latest/getting-started/installing-on-mac.html)
+
+###.NET Version Manager
+
+
