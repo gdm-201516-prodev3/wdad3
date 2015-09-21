@@ -40,3 +40,17 @@ Installatie van de .NET executieomgeving (execution environment)
 **Oplijsten aanwezige executieomgevingen:**
 
 `dnvm list`
+
+Installatie npm
+---------------
+
+[Installatie op WIN](https://nodejs.org/dist/latest/node-v4.1.0-x64.msi)
+
+`npm -g upgrade npm`
+
+`npm -v`
+
+Installatie ASP.NET generator
+-----------------------------
+
+`npm install -g generator-aspnet`
