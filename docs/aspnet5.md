@@ -54,3 +54,19 @@ Installatie ASP.NET generator
 -----------------------------
 
 `npm install -g generator-aspnet`
+
+![CMD Generator-aspnet](images/genasp.net.png)
+
+Installatie bower, yo en Gulp
+-----------------------------
+
+`npm install -g bower`
+
+`npm install -g yo`
+
+`npm install -g gulp`
+
+Weg met mono als default execution environment
+----------------------------------------------
+
+`dnvm use 1.0.0-beta7 -r coreclr -arch x86`
