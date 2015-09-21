@@ -16,7 +16,7 @@
 |Studiepunten|7|
 |Contacturen|4|
 |Docenten|Philippe De Pauw - Waterschoot|
-|Evaluatie 1ste examenkans|Werkstuk (individueel). Mondelinge verdediging van werkstuk + vragen|
+|Evaluatie 1ste examenkans|Werkstuk (max 2 studenten). Mondelinge verdediging van werkstuk + vragen|
 |Evaluatie 2de examenkans|Werkstuk (individueel). Mondelinge verdediging van werkstuk + vragen|
 |Begincompetenties|Webdesign & Development II, Webdesign & Development III, Software Development, |
 |ECTS-fiche|https://bamaflexweb.arteveldehs.be/BMFUIDetailxOLOD.aspx?a=47532&b=5&c=1|
