@@ -149,4 +149,4 @@ Studenten
 |Vanhove Maxim||||||||||||||
 |Van Wienendaele Stef|x|||||||||||||
 |Verplanken Valérie|x|||||||||||||
-|Vervaet Ellen|x|||||||||||||
+|Vervaet Ellen|x||||||||||||| 

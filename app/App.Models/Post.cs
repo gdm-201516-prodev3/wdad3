@@ -15,6 +15,6 @@ namespace App.Models
         public Int32 Id { get; set; } 
         public string Title { get; set; }
         public string Synopsis { get; set; }
-        public string Body { get; set; }
+        public string Body { get; set; }        
     }
 }
