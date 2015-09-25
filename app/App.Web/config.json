@@ -1,2 +1,10 @@
 {
+	"Authentication": {
+		
+		"Facebook": {
+			"AppId": "123MyId",
+			"AppSecret": ""
+		}
+		
+	}	
 }
