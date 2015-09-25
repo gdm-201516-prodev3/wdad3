@@ -79,3 +79,9 @@ Build
 
 **Build**:
 `dnu build App.Models`
+
+Entity Framework
+----------------
+`dnx -p App.Data ef migrations add Initial -s App.Web`
+
+

@@ -38,7 +38,7 @@ namespace App.Web
             }
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
-            Configuration["Data:DefaultConnection:ConnectionString"] = $@"Data Source={appEnv.ApplicationBasePath}/App.Web.db";
+            Configuration["Data:DefaultConnection:ConnectionString"] = $@"Data Source={appEnv.ApplicationBasePath}/data/Library.db";
         }
 
         public IConfigurationRoot Configuration { get; set; }
