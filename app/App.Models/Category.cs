@@ -14,5 +14,8 @@ namespace App.Models
         
         public Int16 Id { get; set; } 
         public string Name { get; set; }
+        
+        /* Navigational or Virtual Properties */          
+        public virtual ICollection<PostCategory> Posts { get; set; }  
     }
 }

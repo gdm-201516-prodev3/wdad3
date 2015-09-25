@@ -70,3 +70,12 @@ Weg met mono als default execution environment
 ----------------------------------------------
 
 `dnvm use 1.0.0-beta7 -r coreclr -arch x86`
+
+Build
+-----
+
+**Import remote packages**:
+`dnu restore App.Models`
+
+**Build**:
+`dnu build App.Models`
