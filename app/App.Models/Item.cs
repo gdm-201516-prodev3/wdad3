@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace App.Models
 {
-    public class Item
+    public abstract class Item
     {
         public Item()
         {

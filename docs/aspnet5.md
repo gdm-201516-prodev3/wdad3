@@ -1,0 +1,87 @@
+ASP.NET5
+========
+
+
+Microsoft Visual Code
+---------------------
+
+**User Settings:**
+```
+{
+	"editor.wrappingColumn": 80,
+	"http.proxy": "http://proxy.arteveldehs.be:8080",
+	"markdown.styles": []
+}
+```
+
+
+Installatie van de .NET versiemanager (version manager)
+-------------------------------------------------------
+
+[Install .NET on a MAC](http://docs.asp.net/en/latest/getting-started/installing-on-mac.html)
+
+`curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | DNX_BRANCH=dev sh && source ~/.dnx/dnvm/dnvm.sh`
+
+[Install .NET on a WIN](http://docs.asp.net/en/latest/getting-started/installing-on-windows.html)
+
+`@powershell -NoProfile -ExecutionPolicy unrestricted -Command "&{$Branch='dev';iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.ps1'))}"`
+
+Installatie van de .NET executieomgeving (execution environment)
+----------------------------------------------------------------
+
+**Installatie DNX voor .NET core:**
+
+`dnvm upgrade -r coreclr`
+
+**Installatie DNX voor mono (MAC):**
+
+`dnvm upgrade -r mono`
+
+**Oplijsten aanwezige executieomgevingen:**
+
+`dnvm list`
+
+Installatie npm
+---------------
+
+[Installatie op WIN](https://nodejs.org/dist/latest/node-v4.1.0-x64.msi)
+
+`npm -g upgrade npm`
+
+`npm -v`
+
+Installatie ASP.NET generator
+-----------------------------
+
+`npm install -g generator-aspnet`
+
+![CMD Generator-aspnet](images/genasp.net.png)
+
+Installatie bower, yo en Gulp
+-----------------------------
+
+`npm install -g bower`
+
+`npm install -g yo`
+
+`npm install -g gulp`
+
+Weg met mono als default execution environment
+----------------------------------------------
+
+`dnvm use 1.0.0-beta7 -r coreclr -arch x86`
+
+Build
+-----
+
+**Import remote packages**:
+`dnu restore App.Models`
+
+**Build**:
+`dnu build App.Models`
+
+Entity Framework
+----------------
+`dnx -p App.Data ef migrations add Initial -s App.Web`
+
+

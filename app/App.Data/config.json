@@ -1,0 +1,12 @@
+{
+	"Data" : {
+		"DefaultConnection" : {
+			"ConnectionString" : ""
+		}	
+	},
+	"EntityFramework" : {
+		"LibraryDbContext" : {
+			"ConnectionStringKey" : "Data:DefaultConnection:ConnectionString"
+		}
+	}
+}
