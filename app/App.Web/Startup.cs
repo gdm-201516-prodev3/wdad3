@@ -17,6 +17,7 @@ using Microsoft.Framework.DependencyInjection;
 using Microsoft.Framework.Logging;
 using App.Web.Models;
 using App.Web.Services;
+using App.Data;
 
 namespace App.Web
 {
@@ -46,6 +47,12 @@ namespace App.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add Configuration to the service container
+            services.AddInstance(Configuration);
+
+            // Resolve dependency injection
+            services.AddScoped<LibraryDbContext, LibraryDbContext>();
+            
             // Add Entity Framework services to the services container.
             services.AddEntityFramework()
                 .AddSqlite()
@@ -54,7 +61,7 @@ namespace App.Web
 
             // Add Identity services to the services container.
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<LibraryDbContext>()
                 .AddDefaultTokenProviders();
 
             // Configure the options for the authentication middleware.

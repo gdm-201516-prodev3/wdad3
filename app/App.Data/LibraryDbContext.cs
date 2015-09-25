@@ -17,11 +17,16 @@ namespace App.Data
             
         }
         
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {   
+            base.OnConfiguring(optionsBuilder);
+        }
+        
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(modelBuilder);
             
-            builder.Entity<Library>(l =>
+            modelBuilder.Entity<Library>(l =>
             {
                l.ToTable("Libraries");
                l.Key(m => m.Id); 
@@ -32,6 +37,12 @@ namespace App.Data
                l.Property(m => m.Name).Required().HasColumnType("nvarchar(128)");
                l.Property(m => m.Code).Required().HasColumnType("char(3)");
                l.Property(m => m.Description).Required(false).HasColumnType("nvarchar(1024)");
+            });
+            
+            modelBuilder.Entity<PostCategory>(l =>
+            {
+                l.ToTable("PostCategories");
+                l.Key(m => new { m.PostId, m.CategoryId });
             });
         }
     }
