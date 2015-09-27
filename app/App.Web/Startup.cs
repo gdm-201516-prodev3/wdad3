@@ -38,8 +38,10 @@ namespace App.Web
                 builder.AddUserSecrets();
             }
             builder.AddEnvironmentVariables();
-            Configuration = builder.Build();
-            Configuration["Data:DefaultConnection:ConnectionString"] = $@"Data Source={appEnv.ApplicationBasePath}/data/Library.db";
+            Configuration = builder.Build();            
+            // {appEnv.ApplicationBasePath}      .
+            string path = appEnv.ApplicationBasePath.Substring(0, appEnv.ApplicationBasePath.LastIndexOf('\\'));      
+            Configuration["Data:DefaultConnection:ConnectionString"] = $@"Data Source={path}/App.Web/data/libraries.sqlite";
         }
 
         public IConfigurationRoot Configuration { get; set; }

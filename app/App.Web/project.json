@@ -33,7 +33,8 @@
   "commands": {
     "kestrel": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --config hosting.ini",
     "web": "Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.WebListener --config hosting.ini",
-    "ef": "EntityFramework.Commands"
+    "ef": "EntityFramework.Commands",
+    "gen": "Microsoft.Framework.CodeGeneration"
   },
 
   "frameworks": {

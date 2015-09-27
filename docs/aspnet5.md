@@ -82,6 +82,17 @@ Build
 
 Entity Framework
 ----------------
+
+**Startup.cs**:
+
+* Noodzalijk om migrations uit te voeren.
+* Meestal aanwezig in een Web API of Web MVC project.
+* Plaats van de SQLite database: bij voorkeur in een aparte folder op de server, bv. D:\data\libraries.sqlite, omdat we werken met verschillende project folders.
+
+
+**Add new migrations**:
 `dnx -p App.Data ef migrations add Initial -s App.Web`
 
+**Update the database by executing migration code**:
+`dnx -p App.Data ef database update -s App.Web`
 
