@@ -96,9 +96,9 @@ Entity Framework
     Configuration["Data:DefaultConnection:ConnectionString"] = $@"Data Source={path}/App.Web/data/libraries.sqlite";
 	```
 
-**Add new migrations**:
+**Add new migrations**:  
 `dnx -p App.Data ef migrations add Initial -s App.Web`
 
-**Update the database by executing migration code**:
+**Update the database by executing migration code**:  
 `dnx -p App.Data ef database update -s App.Web`
 
