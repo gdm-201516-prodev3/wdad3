@@ -87,8 +87,14 @@ Entity Framework
 
 * Noodzalijk om migrations uit te voeren.
 * Meestal aanwezig in een Web API of Web MVC project.
-* Plaats van de SQLite database: bij voorkeur in een aparte folder op de server, bv. D:\data\libraries.sqlite, omdat we werken met verschillende project folders.
-
+* Plaats van de **SQLite database**: bij voorkeur in een aparte folder op de server, bv. D:\data\libraries.sqlite, omdat we werken met verschillende project folders.
+* Vermits EntityFramework 7 in beta is worden vele Database providers nog niet ondersteund, zoals: MySQL, PotsgresQL, MongoDB, ... . Enkel SQL Server en SQLite worden ondersteund op 28-09-2015. Wanneer de provider PostgreSQL binnenkort gereleased wordt zullen we overstappen naar deze Database provider. 
+* In dit voorbeeld plaatsen we de `libraries.sqlite` databank in een `data` folder onder de root van het `App.Web` project.
+* In de `Startup.cs` klasse uit het `App.Web` project halen we het absolut pad op naar deze databank via:
+	```
+	string path = appEnv.ApplicationBasePath.Substring(0, appEnv.ApplicationBasePath.LastIndexOf('\\'));      
+    Configuration["Data:DefaultConnection:ConnectionString"] = $@"Data Source={path}/App.Web/data/libraries.sqlite";
+	```
 
 **Add new migrations**:
 `dnx -p App.Data ef migrations add Initial -s App.Web`
