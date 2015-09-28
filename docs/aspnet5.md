@@ -97,8 +97,10 @@ Entity Framework
 	```
 
 **Add new migrations**:  
-`dnx -p App.Data ef migrations add Initial -s App.Web`
+
+* `dnx -p App.Data ef migrations add Initial -s App.Web`
 
 **Update the database by executing migration code**:  
-`dnx -p App.Data ef database update -s App.Web`
+
+* `dnx -p App.Data ef database update -s App.Web`
 

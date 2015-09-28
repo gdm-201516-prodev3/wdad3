@@ -150,3 +150,7 @@ Studenten
 |Van Wienendaele Stef|x|||||||||||||
 |Verplanken Valérie|x|||||||||||||
 |Vervaet Ellen|x||||||||||||| 
+
+Bronnen
+-------
+- <http://sass-guidelin.es/#the-7-1-pattern>
