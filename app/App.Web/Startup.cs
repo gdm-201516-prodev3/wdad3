@@ -40,8 +40,9 @@ namespace App.Web
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();            
             // {appEnv.ApplicationBasePath}      .
-            string path = appEnv.ApplicationBasePath.Substring(0, appEnv.ApplicationBasePath.LastIndexOf('\\'));      
-            Configuration["Data:DefaultConnection:ConnectionString"] = $@"Data Source={path}/App.Web/data/libraries.sqlite";
+            //string path = appEnv.ApplicationBasePath.Substring(0, appEnv.ApplicationBasePath.LastIndexOf('\\'));//MAC issue      
+            //Configuration["Data:DefaultConnection:ConnectionString"] = $@"Data Source={path}/App.Web/data/libraries.sqlite";
+            Configuration["Data:DefaultConnection:ConnectionString"] = $@"Data Source={appEnv.ApplicationBasePath}/data/libraries.sqlite";
         }
 
         public IConfigurationRoot Configuration { get; set; }
