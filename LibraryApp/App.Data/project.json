@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0-*",
+  "description": "App.Data Class Library",
+  "authors": [ "Class Library template" ],
+  "tags": [""],
+  "projectUrl": "",
+  "licenseUrl": "",
+
+  "dependencies": {
+    "EntityFramework.SQLite": "7.0.0-beta7",
+    "EntityFramework.Commands": "7.0.0-beta7",
+    "Microsoft.AspNet.Mvc": "6.0.0-beta7",
+    "Microsoft.Framework.Configuration.Abstractions": "1.0.0-beta7",
+    "Microsoft.Framework.Configuration.Json": "1.0.0-beta7",
+    "Microsoft.Framework.Configuration.UserSecrets": "1.0.0-beta7",
+    "Microsoft.Framework.DependencyInjection": "1.0.0-beta7",
+    "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-beta7",
+    "App.Models" : "1.0.0-*"
+  },
+  
+  "commands": {
+    "ef": "EntityFramework.Commands"
+  },  
+
+  "frameworks": {
+    "dnx451": { }
+  }
+}

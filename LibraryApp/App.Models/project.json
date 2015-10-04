@@ -1,0 +1,16 @@
+{
+  "version": "1.0.0-*",
+  "description": "App.Models Class Library",
+  "authors": [ "Class Library template" ],
+  "tags": [""],
+  "projectUrl": "",
+  "licenseUrl": "",
+  
+  "dependencies": {
+    "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-beta7"
+  },
+
+  "frameworks": {
+    "dnx451": { }
+  }
+}

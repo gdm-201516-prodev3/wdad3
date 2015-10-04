@@ -1,0 +1,12 @@
+{
+    "Data": {
+        "DefaultConnection": {
+            "ConnectionString": "Data Source=/Users/drdynscript/Hogeschool/2015-16/LibraryApp/App.Web/Libraries.sqlite"
+        }
+    },
+	"EntityFramework": {
+		"LibraryDbContext" : {
+			"ConnectionStringKey" : "Data:DefaultConnection:ConnectionString"
+		}
+	}
+}
