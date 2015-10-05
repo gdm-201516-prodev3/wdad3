@@ -18,7 +18,8 @@ namespace App.Data.SampleData
         
         public void InitializeData() 
         {
-            CreateLibraries();    
+            CreateLibraries(); 
+            CreatePosts();   
         }
         
         private void CreateLibraries() 
@@ -71,6 +72,29 @@ namespace App.Data.SampleData
                     Code = "SAT",
                     Description = "Mediatheek Sint-Annaplein",
                     Url = "http://arteveldehogeschool.be/studeren/mediatheken/mediatheek-sint-annaplein"
+                });
+                
+                _context.SaveChanges();
+            }
+        }
+        
+        private void CreatePosts() 
+        {
+            if(_context.Posts == null || _context.Posts.Count() == 0)
+            {
+                _context.Posts.Add(new Post()
+                {
+                    Title = "Herbekijk het openingscollege Björn Soenens",
+                    Synopsis = "ART",
+                    Description = "Op vrijdag 18 september gaf Björn Soenens, VRT-hoofdredacteur van Het Journaal, zijn kijk op constructieve journalistiek tijdens het allereerste openingscollege van de opleiding Bachelor in de journalistiek aan de Arteveldehogeschool.",
+                    Body = @"
+                    <p>Op vrijdag 18 september gaf Björn Soenens, VRT-hoofdredacteur van Het Journaal, zijn kijk op constructieve journalistiek tijdens het allereerste openingscollege van de opleiding Bachelor in de journalistiek aan de Arteveldehogeschool.</p>
+                    <p>“Ook jullie generatie zoekt diepgang” en “Het is onze journalistieke taak om de ruis van het internet te halen” zijn maar enkele van de krachtige oneliners uit de lezing die hij gaf. (Her)bekijk hieronder zijn pleidooi en enkele foto’s van het openingscollege.</p>                    
+                    <p>Met dank aan de studentenvertegenwoordigers van Journalistiek. Meer info: https://www.facebook.com/groups/Stuverjournalistiek/
+                    Op vrijdag 18 september gaf Björn Soenens, VRT-hoofdredacteur van Het Journaal, zijn kijk op constructieve journalistiek tijdens het allereerste openingscollege van de opleiding Bachelor in de journalistiek aan de Arteveldehogeschool.</p>                    
+                    <p>“Ook jullie generatie zoekt diepgang” en “Het is onze journalistieke taak om de ruis van het internet te halen” zijn maar enkele van de krachtige oneliners uit de lezing die hij gaf. (Her)bekijk hieronder zijn pleidooi en enkele foto’s van het openingscollege.</p>                    
+                    <p>Met dank aan de studentenvertegenwoordigers van Journalistiek. Meer info: https://www.facebook.com/groups/Stuverjournalistiek/
+                    </p>"
                 });
                 
                 _context.SaveChanges();

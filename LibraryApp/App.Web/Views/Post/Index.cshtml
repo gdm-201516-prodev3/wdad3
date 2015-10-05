@@ -1,0 +1,22 @@
+@model IEnumerable<Post>
+@{
+    ViewData["Title"] = "Nieuwsberichten";
+}
+<h2>Nieuwsberichten</h2>
+@if (Model != null && Model.Count() > 0)
+{
+    <ul>
+    @foreach (var post in Model)
+    {
+        <li class="post">            
+            <h3>@post.Title</h3>
+            <blockqoute>@post.Synopsis</blockqoute>
+            @Html.Raw(@post.Body)
+        </li>
+    }
+    </ul>
+}
+else
+{
+    <div>Geen nieuwsberichten</div>
+}

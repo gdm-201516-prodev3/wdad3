@@ -13,6 +13,7 @@ namespace App.Data
     public class LibraryDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public DbSet<Library> Libraries { get; set; }
+        public DbSet<Post> Posts { get; set; }
               
         public LibraryDbContext() : base()
         {
@@ -40,6 +41,20 @@ namespace App.Data
                l.Property(m => m.Code).Required().HasColumnType("char(3)");
                l.Property(m => m.Description).Required(false).HasColumnType("nvarchar(1024)");
                l.Property(m => m.Url).Required(false).HasColumnType("nvarchar(512)");
+            });
+            
+            modelBuilder.Entity<Post>(l =>
+            {
+               l.ToTable("Posts");
+               l.Key(m => m.Id); 
+               l.Property(m => m.Id).ValueGeneratedOnAdd();
+               l.Property(m => m.CreatedAt).Required().HasColumnType("datetime").ValueGeneratedOnAdd();
+               l.Property(m => m.UpdatedAt).Required(false).HasColumnType("datetime").ValueGeneratedOnAddOrUpdate();
+               l.Property(m => m.DeletedAt).Required(false).HasColumnType("datetime");
+               l.Property(m => m.Title).Required().HasColumnType("nvarchar(128)");
+               l.Property(m => m.Synopsis).Required().HasColumnType("nvarchar(1024)");
+               l.Property(m => m.Description).Required(false).HasColumnType("nvarchar(1024)");
+               l.Property(m => m.Body).Required().HasColumnType("nvarchar(65536)");
             });
             
         }
