@@ -29,42 +29,48 @@ namespace App.Data.SampleData
                 {
                     Name = "Alle Mediatheken",
                     Code = "ART",
-                    Description = "Alle Mediatheken"
+                    Description = "Alle Mediatheken",
+                    Url = "http://arteveldehogeschool.be/studeren/mediatheken"
                 });
                 
                 _context.Libraries.Add(new Library()
                 {
                     Name = "Mediatheek Kantienberg",
                     Code = "KAN",
-                    Description = "Mediatheek Kantienberg"
+                    Description = "Mediatheek Kantienberg",
+                    Url = "http://arteveldehogeschool.be/studeren/mediatheken/mediatheek-kantienberg"
                 });
                 
                 _context.Libraries.Add(new Library()
                 {
                     Name = "Mediatheek Kattenberg",
                     Code = "KAT",
-                    Description = "Mediatheek Kattenberg"
+                    Description = "Mediatheek Kattenberg",
+                    Url = "http://arteveldehogeschool.be/studeren/mediatheken/mediatheek-kattenberg-en-mediatheekpunt-bps"
                 });
                 
                 _context.Libraries.Add(new Library()
                 {
                     Name = "Mediatheek Mariakerke",
                     Code = "MAR",
-                    Description = "Mediatheek Mariakerke"
+                    Description = "Mediatheek Mariakerke",
+                    Url = "http://arteveldehogeschool.be/studeren/mediatheken/mediatheek-mariakerke"
                 });
                 
                 _context.Libraries.Add(new Library()
                 {
                     Name = "Mediatheek Sint-Amandsberg",
                     Code = "SAB",
-                    Description = "Mediatheek Sint-Amandsberg"
+                    Description = "Mediatheek Sint-Amandsberg",
+                    Url = "http://arteveldehogeschool.be/studeren/mediatheken/mediatheek-sint-amandsberg"
                 });
                 
                 _context.Libraries.Add(new Library()
                 {
                     Name = "Mediatheek Sint-Annaplein",
                     Code = "SAT",
-                    Description = "Mediatheek Sint-Annaplein"
+                    Description = "Mediatheek Sint-Annaplein",
+                    Url = "http://arteveldehogeschool.be/studeren/mediatheken/mediatheek-sint-annaplein"
                 });
                 
                 _context.SaveChanges();

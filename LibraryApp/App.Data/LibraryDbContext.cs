@@ -39,6 +39,7 @@ namespace App.Data
                l.Property(m => m.Name).Required().HasColumnType("nvarchar(128)");
                l.Property(m => m.Code).Required().HasColumnType("char(3)");
                l.Property(m => m.Description).Required(false).HasColumnType("nvarchar(1024)");
+               l.Property(m => m.Url).Required(false).HasColumnType("nvarchar(512)");
             });
             
         }
