@@ -1,0 +1,21 @@
+@model IEnumerable<Library>
+@{
+    ViewData["Title"] = "Bibliotheken";
+}
+<h2>Bibliotheken</h2>
+@if (Model != null && Model.Count() > 0)
+{
+    <ul>
+    @foreach (var library in Model)
+    {
+        <li class="library">
+            <h3>@library.Name (@library.Code)</h3>
+            <p>@library.Description</p>
+        </li>
+    }
+    </ul>
+}
+else
+{
+    <div>Geen bibliotheken</div>
+}
