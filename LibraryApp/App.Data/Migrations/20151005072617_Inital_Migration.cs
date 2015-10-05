@@ -4,7 +4,7 @@ using Microsoft.Data.Entity.Migrations;
 
 namespace App.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Inital_Migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -8,11 +8,11 @@ using App.Data;
 namespace App.Data.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class Initial
+    partial class Inital_Migration
     {
         public override string Id
         {
-            get { return "20151004200232_Initial"; }
+            get { return "20151005072617_Inital_Migration"; }
         }
 
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

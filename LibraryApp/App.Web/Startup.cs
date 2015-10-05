@@ -20,6 +20,7 @@ using App.Web.Services;
 using App.Models;
 using App.Models.Identity;
 using App.Data;
+using App.Data.SampleData;
 
 namespace App.Web
 {
@@ -135,6 +136,10 @@ namespace App.Web
                 // Uncomment the following line to add a route for porting Web API 2 controllers.
                 // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
             });
+            
+            // Seeding the database with Library Models
+            var librarySampleData = ActivatorUtilities.CreateInstance<LibrarySampleData>(app.ApplicationServices);
+            librarySampleData.InitializeData();
         }
     }
 }
