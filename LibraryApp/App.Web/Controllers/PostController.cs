@@ -18,5 +18,11 @@ namespace App.Web.Controllers
             var models = _libraryContext.Posts.ToList();
             return View(models);
         }
+        
+        [HttpGet]
+        public IActionResult Details(int id)
+        {
+            return View();
+        }
     }
 }
