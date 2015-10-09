@@ -8,12 +8,9 @@ using App.Data;
 
 namespace App.Web.Controllers
 {
-    public class LibraryController : CommonController
+    public class CommonController : Controller
     {
-        public IActionResult Index()
-        {
-            var models = _libraryRepo.GetLibraries();
-            return View(models);
-        }
+        [FromServices]
+        public ILibraryRepo _libraryRepo { get; set; }
     }
 }

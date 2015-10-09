@@ -5,16 +5,18 @@
   "tags": [""],
   "projectUrl": "",
   "licenseUrl": "",
+  
+  "dependencies": {
+    "Newtonsoft.Json": "7.0.1",
+    "PagedList": "1.17.0",
+    "App.Models": "1.0.0-*"
+  },
 
   "frameworks": {
-    "dnx451": { },
-    "dnxcore50": {
-      "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23217",
-        "System.Collections": "4.0.11-beta-23217",
-        "System.Linq": "4.0.1-beta-23217",
-        "System.Runtime": "4.0.21-beta-23217",
-        "System.Threading": "4.0.11-beta-23217"
+    "dnx451": {
+      "frameworkAssemblies": {
+        "System.Net.Http": "4.0.0.0",
+        "System.Net": "4.0.0.0"
       }
     }
   }

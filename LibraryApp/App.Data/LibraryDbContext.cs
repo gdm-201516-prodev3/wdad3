@@ -72,5 +72,28 @@ namespace App.Data
             });
             
         }
+        
+        public override int SaveChanges()
+        {
+            this.ChangeTracker.DetectChanges();
+
+            var entries = this.ChangeTracker.Entries();
+
+            // Add entry
+            var entriesFiltered = entries.Where(e => e.State == EntityState.Added);
+            foreach (var entry in entriesFiltered)
+            {
+                entry.Property("CreatedAt").CurrentValue = DateTime.UtcNow;
+            }
+
+            // Update entry
+            entriesFiltered = entries.Where(e => e.State == EntityState.Modified);
+            foreach (var entry in entriesFiltered)
+            {
+                entry.Property("UpdatedAt").CurrentValue = DateTime.UtcNow;
+            }
+
+            return base.SaveChanges();
+        }
     }
 }
