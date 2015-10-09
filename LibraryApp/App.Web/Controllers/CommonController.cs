@@ -15,6 +15,9 @@ namespace App.Web.Controllers
         public ILibraryRepo _libraryRepo { get; set; }
         
         [FromServices]
+        public IPostRepo _postRepo { get; set; }
+        
+        [FromServices]
         public IMediatheekService _mediatheekService { get; set; }
     }
 }

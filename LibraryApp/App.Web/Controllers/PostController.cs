@@ -10,19 +10,26 @@ namespace App.Web.Controllers
 {
     public class PostController : CommonController
     {
-        [FromServices]
-        public LibraryDbContext _libraryContext { get; set; }
-        
         public IActionResult Index()
         {
-            var models = _libraryContext.Posts.ToList();
+            var models = _postRepo.GetPosts();
             return View(models);
         }
         
         [HttpGet]
         public IActionResult Details(int id)
         {
-            return View();
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(400);    
+            }
+            
+            var model = _postRepo.GetPost(id);
+            if(model == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
     }
 }
