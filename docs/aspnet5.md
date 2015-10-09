@@ -106,16 +106,16 @@ Entity Framework
 
 Stappenplan: Repo, DI, Controller, View
 ---------------------------------------
-1) Maak de interface aan voor het specifiek Model in het project App.Data
+1. Maak de interface aan voor het specifiek Model in het project App.Data
 	> `IFAQRepo.cs`  
 	> Voorzie in deze interface de noodzakelijke methoden!
-2) Maak de corresponderende Repo aan die deze bovenvermelde interface beschrijft
+2. Maak de corresponderende Repo aan die deze bovenvermelde interface beschrijft
 	> `FAQRepo.cs`
-3) Vermeld deze klassen als scope om DI op te lossen in de `Startup.cs` van het project `App.Web`
-	> `services.AddScoped<IFAQRepo, FAQRepo>();`
-4) Maak een instantie van de `IFAQRepo` aan, via services, in de `CommonController`
-5) Maak een nieuwe controller aan met de naam `FAQController` en pas overerving toe van de `CommonController`
-6) In de index actie method schrijven we de volgende code:
+3. Vermeld deze klassen als scope om DI op te lossen in de `Startup.cs` van het project `App.Web`
+	> `services.AddScoped<IFAQRepo, FAQRepo>(.;`
+4. Maak een instantie van de `IFAQRepo` aan, via services, in de `CommonController`
+5. Maak een nieuwe controller aan met de naam `FAQController` en pas overerving toe van de `CommonController`
+6. In de index actie method schrijven we de volgende code:
 
 ```
 		public IActionResult Index()
@@ -125,6 +125,6 @@ Stappenplan: Repo, DI, Controller, View
         }
 ```
 
-7) Maak de corresponderende view aan voor deze actiemethode voor `FAQController`
+7. Maak de corresponderende view aan voor deze actiemethode voor `FAQController`
 
 `Views > FAQ > Index.cshtml`
