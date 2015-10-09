@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using App.Models;
 using App.Data;
+using App.Services.Ahs;
 
 namespace App.Web.Controllers
 {
@@ -12,5 +13,8 @@ namespace App.Web.Controllers
     {
         [FromServices]
         public ILibraryRepo _libraryRepo { get; set; }
+        
+        [FromServices]
+        public IMediatheekService _mediatheekService { get; set; }
     }
 }
