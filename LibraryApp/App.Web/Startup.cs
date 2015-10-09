@@ -55,6 +55,7 @@ namespace App.Web
             services.AddScoped<LibraryDbContext, LibraryDbContext>();
             services.AddScoped<ILibraryRepo, LibraryRepo>();
             services.AddScoped<IPostRepo, PostRepo>();
+            services.AddScoped<IFAQRepo, FAQRepo>();
             services.AddScoped<IMediatheekService, MediatheekService>();
             
             // Add Entity Framework services to the services container.

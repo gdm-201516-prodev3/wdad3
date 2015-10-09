@@ -8,14 +8,11 @@ using App.Data;
 
 namespace App.Web.Controllers
 {
-    public class FAQController : Controller
+    public class FAQController : CommonController
     {
-        [FromServices]
-        public LibraryDbContext _libraryContext { get; set; }
-        
         public IActionResult Index()
         {
-            var models = _libraryContext.FAQs.ToList();
+            var models = _faqRepo.GetFAQs();
             return View(models);
         }
     }
