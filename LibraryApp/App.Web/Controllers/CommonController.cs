@@ -21,6 +21,9 @@ namespace App.Web.Controllers
         public IFAQRepo _faqRepo { get; set; }
         
         [FromServices]
+        public ICategoryRepo _categoryRepo { get; set; }
+        
+        [FromServices]
         public IMediatheekService _mediatheekService { get; set; }
     }
 }

@@ -21,6 +21,7 @@ namespace App.Data.SampleData
             CreateLibraries(); 
             CreatePosts();   
             CreateFAQs();
+            CreateCategories();
         }
         
         private void CreateLibraries() 
@@ -113,6 +114,20 @@ namespace App.Data.SampleData
                     Answer = @"
                     <p><strong>Je moet zelfstandiger werken</strong>.<br>
 	De opleiding verwacht dat je op een actieve en zelfstandige manier je studies aanpakt. Bovendien zal je merken dat het tempo in de lessen hoog ligt en dat je heel wat meer leerstof op korte tijd moet verwerken. Je moet meer dan in het secundair onderwijs je taken en opdrachten goed plannen. Niet alle leerstof verwerf je via contactonderwijs. Dit betekent zeker niet dat je aan je lot wordt overgelaten! Je wordt hierin begeleid door de docenten en indien nodig ook door de leercoach.</p>"
+                });
+                
+                _context.SaveChanges();
+            }
+        }
+        
+        private void CreateCategories() 
+        {
+            if(_context.Categories == null || _context.Categories.Count() == 0)
+            {
+                _context.Categories.Add(new Category()
+                {
+                    Name = "SLA",
+                    Description = "Mjammie"
                 });
                 
                 _context.SaveChanges();

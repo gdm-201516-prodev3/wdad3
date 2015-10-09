@@ -1,0 +1,21 @@
+@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Categories";
+}
+<h2>Category</h2>
+@if (Model != null && Model.Count() > 0)
+{
+    <ul>
+    @foreach (var category in Model)
+    {
+        <li class="category">
+            <h3>@category.Name</h3>
+            @Html.Raw(@category.Description)
+        </li>
+    }
+    </ul>
+}
+else
+{
+    <div>Geen Categorieën te vinden --> :( !</div>
+}
