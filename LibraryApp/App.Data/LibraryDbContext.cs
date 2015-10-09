@@ -84,6 +84,12 @@ namespace App.Data
                l.Property(m => m.Description).Required(false).HasColumnType("nvarchar(1024)");
             });
             
+            modelBuilder.Entity<PostCategory>(l =>
+            {
+               l.ToTable("PostCategories");
+               l.Key(m => new { m.PostId, m.CategoryId });
+            });
+            
         }
         
         public override int SaveChanges()
