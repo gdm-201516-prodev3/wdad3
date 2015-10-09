@@ -8,17 +8,49 @@ using App.Data;
 namespace App.Data.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class Inital_Migration
+    partial class Init
     {
         public override string Id
         {
-            get { return "20151005072617_Inital_Migration"; }
+            get { return "20151009110407_Init"; }
         }
 
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .Annotation("ProductVersion", "7.0.0-beta7-15540");
+
+            modelBuilder.Entity("App.Models.FAQ", b =>
+                {
+                    b.Property<short>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Answer")
+                        .Required()
+                        .Annotation("Relational:ColumnType", "nvarchar(4096)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .Annotation("Relational:ColumnType", "datetime");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .Annotation("Relational:ColumnType", "datetime");
+
+                    b.Property<string>("Description")
+                        .Annotation("Relational:ColumnType", "nvarchar(1024)");
+
+                    b.Property<string>("Question")
+                        .Required()
+                        .Annotation("Relational:ColumnType", "nvarchar(1024)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .Annotation("Relational:ColumnType", "datetime");
+
+                    b.Key("Id");
+
+                    b.Annotation("Relational:TableName", "Faqs");
+                });
 
             modelBuilder.Entity("App.Models.Identity.ApplicationRole", b =>
                 {
@@ -132,9 +164,48 @@ namespace App.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .Annotation("Relational:ColumnType", "datetime");
 
+                    b.Property<string>("Url")
+                        .Annotation("Relational:ColumnType", "nvarchar(512)");
+
                     b.Key("Id");
 
                     b.Annotation("Relational:TableName", "Libraries");
+                });
+
+            modelBuilder.Entity("App.Models.Post", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Body")
+                        .Required()
+                        .Annotation("Relational:ColumnType", "nvarchar(65536)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .Annotation("Relational:ColumnType", "datetime");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .Annotation("Relational:ColumnType", "datetime");
+
+                    b.Property<string>("Description")
+                        .Annotation("Relational:ColumnType", "nvarchar(1024)");
+
+                    b.Property<string>("Synopsis")
+                        .Required()
+                        .Annotation("Relational:ColumnType", "nvarchar(1024)");
+
+                    b.Property<string>("Title")
+                        .Required()
+                        .Annotation("Relational:ColumnType", "nvarchar(128)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .Annotation("Relational:ColumnType", "datetime");
+
+                    b.Key("Id");
+
+                    b.Annotation("Relational:TableName", "Posts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>

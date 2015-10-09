@@ -4,10 +4,27 @@ using Microsoft.Data.Entity.Migrations;
 
 namespace App.Data.Migrations
 {
-    public partial class Inital_Migration : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Faqs",
+                columns: table => new
+                {
+                    Id = table.Column<short>(isNullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Answer = table.Column<string>(type: "nvarchar(4096)", isNullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", isNullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
+                    Description = table.Column<string>(type: "nvarchar(1024)", isNullable: true),
+                    Question = table.Column<string>(type: "nvarchar(1024)", isNullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FAQ", x => x.Id);
+                });
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -64,11 +81,30 @@ namespace App.Data.Migrations
                     DeletedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
                     Description = table.Column<string>(type: "nvarchar(1024)", isNullable: true),
                     Name = table.Column<string>(type: "nvarchar(128)", isNullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
+                    Url = table.Column<string>(type: "nvarchar(512)", isNullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Library", x => x.Id);
+                });
+            migrationBuilder.CreateTable(
+                name: "Posts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(isNullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Body = table.Column<string>(type: "nvarchar(65536)", isNullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", isNullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
+                    Description = table.Column<string>(type: "nvarchar(1024)", isNullable: true),
+                    Synopsis = table.Column<string>(type: "nvarchar(1024)", isNullable: false),
+                    Title = table.Column<string>(type: "nvarchar(128)", isNullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Post", x => x.Id);
                 });
             migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
@@ -163,7 +199,9 @@ namespace App.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable("Faqs");
             migrationBuilder.DropTable("Libraries");
+            migrationBuilder.DropTable("Posts");
             migrationBuilder.DropTable("AspNetRoleClaims");
             migrationBuilder.DropTable("AspNetUserClaims");
             migrationBuilder.DropTable("AspNetUserLogins");

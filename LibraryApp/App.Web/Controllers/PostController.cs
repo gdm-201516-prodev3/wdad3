@@ -8,7 +8,7 @@ using App.Data;
 
 namespace App.Web.Controllers
 {
-    public class PostController : Controller
+    public class PostController : CommonController
     {
         [FromServices]
         public LibraryDbContext _libraryContext { get; set; }
