@@ -51,6 +51,7 @@ namespace App.API
             
             // Add Scoped = Resolve dependency injection
             services.AddScoped<LibraryDbContext, LibraryDbContext>();
+            services.AddScoped<ILibraryRepo, LibraryRepo>();
             services.AddScoped<IMediatheekService, MediatheekService>();
             
             // Add Entity Framework services to the services container.

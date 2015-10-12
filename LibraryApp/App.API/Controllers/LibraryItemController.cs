@@ -11,11 +11,8 @@ using App.Services.Ahs;
 namespace App.API.Controllers
 {
     [Route("api/[controller]")]
-    public class LibraryItemsController : Controller
+    public class LibraryItemController : CommonController
     {
-        [FromServices]
-        public IMediatheekService _mediatheekService { get; set; }
-        
         // GET: api/values
         [HttpGet(Name = "GetLibraryItems")]
         public IEnumerable<LibraryItem> GetLibraryItems()
@@ -23,10 +20,10 @@ namespace App.API.Controllers
             var search = new MediatheekSimpleSearch() 
             {
                 LibraryCode = "MAR",
-                SearchField = "JavaScript",
+                SearchField = "CSS",
                 ItemsPerPage = 30,
                 Offset = 0,
-                SortOrder = MediatheekSortOrder.Title
+                SortOrder = MediatheekSortOrder.Relavance
             };
             return _mediatheekService.GetLibraryItemsBySimpleSearch(search);
         }
