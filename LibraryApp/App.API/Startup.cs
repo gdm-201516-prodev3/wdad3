@@ -65,11 +65,16 @@ namespace App.API
         {
             // Configure the HTTP request pipeline.
             app.UseStaticFiles();
-
-            // Add MVC to the request pipeline.
-            app.UseMvc();
-            // Add the following route for porting Web API 2 controllers.
-            // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
+            
+            // Add MVC to the request pipeline.            
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+                // Add the following route for porting Web API 2 controllers.
+                //routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
+            });
         }
     }
 }
