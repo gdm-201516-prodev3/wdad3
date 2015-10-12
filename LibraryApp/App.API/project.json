@@ -3,11 +3,17 @@
   "version": "1.0.0-*",
 
   "dependencies": {
+    "EntityFramework.SQLite": "7.0.0-beta7",
+    "EntityFramework.Commands": "7.0.0-beta7",
     "Microsoft.AspNet.Mvc": "6.0.0-beta7",
     "Microsoft.AspNet.Server.IIS": "1.0.0-beta7",
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta7",
     "Microsoft.AspNet.Server.WebListener": "1.0.0-beta7",
-    "Microsoft.AspNet.StaticFiles": "1.0.0-beta7"
+    "Microsoft.AspNet.StaticFiles": "1.0.0-beta7",
+    "PagedList": "1.17.0",
+    "App.Data": "1.0.0-*",
+    "App.Models": "1.0.0-*",
+    "App.Services": "1.0.0-*"    
   },
 
   "commands": {
@@ -16,8 +22,7 @@
   },
 
   "frameworks": {
-    "dnx451": {},
-    "dnxcore50": {}
+    "dnx451": {}
   },
 
   "exclude": [

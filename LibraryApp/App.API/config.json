@@ -1,0 +1,22 @@
+{
+    "Data": {
+        "DefaultConnection": {
+            "ConnectionString": "Data Source=C:\\Users\\Administrator\\wdad3\\LibraryApp\\App.Web\\Libraries.sqlite"
+        }
+    },
+	"EntityFramework": {
+		"LibraryDbContext" : {
+			"ConnectionStringKey" : "Data:DefaultConnection:ConnectionString"
+		}
+	},
+	"MediatheekServiceSettings" : {
+		"Bidoc": {
+			"SearchUrl": "http://www.arteveldehogeschool.be/bib/cgi-bin/bidoczoek.exe",
+			"GetUrl": "http://www.arteveldehogeschool.be/bib/cgi-bin/bidocget.exe",
+			"ServerPort": 9711,
+			"LoginServerPort": 9717,
+			"ReplayPort": 6006,
+			"LoginRelayPort": 6008
+		}
+	}
+}
