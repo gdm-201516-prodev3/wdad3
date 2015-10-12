@@ -14,6 +14,12 @@ namespace App.Models
         
         public Int16 Id { get; set; } 
         public string Question { get; set; }
-        public string Answer { get; set; }    
+        public string Answer { get; set; }
+        
+        /* Foreign Keys */
+        public Nullable<Int16> LibraryId { get; set; }
+        
+        /* Virtual or Navigational Properties */
+        public virtual Library Library { get; set; }    
     }
 }

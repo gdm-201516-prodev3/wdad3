@@ -34,6 +34,8 @@ namespace App.Data.Migrations
                         .Required()
                         .Annotation("Relational:ColumnType", "nvarchar(255)");
 
+                    b.Property<short?>("ParentCategoryId");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .Annotation("Relational:ColumnType", "datetime");
@@ -61,6 +63,8 @@ namespace App.Data.Migrations
 
                     b.Property<string>("Description")
                         .Annotation("Relational:ColumnType", "nvarchar(1024)");
+
+                    b.Property<short?>("LibraryId");
 
                     b.Property<string>("Question")
                         .Required()
@@ -214,6 +218,8 @@ namespace App.Data.Migrations
                     b.Property<string>("Description")
                         .Annotation("Relational:ColumnType", "nvarchar(1024)");
 
+                    b.Property<short?>("LibraryId");
+
                     b.Property<string>("Synopsis")
                         .Required()
                         .Annotation("Relational:ColumnType", "nvarchar(1024)");
@@ -300,6 +306,27 @@ namespace App.Data.Migrations
                     b.Key("UserId", "RoleId");
 
                     b.Annotation("Relational:TableName", "AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("App.Models.Category", b =>
+                {
+                    b.Reference("App.Models.Category")
+                        .InverseCollection()
+                        .ForeignKey("ParentCategoryId");
+                });
+
+            modelBuilder.Entity("App.Models.FAQ", b =>
+                {
+                    b.Reference("App.Models.Library")
+                        .InverseCollection()
+                        .ForeignKey("LibraryId");
+                });
+
+            modelBuilder.Entity("App.Models.Post", b =>
+                {
+                    b.Reference("App.Models.Library")
+                        .InverseCollection()
+                        .ForeignKey("LibraryId");
                 });
 
             modelBuilder.Entity("App.Models.PostCategory", b =>

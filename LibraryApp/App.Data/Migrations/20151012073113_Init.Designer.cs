@@ -12,13 +12,43 @@ namespace App.Data.Migrations
     {
         public override string Id
         {
-            get { return "20151009110407_Init"; }
+            get { return "20151012073113_Init"; }
         }
 
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .Annotation("ProductVersion", "7.0.0-beta7-15540");
+
+            modelBuilder.Entity("App.Models.Category", b =>
+                {
+                    b.Property<short>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .Annotation("Relational:ColumnType", "datetime");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .Annotation("Relational:ColumnType", "datetime");
+
+                    b.Property<string>("Description")
+                        .Annotation("Relational:ColumnType", "nvarchar(1024)");
+
+                    b.Property<string>("Name")
+                        .Required()
+                        .Annotation("Relational:ColumnType", "nvarchar(255)");
+
+                    b.Property<short?>("ParentCategoryId");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .Annotation("Relational:ColumnType", "datetime");
+
+                    b.Key("Id");
+
+                    b.Annotation("Relational:TableName", "Categories");
+                });
 
             modelBuilder.Entity("App.Models.FAQ", b =>
                 {
@@ -38,6 +68,8 @@ namespace App.Data.Migrations
 
                     b.Property<string>("Description")
                         .Annotation("Relational:ColumnType", "nvarchar(1024)");
+
+                    b.Property<short?>("LibraryId");
 
                     b.Property<string>("Question")
                         .Required()
@@ -191,6 +223,8 @@ namespace App.Data.Migrations
                     b.Property<string>("Description")
                         .Annotation("Relational:ColumnType", "nvarchar(1024)");
 
+                    b.Property<short?>("LibraryId");
+
                     b.Property<string>("Synopsis")
                         .Required()
                         .Annotation("Relational:ColumnType", "nvarchar(1024)");
@@ -206,6 +240,19 @@ namespace App.Data.Migrations
                     b.Key("Id");
 
                     b.Annotation("Relational:TableName", "Posts");
+                });
+
+            modelBuilder.Entity("App.Models.PostCategory", b =>
+                {
+                    b.Property<short>("PostId");
+
+                    b.Property<short>("CategoryId");
+
+                    b.Property<int?>("PostId1");
+
+                    b.Key("PostId", "CategoryId");
+
+                    b.Annotation("Relational:TableName", "PostCategories");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
@@ -264,6 +311,38 @@ namespace App.Data.Migrations
                     b.Key("UserId", "RoleId");
 
                     b.Annotation("Relational:TableName", "AspNetUserRoles");
+                });
+
+            modelBuilder.Entity("App.Models.Category", b =>
+                {
+                    b.Reference("App.Models.Category")
+                        .InverseCollection()
+                        .ForeignKey("ParentCategoryId");
+                });
+
+            modelBuilder.Entity("App.Models.FAQ", b =>
+                {
+                    b.Reference("App.Models.Library")
+                        .InverseCollection()
+                        .ForeignKey("LibraryId");
+                });
+
+            modelBuilder.Entity("App.Models.Post", b =>
+                {
+                    b.Reference("App.Models.Library")
+                        .InverseCollection()
+                        .ForeignKey("LibraryId");
+                });
+
+            modelBuilder.Entity("App.Models.PostCategory", b =>
+                {
+                    b.Reference("App.Models.Category")
+                        .InverseCollection()
+                        .ForeignKey("CategoryId");
+
+                    b.Reference("App.Models.Post")
+                        .InverseCollection()
+                        .ForeignKey("PostId1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>

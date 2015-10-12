@@ -57,6 +57,11 @@ namespace App.Data
                l.Property(m => m.Synopsis).Required().HasColumnType("nvarchar(1024)");
                l.Property(m => m.Description).Required(false).HasColumnType("nvarchar(1024)");
                l.Property(m => m.Body).Required().HasColumnType("nvarchar(65536)");
+               
+               // Library => 0 to many Posts
+               l.Reference(m => m.Library)
+               .InverseCollection(m => m.Posts)
+               .ForeignKey(m => m.LibraryId);
             });
             
             modelBuilder.Entity<FAQ>(l =>
@@ -70,6 +75,11 @@ namespace App.Data
                l.Property(m => m.Question).Required().HasColumnType("nvarchar(1024)");
                l.Property(m => m.Answer).Required().HasColumnType("nvarchar(4096)");
                l.Property(m => m.Description).Required(false).HasColumnType("nvarchar(1024)");
+               
+               // Library => 0 to many FAQs
+               l.Reference(m => m.Library)
+               .InverseCollection(m => m.FAQs)
+               .ForeignKey(m => m.LibraryId);
             });
             
             modelBuilder.Entity<Category>(l =>
@@ -82,6 +92,11 @@ namespace App.Data
                l.Property(m => m.DeletedAt).Required(false).HasColumnType("datetime");
                l.Property(m => m.Name).Required().HasColumnType("nvarchar(255)");
                l.Property(m => m.Description).Required(false).HasColumnType("nvarchar(1024)");
+               
+               // Category => 0 to many Child categories
+               l.Reference(m => m.ParentCategory)
+               .InverseCollection(m => m.ChildCategories)
+               .ForeignKey(m => m.ParentCategoryId);
             });
             
             modelBuilder.Entity<PostCategory>(l =>

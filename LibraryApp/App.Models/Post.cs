@@ -15,9 +15,13 @@ namespace App.Models
         public Int32 Id { get; set; } 
         public string Title { get; set; }
         public string Synopsis { get; set; }
-        public string Body { get; set; }  
+        public string Body { get; set; }
         
-        /* Virtual Properties */
+        /* Foreign Keys */
+        public Nullable<Int16> LibraryId { get; set; }
+        
+        /* Virtual or Navigational Properties */
+        public virtual Library Library { get; set; } 
         public virtual ICollection<PostCategory> Categories { get; set; }      
     }
 }

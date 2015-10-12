@@ -1,6 +1,6 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-	"editor.fontSize": 20,
+	"editor.fontSize": 22,
 	"editor.wrappingColumn": 90,
 	"http.proxy": "http://proxy.arteveldehs.be:8080"
 }

@@ -14,7 +14,14 @@ namespace App.Models
         
         public Int16 Id { get; set; } 
         public string Name { get; set; } 
-        /* Virtual Properties */
+        
+        
+        /* Foreign Keys */
+        public Nullable<Int16> ParentCategoryId { get; set; }
+        
+        /* Virtual or Navigation Properties */
+        public virtual Category ParentCategory { get; set; } 
+        public virtual ICollection<Category> ChildCategories{ get; set; }
         public virtual ICollection<PostCategory> Posts { get; set; }   
     }
 }
