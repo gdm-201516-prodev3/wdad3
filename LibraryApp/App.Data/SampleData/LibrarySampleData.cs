@@ -126,8 +126,15 @@ namespace App.Data.SampleData
             {
                 _context.Categories.Add(new Category()
                 {
-                    Name = "SLA",
-                    Description = "Mjammie"
+                    Name = "Webtechnologie",
+                    Description = "Webtechnologie"
+                });
+                
+                _context.Categories.Add(new Category()
+                {
+                    Name = "HTML",
+                    Description = "HTML",
+                    ParentCategoryId = 1
                 });
                 
                 _context.SaveChanges();

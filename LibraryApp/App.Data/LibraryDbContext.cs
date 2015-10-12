@@ -105,6 +105,28 @@ namespace App.Data
                l.Key(m => new { m.PostId, m.CategoryId });
             });
             
+            modelBuilder.Entity<Comment>(l =>
+            {
+               l.ToTable("Comments");
+               l.Key(m => m.Id); 
+               l.Property(m => m.Id).ValueGeneratedOnAdd();
+               l.Property(m => m.CreatedAt).Required().HasColumnType("datetime").ValueGeneratedOnAdd();
+               l.Property(m => m.UpdatedAt).Required(false).HasColumnType("datetime").ValueGeneratedOnAddOrUpdate();
+               l.Property(m => m.DeletedAt).Required(false).HasColumnType("datetime");
+               l.Property(m => m.Body).Required().HasColumnType("nvarchar(65536)");
+               l.Property(m => m.Description).Required(false).HasColumnType("nvarchar(1024)");
+               
+               // Comment => 0 to many Child comments
+               l.Reference(m => m.ParentComment)
+               .InverseCollection(m => m.ChildComments)
+               .ForeignKey(m => m.ParentCommentId);
+               
+               // Post => 0 to many comments
+               l.Reference(m => m.Post)
+               .InverseCollection(m => m.Comments)
+               .ForeignKey(m => m.PostId);
+            });
+            
         }
         
         public override int SaveChanges()

@@ -22,6 +22,7 @@ namespace App.Models
         
         /* Virtual or Navigational Properties */
         public virtual Library Library { get; set; } 
-        public virtual ICollection<PostCategory> Categories { get; set; }      
+        public virtual ICollection<PostCategory> Categories { get; set; }  
+        public virtual ICollection<Comment> Comments { get; set; }     
     }
 }
