@@ -4,7 +4,7 @@ using Microsoft.Data.Entity.Migrations;
 
 namespace App.Data.Migrations
 {
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -218,6 +218,34 @@ namespace App.Data.Migrations
                         principalColumn: "Id");
                 });
             migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(isNullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Body = table.Column<string>(type: "nvarchar(65536)", isNullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", isNullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
+                    Description = table.Column<string>(type: "nvarchar(1024)", isNullable: true),
+                    ParentCommentId = table.Column<int>(isNullable: true),
+                    PostId = table.Column<int>(isNullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comment_Comment_ParentCommentId",
+                        column: x => x.ParentCommentId,
+                        principalTable: "Comments",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Comment_Post_PostId",
+                        column: x => x.PostId,
+                        principalTable: "Posts",
+                        principalColumn: "Id");
+                });
+            migrationBuilder.CreateTable(
                 name: "PostCategories",
                 columns: table => new
                 {
@@ -255,6 +283,7 @@ namespace App.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable("Comments");
             migrationBuilder.DropTable("Faqs");
             migrationBuilder.DropTable("PostCategories");
             migrationBuilder.DropTable("AspNetRoleClaims");

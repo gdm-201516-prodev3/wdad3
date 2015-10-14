@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace App.Models
 {
@@ -12,6 +14,7 @@ namespace App.Models
             
         }
         
+        [Key]
         public Int16 Id { get; set; } 
         public string Name { get; set; }
         public string Code { get; set; }

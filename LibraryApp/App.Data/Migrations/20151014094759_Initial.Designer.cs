@@ -8,11 +8,11 @@ using App.Data;
 namespace App.Data.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class Init
+    partial class Initial
     {
         public override string Id
         {
-            get { return "20151012073113_Init"; }
+            get { return "20151014094759_Initial"; }
         }
 
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -48,6 +48,38 @@ namespace App.Data.Migrations
                     b.Key("Id");
 
                     b.Annotation("Relational:TableName", "Categories");
+                });
+
+            modelBuilder.Entity("App.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Body")
+                        .Required()
+                        .Annotation("Relational:ColumnType", "nvarchar(65536)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .Annotation("Relational:ColumnType", "datetime");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .Annotation("Relational:ColumnType", "datetime");
+
+                    b.Property<string>("Description")
+                        .Annotation("Relational:ColumnType", "nvarchar(1024)");
+
+                    b.Property<int?>("ParentCommentId");
+
+                    b.Property<int>("PostId");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .Annotation("Relational:ColumnType", "datetime");
+
+                    b.Key("Id");
+
+                    b.Annotation("Relational:TableName", "Comments");
                 });
 
             modelBuilder.Entity("App.Models.FAQ", b =>
@@ -318,6 +350,17 @@ namespace App.Data.Migrations
                     b.Reference("App.Models.Category")
                         .InverseCollection()
                         .ForeignKey("ParentCategoryId");
+                });
+
+            modelBuilder.Entity("App.Models.Comment", b =>
+                {
+                    b.Reference("App.Models.Comment")
+                        .InverseCollection()
+                        .ForeignKey("ParentCommentId");
+
+                    b.Reference("App.Models.Post")
+                        .InverseCollection()
+                        .ForeignKey("PostId");
                 });
 
             modelBuilder.Entity("App.Models.FAQ", b =>
