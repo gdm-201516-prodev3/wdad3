@@ -53,10 +53,6 @@ namespace App.Web
         {
             // Add Scoped = Resolve dependency injection
             services.AddScoped<LibraryDbContext, LibraryDbContext>();
-            services.AddScoped<ILibraryRepo, LibraryRepo>();
-            services.AddScoped<IPostRepo, PostRepo>();
-            services.AddScoped<IFAQRepo, FAQRepo>();
-            services.AddScoped<ICategoryRepo, CategoryRepo>();
             services.AddScoped<IMediatheekService, MediatheekService>();
             
             // Add Entity Framework services to the services container.
@@ -135,6 +131,11 @@ namespace App.Web
             // Add MVC to the request pipeline.
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "areaRoute", 
+                    template: "{area:exists}/{controller}/{action}", 
+                    defaults: new { controller = "Home", action = "Index" });
+        
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

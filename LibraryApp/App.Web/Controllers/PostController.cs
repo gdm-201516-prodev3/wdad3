@@ -12,19 +12,19 @@ namespace App.Web.Controllers
     {
         public IActionResult Index()
         {
-            var models = _postRepo.GetPosts();
+            var models = _libraryContext.Posts.AsEnumerable();
             return View(models);
         }
         
         [HttpGet]
-        public IActionResult Details(int id)
+        public IActionResult Details(int? id)
         {
             if(id == null)
             {
                 return new HttpStatusCodeResult(400);    
             }
             
-            var model = _postRepo.GetPost(id);
+            var model = _libraryContext.Posts.FirstOrDefault(c => c.Id == id);
             if(model == null)
             {
                 return RedirectToAction("Index");

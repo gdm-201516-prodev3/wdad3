@@ -12,7 +12,7 @@ namespace App.Web.Controllers
     {
         public IActionResult Index()
         {
-            var models = _faqRepo.GetFAQs();
+            var models = _libraryContext.FAQs.AsEnumerable();
             return View(models);
         }
     }

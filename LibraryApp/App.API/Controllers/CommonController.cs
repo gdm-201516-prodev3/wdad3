@@ -13,8 +13,9 @@ namespace App.API.Controllers
     public abstract class CommonController : Controller
     {
         [FromServices]
-        public IMediatheekService _mediatheekService { get; set; }        
+        public LibraryDbContext _libraryContext { get; set; }
+        
         [FromServices]
-        public ILibraryRepo _libraryRepo { get; set; }
+        public IMediatheekService _mediatheekService { get; set; } 
     }
 }

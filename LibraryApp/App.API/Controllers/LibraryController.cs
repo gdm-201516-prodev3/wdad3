@@ -17,20 +17,20 @@ namespace App.API.Controllers
         [HttpGet(Name = "GetLibraries")]
         public IEnumerable<Library> GetLibraries()
         {
-            return _libraryRepo.GetLibraries();           
+            return _libraryContext.Libraries.AsEnumerable();          
         }
         
         // GET api/libraries/5
         [HttpGet("{libraryId:int}", Name = "GetLibraryById")]
         public IActionResult GetLibraryById(int libraryId)
         {
-            var library = _libraryRepo.GetLibrary(libraryId);
-            if (library == null)
+            var model = _libraryContext.Libraries.FirstOrDefault(c => c.Id == libraryId);
+            if (model == null)
             {
                 return HttpNotFound();
             }
 
-            return new ObjectResult(library);
+            return new ObjectResult(model);
         }
         
         // POST api/library
@@ -44,7 +44,8 @@ namespace App.API.Controllers
             }
             else
             {
-                var addedLibrary = _libraryRepo.AddLibrary(library);
+                _libraryContext.Libraries.Add(library);
+                var addedLibrary = (_libraryContext.SaveChanges() > 0) ? library : null;
 
                 if (addedLibrary != null)
                 {
@@ -73,8 +74,15 @@ namespace App.API.Controllers
         [HttpDelete("{libraryId:int}", Name = "DeleteLibrary")]
         public IActionResult DeleteLibrary(int libraryId)
         {
-            var result = _libraryRepo.DeleteLibrary(libraryId);
-            if (result)
+            var library = _libraryContext.Libraries.FirstOrDefault(c => c.Id == libraryId);
+            
+            if (library == null)
+            {
+                return HttpNotFound();
+            }
+                
+            _libraryContext.Libraries.Remove(library);
+            if (_libraryContext.SaveChanges() > 0)
             {
                 return new HttpStatusCodeResult(204);
             }
