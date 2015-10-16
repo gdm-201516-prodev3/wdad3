@@ -1,0 +1,130 @@
+﻿@* Sidebar, on the left in the backoffice *@
+<aside id="sidebar" class="sidebar-push-left">
+    <nav id="main-navigation">
+        <ul>
+            <li class="active">
+                <a href="@Url.Action("Index", "Home")" title="">
+                    <span class="glyphicon glyphicon-home"></span>
+                    <span class="label-menu">Dashboard</span>
+                </a>
+            </li>
+            <li class="submenu">
+                <a href="#" title="">
+                    <span class="fa fa-calendar"></span>
+                    <span class="label-menu">AcademicYears</span>
+                    <span class="pull-right arrow glyphicon glyphicon-chevron-right"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Index", "AcademicYear")" title="All academicyears">
+                            <span class="label-menu">All AcademicYears</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "AcademicYear")" title="">
+                            <span class="label-menu">Add New</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="submenu">
+                <a href="#" title="">
+                    <span class="fa fa-university"></span>
+                    <span class="label-menu">Departments</span>
+                    <span class="pull-right arrow glyphicon glyphicon-chevron-right"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Index", "Department")" title="All departments">
+                            <span class="label-menu">All Departments</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "Department")" title="Add a new department">
+                            <span class="label-menu">Add New</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="submenu">
+                <a href="#" title="">
+                    <span class="fa fa-newspaper-o"></span>
+                    <span class="label-menu">Posts</span>
+                    <span class="pull-right arrow glyphicon glyphicon-chevron-right"></span>
+                </a>
+                <ul>
+                    <li>                        
+                        <a href="@Url.Action("Index", "Post")" title="All posts">
+                            <span class="label-menu">All Posts</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "Post")" title="">
+                            <span class="label-menu">Add New</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="submenu">
+                <a href="#" title="">
+                    <span class="fa fa-book"></span>
+                    <span class="label-menu">Categories</span>
+                    <span class="pull-right arrow glyphicon glyphicon-chevron-right"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Index", "Category")" title="">
+                            <span class="label-menu">All Categories</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "Category")" title="">
+                            <span class="label-menu">Create Category</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Tag")" title="">
+                    <span class="fa fa-tags"></span>
+                    <span class="label-menu">Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Comment")" title="">
+                    <span class="fa fa-comments"></span>
+                    <span class="label-menu">Comments</span>
+                </a>
+            </li>
+            <li class="submenu">
+                <a href="#" title="">
+                    <span class="fa fa-users"></span>
+                    <span class="label-menu">Users</span>
+                    <span class="pull-right arrow glyphicon glyphicon-chevron-right"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Index", "User")" title="">
+                            <span class="label-menu">All Users</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "User")" title="">
+                            <span class="label-menu">Add New User</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Role")" title="">
+                            <span class="label-menu">All Roles</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "Role")" title="">
+                            <span class="label-menu">Add New Role</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</aside>

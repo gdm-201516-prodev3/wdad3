@@ -1,14 +1,24 @@
 <!doctype html>
-<html lang="">
+<!-- [if lt IE 7]><html dir="ltr" lang="nl-be" class="no-js lt-ie7"><![endif]-->
+<!-- [if lt IE 8]><html dir="ltr" lang="nl-be" class="no-js lt-ie8"><![endif]-->
+<!-- [if lt IE 9]><html dir="ltr" lang="nl-be" class="no-js lt-ie9"><![endif]-->
+<!-- [if lt IE 10]><html dir="ltr" lang="nl-be" class="no-js lt-ie10"><![endif]-->
+<!-- [if (gt IE 9)|!(IE)]><!-->
+<html dir="ltr" lang="nl-be" class="no-js" prefix="og: http://ogp.me/ns#">
+<!--<![endif]-->
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - App.Web</title>
-
+        <title>@ViewBag.Title - Mediatheken - Arteveldehogeschool</title>
+        <meta name="description" content="@ViewBag.Description">
+        <meta name="keywords" content="@ViewBag.Keywords">
+        <meta name="author" content="@ViewBag.Author">
+        <meta name="copyright" content="Copyright 2003-16 Arteveldehogeschool. Alle rechten voorbehouden.">
+    
         <environment names="Development">
             <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
             <link rel="stylesheet" href="~/lib/bootstrap-touch-carousel/dist/css/bootstrap-touch-carousel.css" />
-            <link rel="stylesheet" href="~/css/site.css" />
+            <link rel="stylesheet" href="~/css/backoffice/site.css" />
         </environment>
         <environment names="Staging,Production">
             <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap/3.0.0/css/bootstrap.min.css"
@@ -17,41 +27,32 @@
             <link rel="stylesheet" href="//ajax.aspnetcdn.com/ajax/bootstrap-touch-carousel/0.8.0/css/bootstrap-touch-carousel.css"
                   asp-fallback-href="~/lib/bootstrap-touch-carousel/css/bootstrap-touch-carousel.css"
                   asp-fallback-test-class="carousel-caption" asp-fallback-test-property="display" asp-fallback-test-value="none" />
-            <link rel="stylesheet" href="~/css/site.css" asp-file-version="true" />
+            <link rel="stylesheet" href="~/css/backoffice/site.css" asp-file-version="true" />
         </environment>
     </head>
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">App.Web</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li><a asp-controller="Home" asp-action="About">About</a></li>
-                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
-                        <li><a asp-controller="Library" asp-action="Index">Bibliotheken</a></li>
-                        <li><a asp-controller="Post" asp-action="Index">Posts</a></li>
-                        <li><a asp-controller="Category" asp-action="Index">Categorieën</a></li>
-                        
-                    </ul>
-                    @await Html.PartialAsync("_LoginPartial")
-                </div>
+        @* Header Partial *@
+        @Html.Partial("_Header")
+    
+        @* Sidebar Partial*@
+        @Html.Partial("_Sidebar")
+    
+        @* Main Content *@
+        <main id="main" role="main">
+            <header id="main-header" class="clearfix">
+                <h1>@ViewBag.Title <small>@ViewBag.SubTitle</small></h1>
+            </header>
+            <div>
+                <ol class="breadcrumb">
+                    <li><a href="#"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+                    <li><a href="#">Fake 1</a></li>
+                    <li class="active">Fake 2</li>
+                </ol>
             </div>
-        </div>
-        <div class="container body-content">
+    
+            @* Render the body of the view *@
             @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; 2015 - App.Web</p>
-            </footer>
-        </div>
+        </main>
 
         <environment names="Development">
             <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -80,6 +81,7 @@
             <script src="~/js/site.js" asp-file-version="true"></script>
         </environment>
 
+        @* Custom scripts specified in the views*@
         @RenderSection("scripts", required: false)
     </body>
 </html>

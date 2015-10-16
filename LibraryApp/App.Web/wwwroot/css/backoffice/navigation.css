@@ -1,0 +1,98 @@
+﻿#main-navigation ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+}
+#main-navigation ul li {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+}
+#main-navigation ul li a {
+    display: block;
+    color: #8b91a0;
+    font-weight: 300;
+    text-decoration:none;
+    text-shadow: 0 1px 1px #000;
+}
+#main-navigation > ul > li > a {
+    font-size:16px;
+    color: #8b91a0;
+}
+#main-navigation > ul > li > a:hover {
+    color: #e2eeff;
+}
+#main-navigation > ul > li > a .glyphicon,
+#main-navigation > ul > li > a .fa{
+    display:inline-block;
+    width:32px;
+    text-align:center;
+    top:0;
+    padding:10px 0;
+}
+#main-navigation > ul > li > a .label-menu{
+    position:relative;
+    display: inline-block;
+    text-align:left;
+    top:-1px;
+}
+#main-navigation > ul > li > a .arrow {
+    float: right;
+    margin-top: 3px;
+    font-size: 10px;
+    -webkit-transition: 0.3s ease-in-out;
+    transition: 0.3s ease-in-out;
+}
+#main-navigation > ul > li.open > a .arrow {
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+#main-navigation > ul > li.active > a{
+    color: #e2eeff;
+}
+#main-navigation > ul > li.open > ul {
+    display:block;
+}
+#main-navigation ul ul{
+    background:#22262E;
+    position:relative;
+    display:none;
+}
+#main-navigation ul > li > ul:before{
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 1;
+    left: 16px;
+    top: 0;
+    bottom: 0;
+    border-left: 1px solid #7A7A7A;
+}
+#main-navigation ul ul > li{
+    background:#22262E;
+}
+#main-navigation ul ul > li:before{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 8px;
+    left: 16px;
+    top: 16px;
+    border-top: 1px solid #7A7A7A;
+    z-index: 1;
+}
+#main-navigation ul ul > li > a{
+    padding:6px 10px 6px 36px;
+    font-size:14px;
+    color: #8b91a0;
+}
+#main-navigation > ul ul > li > a:hover {
+    color: #e2eeff;
+}
+#main-navigation > ul ul > li.active > a{
+    color: #e2eeff;
+}
+#main-navigation ul ul > li:hover:before{
+    border-top-color: #e2eeff;
+}

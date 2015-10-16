@@ -1,0 +1,76 @@
+﻿/*
+Sidebar off-canvas toggle
+==========================================================
+*/
+.sidebar-toggle{
+    background: #000;
+    color: #FFF;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 10px 10px;
+    margin:11px 2px 0 11px;
+    box-sizing: border-box;
+}
+.sidebar-toggle:hover{
+    background: #00b4ff;
+    color: #FFF;
+}
+.sidebar-toggle .icon-bar {
+    background-color:#fff;
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+}
+.sidebar-toggle .icon-bar+.icon-bar {
+    margin-top:4px;
+}
+
+/*
+Sidebar
+==========================================================
+*/
+#sidebar{
+    position:fixed;
+    width:244px;
+    height: 100%;
+    top:0;
+    background: #1b1e24;
+    -webkit-overflow-scrolling: touch; /* enables momentum scrolling in iOS overflow elements */
+    padding-top:56px;
+}
+.sidebar-push-left{
+    -webkit-transform: translate3d(-244px,0,0);
+    -moz-transform: translate3d(-244px,0,0);
+    -ms-transform: translate3d(-244px,0,0);
+    -o-transform: translate3d(-244px,0,0);
+    transform: translate3d(-244px,0,0);
+}
+.sidebar-push-open{
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    -ms-transform: translate3d(0,0,0);
+    -o-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+.main-push{
+    -webkit-transform: translate3d(244px,0,0);
+    -moz-transform: translate3d(244px,0,0);
+    -ms-transform: translate3d(244px,0,0);
+    -o-transform: translate3d(244px,0,0);
+    transform: translate3d(244px,0,0);
+}
+#sidebar, #main{
+    -webkit-transition: -webkit-transform .2s cubic-bezier(.16, .68, .43, .99);
+    -moz-transition: -moz-transform .2s cubic-bezier(.16, .68, .43, .99);
+    -o-transition: -o-transform .2s cubic-bezier(.16, .68, .43, .99);
+    transition: transform .2s cubic-bezier(.16, .68, .43, .99);
+    /* improves performance issues on mobile*/
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+}
+.main-full{
+    margin-left:244px;
+}

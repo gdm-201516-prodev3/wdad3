@@ -1,0 +1,14 @@
+﻿.scrolltotop{
+    width:36px;
+    height:36px;
+    display:block;
+    position:fixed;
+    right:6px;
+    bottom:6px;
+    background:url('backoffice/images/totop.png') no-repeat;
+    background-size:cover;
+    text-indent:-999em;
+    cursor:hand;
+    cursor:pointer;
+    display:none;
+}
