@@ -10,12 +10,13 @@ using App.Models.Identity;
 
 namespace App.Data
 {
-    public class LibraryDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
+    public class LibraryDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>, ILibraryDbContext
     {
         public DbSet<Library> Libraries { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<FAQ> FAQs { get; set; }        
         public DbSet<Category> Categories { get; set; }
+        public DbSet<LibraryItemAction> LibraryItemActions { get; set; }
               
         public LibraryDbContext() : base()
         {
@@ -43,6 +44,10 @@ namespace App.Data
                l.Property(m => m.Code).Required().HasColumnType("char(3)");
                l.Property(m => m.Description).Required(false).HasColumnType("nvarchar(1024)");
                l.Property(m => m.Url).Required(false).HasColumnType("nvarchar(512)");
+               
+               l.Reference(m => m.User)
+               .InverseCollection(m => m.Libraries)
+               .ForeignKey(m => m.UserId);
             });
             
             modelBuilder.Entity<Post>(l =>
@@ -62,6 +67,11 @@ namespace App.Data
                l.Reference(m => m.Library)
                .InverseCollection(m => m.Posts)
                .ForeignKey(m => m.LibraryId);
+               
+               l.Reference(m => m.User)
+               .InverseCollection(m => m.Posts)
+               .ForeignKey(m => m.UserId);
+               
             });
             
             modelBuilder.Entity<FAQ>(l =>
@@ -80,6 +90,11 @@ namespace App.Data
                l.Reference(m => m.Library)
                .InverseCollection(m => m.FAQs)
                .ForeignKey(m => m.LibraryId);
+               
+               l.Reference(m => m.User)
+               .InverseCollection(m => m.FAQs)
+               .ForeignKey(m => m.UserId);
+               
             });
             
             modelBuilder.Entity<Category>(l =>
@@ -97,6 +112,11 @@ namespace App.Data
                l.Reference(m => m.ParentCategory)
                .InverseCollection(m => m.ChildCategories)
                .ForeignKey(m => m.ParentCategoryId);
+               
+               l.Reference(m => m.User)
+               .InverseCollection(m => m.Categories)
+               .ForeignKey(m => m.UserId);
+               
             });
             
             modelBuilder.Entity<PostCategory>(l =>
@@ -125,7 +145,27 @@ namespace App.Data
                l.Reference(m => m.Post)
                .InverseCollection(m => m.Comments)
                .ForeignKey(m => m.PostId);
+               
+               l.Reference(m => m.User)
+               .InverseCollection(m => m.Comments)
+               .ForeignKey(m => m.UserId);
+               
             });
+            
+            /*modelBuilder.Entity<LibraryItemAction>(l =>
+            {
+               l.ToTable("LibraryItemActions");
+               l.Property(m => m.LibraryItemId).Required();
+               l.Property(m => m.UserAgent).Required().HasColumnType("nvarchar(2056)");
+               l.Property(m => m.Action).Required(true);
+               l.Property(m => m.Rating).Required(false);
+               l.Property(m => m.CreatedAt).Required().HasColumnType("datetime").ValueGeneratedOnAdd();
+               
+               // ApplicationUser => 0 to many Actions
+               l.Reference(m => m.User)
+               .InverseCollection(m => m.Actions)
+               .ForeignKey(m => m.UserId);
+            })*/
             
         }
         

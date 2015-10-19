@@ -40,6 +40,8 @@ namespace App.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .Annotation("Relational:ColumnType", "datetime");
 
+                    b.Property<string>("UserId");
+
                     b.Key("Id");
 
                     b.Annotation("Relational:TableName", "Categories");
@@ -71,6 +73,8 @@ namespace App.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .Annotation("Relational:ColumnType", "datetime");
+
+                    b.Property<string>("UserId");
 
                     b.Key("Id");
 
@@ -105,6 +109,8 @@ namespace App.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .Annotation("Relational:ColumnType", "datetime");
+
+                    b.Property<string>("UserId");
 
                     b.Key("Id");
 
@@ -226,6 +232,8 @@ namespace App.Data.Migrations
                     b.Property<string>("Url")
                         .Annotation("Relational:ColumnType", "nvarchar(512)");
 
+                    b.Property<string>("UserId");
+
                     b.Key("Id");
 
                     b.Annotation("Relational:TableName", "Libraries");
@@ -263,6 +271,8 @@ namespace App.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .ValueGeneratedOnAddOrUpdate()
                         .Annotation("Relational:ColumnType", "datetime");
+
+                    b.Property<string>("UserId");
 
                     b.Key("Id");
 
@@ -345,6 +355,10 @@ namespace App.Data.Migrations
                     b.Reference("App.Models.Category")
                         .InverseCollection()
                         .ForeignKey("ParentCategoryId");
+
+                    b.Reference("App.Models.Identity.ApplicationUser")
+                        .InverseCollection()
+                        .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("App.Models.Comment", b =>
@@ -356,6 +370,10 @@ namespace App.Data.Migrations
                     b.Reference("App.Models.Post")
                         .InverseCollection()
                         .ForeignKey("PostId");
+
+                    b.Reference("App.Models.Identity.ApplicationUser")
+                        .InverseCollection()
+                        .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("App.Models.FAQ", b =>
@@ -363,6 +381,17 @@ namespace App.Data.Migrations
                     b.Reference("App.Models.Library")
                         .InverseCollection()
                         .ForeignKey("LibraryId");
+
+                    b.Reference("App.Models.Identity.ApplicationUser")
+                        .InverseCollection()
+                        .ForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("App.Models.Library", b =>
+                {
+                    b.Reference("App.Models.Identity.ApplicationUser")
+                        .InverseCollection()
+                        .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("App.Models.Post", b =>
@@ -370,6 +399,10 @@ namespace App.Data.Migrations
                     b.Reference("App.Models.Library")
                         .InverseCollection()
                         .ForeignKey("LibraryId");
+
+                    b.Reference("App.Models.Identity.ApplicationUser")
+                        .InverseCollection()
+                        .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("App.Models.PostCategory", b =>

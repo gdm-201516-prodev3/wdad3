@@ -11,6 +11,14 @@ namespace App.Models.Identity
         public string Description { get; set; }
 		public DateTime CreatedAt { get; set; }
 		public Nullable<DateTime> UpdatedAt { get; set; }
-		public Nullable<DateTime> DeletedAt { get; set; }    
+		public Nullable<DateTime> DeletedAt { get; set; }  
+        
+        /* Virtual or Navigation Properties */
+        public virtual ICollection<Library> Libraries { get; set; }  
+        public virtual ICollection<Post> Posts { get; set; }  
+        public virtual ICollection<Category> Categories { get; set; }    
+        public virtual ICollection<Comment> Comments { get; set; } 
+        public virtual ICollection<FAQ> FAQs { get; set; }   
+        //public virtual ICollection<LibraryItemAction> Actions { get; set; } 
     }
 }

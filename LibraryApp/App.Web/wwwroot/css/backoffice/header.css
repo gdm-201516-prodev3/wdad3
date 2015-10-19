@@ -28,6 +28,9 @@
     overflow:hidden;
     text-indent:-999em;
 }
+#logo h2 {
+    display:none;
+}
 #courtesy-navigation>ul{
     margin:0;
     padding:0;
@@ -85,6 +88,9 @@
 }
 .profile .dropdown-menu>li>a>.glyphicon{
     margin-right:12px;
+}
+.fa.fa-bell {
+    transform-origin:center top;
 }
 @media (max-width: 560px) {
     #courtesy-navigation>ul>li{

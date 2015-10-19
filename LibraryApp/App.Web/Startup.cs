@@ -50,11 +50,7 @@ namespace App.Web
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            // Add Scoped = Resolve dependency injection
-            services.AddScoped<LibraryDbContext, LibraryDbContext>();
-            services.AddScoped<IMediatheekService, MediatheekService>();
-            
+        {   
             // Add Entity Framework services to the services container.
             services.AddEntityFramework()
                 .AddSqlite()
@@ -65,6 +61,10 @@ namespace App.Web
             services.AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<LibraryDbContext>()
                 .AddDefaultTokenProviders();
+                
+            // Add Scoped = Resolve dependency injection
+            services.AddScoped<ILibraryDbContext>(provider => provider.GetService<LibraryDbContext>());
+            services.AddScoped<IMediatheekService, MediatheekService>();
 
             // Configure the options for the authentication middleware.
             // You can add options for Google, Twitter and other middleware as shown below.

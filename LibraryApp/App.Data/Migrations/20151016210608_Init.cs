@@ -4,32 +4,10 @@ using Microsoft.Data.Entity.Migrations;
 
 namespace App.Data.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    Id = table.Column<short>(isNullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", isNullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
-                    Description = table.Column<string>(type: "nvarchar(1024)", isNullable: true),
-                    Name = table.Column<string>(type: "nvarchar(255)", isNullable: false),
-                    ParentCategoryId = table.Column<short>(isNullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Category", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Category_Category_ParentCategoryId",
-                        column: x => x.ParentCategoryId,
-                        principalTable: "Categories",
-                        principalColumn: "Id");
-                });
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -76,24 +54,6 @@ namespace App.Data.Migrations
                     table.PrimaryKey("PK_ApplicationUser", x => x.Id);
                 });
             migrationBuilder.CreateTable(
-                name: "Libraries",
-                columns: table => new
-                {
-                    Id = table.Column<short>(isNullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Code = table.Column<string>(type: "char(3)", isNullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", isNullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
-                    Description = table.Column<string>(type: "nvarchar(1024)", isNullable: true),
-                    Name = table.Column<string>(type: "nvarchar(128)", isNullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
-                    Url = table.Column<string>(type: "nvarchar(512)", isNullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Library", x => x.Id);
-                });
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -110,6 +70,58 @@ namespace App.Data.Migrations
                         name: "FK_IdentityRoleClaim<string>_ApplicationRole_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id");
+                });
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<short>(isNullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", isNullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
+                    Description = table.Column<string>(type: "nvarchar(1024)", isNullable: true),
+                    Name = table.Column<string>(type: "nvarchar(255)", isNullable: false),
+                    ParentCategoryId = table.Column<short>(isNullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
+                    UserId = table.Column<string>(isNullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Category_Category_ParentCategoryId",
+                        column: x => x.ParentCategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Category_ApplicationUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+            migrationBuilder.CreateTable(
+                name: "Libraries",
+                columns: table => new
+                {
+                    Id = table.Column<short>(isNullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Code = table.Column<string>(type: "char(3)", isNullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", isNullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
+                    Description = table.Column<string>(type: "nvarchar(1024)", isNullable: true),
+                    Name = table.Column<string>(type: "nvarchar(128)", isNullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
+                    Url = table.Column<string>(type: "nvarchar(512)", isNullable: true),
+                    UserId = table.Column<string>(isNullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Library", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Library_ApplicationUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
             migrationBuilder.CreateTable(
@@ -182,7 +194,8 @@ namespace App.Data.Migrations
                     Description = table.Column<string>(type: "nvarchar(1024)", isNullable: true),
                     LibraryId = table.Column<short>(isNullable: true),
                     Question = table.Column<string>(type: "nvarchar(1024)", isNullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
+                    UserId = table.Column<string>(isNullable: true)
                 },
                 constraints: table =>
                 {
@@ -191,6 +204,11 @@ namespace App.Data.Migrations
                         name: "FK_FAQ_Library_LibraryId",
                         column: x => x.LibraryId,
                         principalTable: "Libraries",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_FAQ_ApplicationUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
             migrationBuilder.CreateTable(
@@ -206,7 +224,8 @@ namespace App.Data.Migrations
                     LibraryId = table.Column<short>(isNullable: true),
                     Synopsis = table.Column<string>(type: "nvarchar(1024)", isNullable: false),
                     Title = table.Column<string>(type: "nvarchar(128)", isNullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
+                    UserId = table.Column<string>(isNullable: true)
                 },
                 constraints: table =>
                 {
@@ -215,6 +234,11 @@ namespace App.Data.Migrations
                         name: "FK_Post_Library_LibraryId",
                         column: x => x.LibraryId,
                         principalTable: "Libraries",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Post_ApplicationUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
             migrationBuilder.CreateTable(
@@ -229,7 +253,8 @@ namespace App.Data.Migrations
                     Description = table.Column<string>(type: "nvarchar(1024)", isNullable: true),
                     ParentCommentId = table.Column<int>(isNullable: true),
                     PostId = table.Column<int>(isNullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
+                    UserId = table.Column<string>(isNullable: true)
                 },
                 constraints: table =>
                 {
@@ -243,6 +268,11 @@ namespace App.Data.Migrations
                         name: "FK_Comment_Post_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Comment_ApplicationUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
             migrationBuilder.CreateTable(
@@ -293,8 +323,8 @@ namespace App.Data.Migrations
             migrationBuilder.DropTable("Categories");
             migrationBuilder.DropTable("Posts");
             migrationBuilder.DropTable("AspNetRoles");
-            migrationBuilder.DropTable("AspNetUsers");
             migrationBuilder.DropTable("Libraries");
+            migrationBuilder.DropTable("AspNetUsers");
         }
     }
 }

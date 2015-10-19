@@ -1,4 +1,13 @@
 ﻿/*
+Import CSS files
+*/
+@import "colors.css";
+@import "header.css";
+@import "navigation.css";
+@import "sidebar.css";
+@import "scrolltotop.css";
+
+/*
 Main Content
 ==========================================================
 */

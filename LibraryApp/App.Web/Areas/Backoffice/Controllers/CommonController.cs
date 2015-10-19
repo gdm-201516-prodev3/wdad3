@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
-using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Infrastructure;
 using App.Models;
 using App.Data;
 using App.Services.Ahs;
 
-namespace App.Web.Controllers
+namespace App.Web.Areas.Backoffice.Controllers
 {
+    [Area("Backoffice")]
     public abstract class CommonController : Controller
     {
         [FromServices]

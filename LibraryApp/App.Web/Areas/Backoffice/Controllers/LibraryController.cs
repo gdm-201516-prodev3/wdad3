@@ -7,11 +7,13 @@ using Microsoft.AspNet.Mvc;
 namespace App.Web.Areas.Backoffice.Controllers
 {
     [Area("Backoffice")]
-    public class HomeController : CommonController
+    public class LibraryController : CommonController
     {
         public IActionResult Index()
         {
-            return View();
+            var model = _libraryContext.Libraries.AsEnumerable().OrderByDescending(m => m.Name);
+            
+            return View(model);
         }
     }
 }
