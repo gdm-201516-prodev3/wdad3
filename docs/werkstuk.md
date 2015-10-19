@@ -33,11 +33,31 @@ Groepsindeling
 |3PRODEV-06|Verplanken Valérie, Chanterie Neeltje|
 |3PRODEV-07|Goetynck Gertjan|
 |3PRODEV-08|Bultynck Laurens, Knockaert Jeroen|
-|3PRODEV-09|Sas Pieter-Jan, Tang Cheng
+|3PRODEV-09|Sas Pieter-Jan, Tang Cheng|
 |3PRODEV-10|Simoen Enzo, Beeckman Pieter-Jan|
 |3PRODEV-11|Meert Sander|
 |3PRODEV-12|Balcaen Charlotte|
+|3PRODEV-13|Denys Nick|
+|3PRODEV-14|Vanhove Maxim|
 
+Milestone 1
+-----------
+|Groep|Studenten|Evaluatie|
+|-----|---------|---------|
+|3PRODEV-01|Van Wienendaele Stef|Foto's bij persona's, Sitemap voor backoffice (aanduiden rollen per sectie), Geschiedenis aanbod/vraag, Statussen vraag/aanbod uitbreiden, denk aan uitbreidingen, poster (alle techs vermelden)|
+|3PRODEV-02|Vandewalle Michiel, Goossens Bert|Desktop Wireframes, Markdown dossier, Backoffice, Chopstick is cool|
+|3PRODEV-03|Mergan Lien, Vervaet Ellen|Logo voorleggen aan Pottie (tijdens proLAB), STyle tile 1 (ok), Role Management zit al in Identity 3 (ASP.NET5), Kijk naar de contrasten|
+|3PRODEV-04|Vanbrabant Wesley, Lierman Benjamin|Material Design (Ok), Uniformiteit Wireframes, Nummering Sitemap, Style tiles uitbreiden, Responsive Webdesign|
+|3PRODEV-05|Beelprez Seppe, Mares Quinten|Nummering Sitemap, Aanpassen groep door regioverantwoordelijke, Axure is cool, Wireframes backoffice, Logo voorleggen aan Pottie|
+|3PRODEV-06|Verplanken Valérie, Chanterie Neeltje|Logo voorstellen aan pottie, Wireframes Admin uitbreiden, Sitemap Admin, Desktop versies voorzien|
+|3PRODEV-07|Goetynck Gertjan|x - Where are you?|
+|3PRODEV-08|Bultynck Laurens, Knockaert Jeroen|Foto's bij persona's, verkeerde nummering sitemap, Backoffice is cool, paginering (backoffice) / front (endless scrolling), autocomplete techniek, jquery chosen|
+|3PRODEV-09|Sas Pieter-Jan, Tang Cheng|Goede persona's, Logo zeker voorleggen aan Pottie, Labels/relaties in sitemap concretiseren, Mobiele versie Wireframes, Style tiles voorleggen aan Pottie, alle visuele componenten moeten aanwezig zijn op een style tile, aan mijn hoofdje hangt een submenu|
+|3PRODEV-10|Simoen Enzo, Beeckman Pieter-Jan|Half Char encoding probleem, Concurrentie analyseren, Mail functionaliteit (ok) - Max width : 580px/620px, Sitemap Backoffice, Elastic Search, Design voorleggen aan Pottie, Mockups, Mobile wireframes|
+|3PRODEV-11|Meert Sander|x - Where are you?|
+|3PRODEV-12|Balcaen Charlotte|Logo, Style tiles voorleggen aan Pottie, Diensten toevoegen in de app, Whishlist is geen ster maar en hartje. Desktop wireframes!|
+|3PRODEV-13|Denys Nick|Maandag|
+|3PRODEV-14|Vanhove|Maandag|
 
 Omschrijving
 ------------
