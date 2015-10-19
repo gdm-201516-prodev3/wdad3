@@ -1,7 +1,7 @@
 {
     "Data": {
         "DefaultConnection": {
-            "ConnectionString": "Data Source=/Users/drdynscript/Hogeschool/2015-16/wdad3/LibraryApp/App.Web/Libraries.sqlite"
+            "ConnectionString": "Data Source=C:\\Users\\Administrator\\wdad3course\\LibraryApp\\App.Web\\Libraries.sqlite"
         }
     },
 	"EntityFramework": {

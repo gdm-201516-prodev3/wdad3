@@ -1,0 +1,33 @@
+@model IEnumerable<App.Models.Library>
+<div class="panel panel-default">
+	<div class="panel-body">
+		@if (Model != null && Model.Count() > 0)
+		{
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Code</th>
+							<th>Description</th>
+							<th>Created</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var library in Model)
+						{
+							<tr>
+								<td>@library.Name</td>
+								<td>@library.Code</td>
+								<td>@library.Description</td>
+								<td>@library.CreatedAt</td>
+								<td>NOG</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		}
+	</div>
+</div>

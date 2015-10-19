@@ -8,11 +8,11 @@ using App.Data;
 namespace App.Data.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    partial class Init
+    partial class Initial
     {
         public override string Id
         {
-            get { return "20151016210608_Init"; }
+            get { return "20151019070109_Initial"; }
         }
 
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -244,6 +244,23 @@ namespace App.Data.Migrations
                     b.Annotation("Relational:TableName", "Libraries");
                 });
 
+            modelBuilder.Entity("App.Models.LibraryItemAction", b =>
+                {
+                    b.Property<int>("LibraryItemId");
+
+                    b.Property<int?>("ActionLibraryItemId");
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<short?>("Rating");
+
+                    b.Property<string>("UserAgent");
+
+                    b.Property<string>("UserId");
+
+                    b.Key("LibraryItemId");
+                });
+
             modelBuilder.Entity("App.Models.Post", b =>
                 {
                     b.Property<int>("Id")
@@ -394,6 +411,17 @@ namespace App.Data.Migrations
 
             modelBuilder.Entity("App.Models.Library", b =>
                 {
+                    b.Reference("App.Models.Identity.ApplicationUser")
+                        .InverseCollection()
+                        .ForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("App.Models.LibraryItemAction", b =>
+                {
+                    b.Reference("App.Models.LibraryItemAction")
+                        .InverseCollection()
+                        .ForeignKey("ActionLibraryItemId");
+
                     b.Reference("App.Models.Identity.ApplicationUser")
                         .InverseCollection()
                         .ForeignKey("UserId");

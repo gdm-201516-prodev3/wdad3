@@ -11,7 +11,7 @@ namespace App.Web.Areas.Backoffice.Controllers
     {
         public IActionResult Index()
         {
-            var model = _libraryContext.Libraries.AsEnumerable().OrderByDescending(m => m.Name);
+            var model = _libraryContext.Libraries.AsEnumerable().OrderBy(m => m.Name);
             
             return View(model);
         }

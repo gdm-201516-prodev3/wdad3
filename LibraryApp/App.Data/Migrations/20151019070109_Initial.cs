@@ -4,7 +4,7 @@ using Microsoft.Data.Entity.Migrations;
 
 namespace App.Data.Migrations
 {
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -120,6 +120,31 @@ namespace App.Data.Migrations
                     table.PrimaryKey("PK_Library", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Library_ApplicationUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+            migrationBuilder.CreateTable(
+                name: "LibraryItemAction",
+                columns: table => new
+                {
+                    LibraryItemId = table.Column<int>(isNullable: false),
+                    ActionLibraryItemId = table.Column<int>(isNullable: true),
+                    CreatedAt = table.Column<DateTime>(isNullable: false),
+                    Rating = table.Column<short>(isNullable: true),
+                    UserAgent = table.Column<string>(isNullable: true),
+                    UserId = table.Column<string>(isNullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LibraryItemAction", x => x.LibraryItemId);
+                    table.ForeignKey(
+                        name: "FK_LibraryItemAction_LibraryItemAction_ActionLibraryItemId",
+                        column: x => x.ActionLibraryItemId,
+                        principalTable: "LibraryItemAction",
+                        principalColumn: "LibraryItemId");
+                    table.ForeignKey(
+                        name: "FK_LibraryItemAction_ApplicationUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
@@ -315,6 +340,7 @@ namespace App.Data.Migrations
         {
             migrationBuilder.DropTable("Comments");
             migrationBuilder.DropTable("Faqs");
+            migrationBuilder.DropTable("LibraryItemAction");
             migrationBuilder.DropTable("PostCategories");
             migrationBuilder.DropTable("AspNetRoleClaims");
             migrationBuilder.DropTable("AspNetUserClaims");

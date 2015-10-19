@@ -9,7 +9,7 @@ namespace App.Data.SampleData
 {
     public class LibrarySampleData
     {
-        private readonly LibraryDbContext _context;
+        private readonly ILibraryDbContext _context;
         
         public LibrarySampleData(LibraryDbContext context)
         {
