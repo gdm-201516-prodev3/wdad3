@@ -37,7 +37,6 @@ namespace App.Data.Migrations
                     b.Property<short?>("ParentCategoryId");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
                         .Annotation("Relational:ColumnType", "datetime");
 
                     b.Property<string>("UserId");
@@ -71,7 +70,6 @@ namespace App.Data.Migrations
                     b.Property<int>("PostId");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
                         .Annotation("Relational:ColumnType", "datetime");
 
                     b.Property<string>("UserId");
@@ -107,7 +105,6 @@ namespace App.Data.Migrations
                         .Annotation("Relational:ColumnType", "nvarchar(1024)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
                         .Annotation("Relational:ColumnType", "datetime");
 
                     b.Property<string>("UserId");
@@ -226,7 +223,6 @@ namespace App.Data.Migrations
                         .Annotation("Relational:ColumnType", "nvarchar(128)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
                         .Annotation("Relational:ColumnType", "datetime");
 
                     b.Property<string>("Url")
@@ -286,7 +282,6 @@ namespace App.Data.Migrations
                         .Annotation("Relational:ColumnType", "nvarchar(128)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .ValueGeneratedOnAddOrUpdate()
                         .Annotation("Relational:ColumnType", "datetime");
 
                     b.Property<string>("UserId");

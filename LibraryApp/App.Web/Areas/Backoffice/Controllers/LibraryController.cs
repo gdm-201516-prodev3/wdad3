@@ -29,6 +29,7 @@ namespace App.Web.Areas.Backoffice.Controllers
         }
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(Library model)
         {
             try
@@ -67,6 +68,7 @@ namespace App.Web.Areas.Backoffice.Controllers
         }
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(Library model)
         {
             try 

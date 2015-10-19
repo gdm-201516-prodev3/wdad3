@@ -14,6 +14,7 @@
             <div class="panel-body">
                 @using (Html.BeginForm())
                 {
+                    @Html.AntiForgeryToken()
                     <fieldset>
                         <legend class="hidden">Wijzigen van een bestaande mediatheek @Model.Name</legend>
                         <div class="form-group">

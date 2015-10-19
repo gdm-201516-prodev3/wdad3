@@ -10,7 +10,7 @@ using App.Models.Identity;
 
 namespace App.Data
 {
-    public class LibraryDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>, ILibraryDbContext
+    public class LibraryDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public DbSet<Library> Libraries { get; set; }
         public DbSet<Post> Posts { get; set; }
@@ -38,7 +38,7 @@ namespace App.Data
                l.Key(m => m.Id); 
                l.Property(m => m.Id).ValueGeneratedOnAdd();
                l.Property(m => m.CreatedAt).Required().HasColumnType("datetime").ValueGeneratedOnAdd();
-               l.Property(m => m.UpdatedAt).Required(false).HasColumnType("datetime").ValueGeneratedOnAddOrUpdate();
+               l.Property(m => m.UpdatedAt).Required(false).HasColumnType("datetime");
                l.Property(m => m.DeletedAt).Required(false).HasColumnType("datetime");
                l.Property(m => m.Name).Required().HasColumnType("nvarchar(128)");
                l.Property(m => m.Code).Required().HasColumnType("char(3)");
@@ -56,7 +56,7 @@ namespace App.Data
                l.Key(m => m.Id); 
                l.Property(m => m.Id).ValueGeneratedOnAdd();
                l.Property(m => m.CreatedAt).Required().HasColumnType("datetime").ValueGeneratedOnAdd();
-               l.Property(m => m.UpdatedAt).Required(false).HasColumnType("datetime").ValueGeneratedOnAddOrUpdate();
+               l.Property(m => m.UpdatedAt).Required(false).HasColumnType("datetime");
                l.Property(m => m.DeletedAt).Required(false).HasColumnType("datetime");
                l.Property(m => m.Title).Required().HasColumnType("nvarchar(128)");
                l.Property(m => m.Synopsis).Required().HasColumnType("nvarchar(1024)");
@@ -80,7 +80,7 @@ namespace App.Data
                l.Key(m => m.Id); 
                l.Property(m => m.Id).ValueGeneratedOnAdd();
                l.Property(m => m.CreatedAt).Required().HasColumnType("datetime").ValueGeneratedOnAdd();
-               l.Property(m => m.UpdatedAt).Required(false).HasColumnType("datetime").ValueGeneratedOnAddOrUpdate();
+               l.Property(m => m.UpdatedAt).Required(false).HasColumnType("datetime");
                l.Property(m => m.DeletedAt).Required(false).HasColumnType("datetime");
                l.Property(m => m.Question).Required().HasColumnType("nvarchar(1024)");
                l.Property(m => m.Answer).Required().HasColumnType("nvarchar(4096)");
@@ -103,7 +103,7 @@ namespace App.Data
                l.Key(m => m.Id); 
                l.Property(m => m.Id).ValueGeneratedOnAdd();
                l.Property(m => m.CreatedAt).Required().HasColumnType("datetime").ValueGeneratedOnAdd();
-               l.Property(m => m.UpdatedAt).Required(false).HasColumnType("datetime").ValueGeneratedOnAddOrUpdate();
+               l.Property(m => m.UpdatedAt).Required(false).HasColumnType("datetime");
                l.Property(m => m.DeletedAt).Required(false).HasColumnType("datetime");
                l.Property(m => m.Name).Required().HasColumnType("nvarchar(255)");
                l.Property(m => m.Description).Required(false).HasColumnType("nvarchar(1024)");
@@ -131,7 +131,7 @@ namespace App.Data
                l.Key(m => m.Id); 
                l.Property(m => m.Id).ValueGeneratedOnAdd();
                l.Property(m => m.CreatedAt).Required().HasColumnType("datetime").ValueGeneratedOnAdd();
-               l.Property(m => m.UpdatedAt).Required(false).HasColumnType("datetime").ValueGeneratedOnAddOrUpdate();
+               l.Property(m => m.UpdatedAt).Required(false).HasColumnType("datetime");
                l.Property(m => m.DeletedAt).Required(false).HasColumnType("datetime");
                l.Property(m => m.Body).Required().HasColumnType("nvarchar(65536)");
                l.Property(m => m.Description).Required(false).HasColumnType("nvarchar(1024)");
