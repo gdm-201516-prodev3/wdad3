@@ -22,7 +22,11 @@
 								<td>@library.Code</td>
 								<td>@library.Description</td>
 								<td>@library.CreatedAt</td>
-								<td>NOG</td>
+								<td>
+									<a href="@Url.Action("Edit", new { id = @library.Id })" title="Edit Mediatheek: @library.Name"><span class="fa fa-edit"></span></a>
+									<a href="" title="Delete Mediatheek: @library.Name"><span class="fa fa-trash"></span></a>
+									<a href="" title="Softdelete Mediatheek: @library.Name"><span class="fa fa-eye"></span></a>
+								</td>
 							</tr>
 						}
 					</tbody>
