@@ -35,16 +35,19 @@ namespace App.Web.Areas.Backoffice.Controllers
             try
             {
                 if(!ModelState.IsValid)
-                    throw new Exception("Mislukt");
+                    throw new Exception("The Library model is not valid!");
                 
                 _libraryContext.Libraries.Add(model);
-                _libraryContext.SaveChanges();    
+                if (_libraryContext.SaveChanges() > 0)
+                {
+                   throw new Exception("The Library model could not be saved!");
+                }   
                 
                 return RedirectToAction("Index");
             }
             catch(Exception ex)
             {
-                
+                ModelState.AddModelError(string.Empty, "Unable to save changes.");
             }
             return View(model);
         }
@@ -74,12 +77,12 @@ namespace App.Web.Areas.Backoffice.Controllers
             try 
             {
                 if(!ModelState.IsValid)
-                    throw new Exception("De wijzigingen zijn niet");
+                    throw new Exception("The Library model is not valid!");
                     
                 var originalModel = _libraryContext.Libraries.FirstOrDefault(m => m.Id == model.Id);
                 
                 if(originalModel == null)
-                    throw new Exception("De wijzigingen zijn niet");
+                    throw new Exception("The existing Library: " + model.Name + " doesn't exists anymore!");
                     
                 originalModel.Name = model.Name;
                 originalModel.Code = model.Code;
@@ -89,7 +92,10 @@ namespace App.Web.Areas.Backoffice.Controllers
                 _libraryContext.Libraries.Attach(originalModel);
                 _libraryContext.Entry(originalModel).State = EntityState.Modified;
                 
-                int result = _libraryContext.SaveChanges();
+                if (_libraryContext.SaveChanges() > 0)
+                {
+                   throw new Exception("The Library model could not be saved!");
+                } 
                 
                 return RedirectToAction("Index");
             
