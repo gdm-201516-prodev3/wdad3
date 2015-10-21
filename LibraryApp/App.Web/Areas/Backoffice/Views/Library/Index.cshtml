@@ -10,3 +10,9 @@
         @Html.Partial("_ListPartial", @Model)
     </div>      
 </div>
+@section Scripts {
+    <script>
+        window.ConfirmService.registerClickHandlers();
+        window.ConfirmService.registerModalHandlers();
+    </script>
+}

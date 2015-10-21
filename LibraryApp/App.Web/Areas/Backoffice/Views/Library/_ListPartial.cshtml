@@ -1,4 +1,5 @@
 @model IEnumerable<App.Models.Library>
+@Html.AntiForgeryToken()
 <div class="panel panel-default">
 	<div class="panel-body">
 		@if (Model != null && Model.Count() > 0)
@@ -17,15 +18,46 @@
 					<tbody>
 						@foreach (var library in Model)
 						{
-							<tr>
+							<tr data-id="library-@library.Id">
 								<td>@library.Name</td>
 								<td>@library.Code</td>
 								<td>@library.Description</td>
 								<td>@library.CreatedAt</td>
 								<td>
 									<a href="@Url.Action("Edit", new { id = @library.Id })" title="Edit Mediatheek: @library.Name"><span class="fa fa-edit"></span></a>
-									<a href="" title="Delete Mediatheek: @library.Name"><span class="fa fa-trash"></span></a>
-									<a href="" title="Softdelete Mediatheek: @library.Name"><span class="fa fa-eye"></span></a>
+									<a 	class="confirm-link"
+										data-id="@library.Id" 
+										data-name="@library.Name"
+										data-cat = "library"
+										data-action="delete"  
+										data-update-target="#libraries-list" 
+										data-update-href="@Url.Action("Index", "Library")"
+										href="@Url.Action("Delete", new { id = @library.Id })" 
+										title="Delete Mediatheek: @library.Name"><span class="fa fa-trash"></span></a>
+									@if (@library.DeletedAt != null)
+                                    {
+                                        <a 	class="confirm-link"
+										data-id="@library.Id" 
+										data-name="@library.Name"
+										data-cat = "library"
+										data-action="softundelete"  
+										data-update-target="#libraries-list" 
+										data-update-href="@Url.Action("Index", "Library")"
+										href="@Url.Action("SoftUnDelete", new { id = @library.Id })" 
+										title="Soft UnDelete Mediatheek: @library.Name"><span class="fa fa-eye-slash"></span></a>
+                                    }
+                                    else
+                                    {
+                                        <a 	class="confirm-link"
+										data-id="@library.Id" 
+										data-name="@library.Name"
+										data-cat = "library"
+										data-action="softdelete"  
+										data-update-target="#libraries-list" 
+										data-update-href="@Url.Action("Index", "Library")"
+										href="@Url.Action("SoftDelete", new { id = @library.Id })" 
+										title="Soft Delete Mediatheek: @library.Name"><span class="fa fa-eye"></span></a>
+                                    }
 								</td>
 							</tr>
 						}
@@ -33,5 +65,12 @@
 				</table>
 			</div>
 		}
-	</div>
+		else
+        {
+            <p>No libraries in the database!</p>
+        }
+    </div>
+    <div class="panel-footer">
+        @Html.ActionLink("Create a new library", "Create", new { }, new { @class = "btn btn-primary" })
+    </div>
 </div>

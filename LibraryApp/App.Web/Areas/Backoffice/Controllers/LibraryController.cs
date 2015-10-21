@@ -17,6 +17,11 @@ namespace App.Web.Areas.Backoffice.Controllers
         {
             var model = _libraryContext.Libraries.AsEnumerable().OrderBy(m => m.Name);
             
+            if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest") 
+            {
+                return PartialView("_ListPartial", model);
+            }
+            
             return View(model);
         }
         
@@ -38,10 +43,12 @@ namespace App.Web.Areas.Backoffice.Controllers
                     throw new Exception("The Library model is not valid!");
                 
                 _libraryContext.Libraries.Add(model);
-                if (_libraryContext.SaveChanges() > 0)
+                if (_libraryContext.SaveChanges() == 0)
                 {
                    throw new Exception("The Library model could not be saved!");
                 }   
+                
+                //Success(CreateMessage(ControllerActionType.Create, "library", model.Name), true);
                 
                 return RedirectToAction("Index");
             }
@@ -92,7 +99,7 @@ namespace App.Web.Areas.Backoffice.Controllers
                 _libraryContext.Libraries.Attach(originalModel);
                 _libraryContext.Entry(originalModel).State = EntityState.Modified;
                 
-                if (_libraryContext.SaveChanges() > 0)
+                if (_libraryContext.SaveChanges() == 0)
                 {
                    throw new Exception("The Library model could not be saved!");
                 } 
@@ -105,6 +112,143 @@ namespace App.Web.Areas.Backoffice.Controllers
                 ModelState.AddModelError(string.Empty, "Unable to save changes.");
             }
             return View(model);
+        }
+        
+        [HttpPost]
+        public IActionResult Delete(Int16 id)
+        {
+            try
+            {
+                var originalModel = _libraryContext.Libraries.FirstOrDefault(m => m.Id == id);
+                
+                if(originalModel == null)
+                    throw new Exception("The existing Library with id: " + id + " doesn't exists anymore!");
+
+                _libraryContext.Libraries.Attach(originalModel);
+                _libraryContext.Entry(originalModel).State = EntityState.Deleted;
+                
+                if (_libraryContext.SaveChanges() == 0)
+                {
+                   throw new Exception("The Library model could not be saved!");
+                } 
+
+                var msg = CreateMessage(ControllerActionType.Delete, "library", id);
+
+                if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { state = 1, id = id, message = msg });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Library");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                var msg = CreateMessage(ControllerActionType.Delete, "library", id, ex);
+
+                if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { state = 0, id = id, message = msg });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Library");
+                }
+            }
+        }
+        
+        [HttpPost]
+        public IActionResult SoftDelete(Int16 id)
+        {
+            try
+            {
+                var originalModel = _libraryContext.Libraries.FirstOrDefault(m => m.Id == id);
+                
+                if(originalModel == null)
+                    throw new Exception("The existing Library with id: " + id + " doesn't exists anymore!");
+
+                originalModel.DeletedAt = DateTime.Now;
+                _libraryContext.Libraries.Attach(originalModel);
+                _libraryContext.Entry(originalModel).State = EntityState.Modified;
+                
+                if (_libraryContext.SaveChanges() == 0)
+                {
+                   throw new Exception("The Library model could not be soft deleted!");
+                } 
+
+                var msg = CreateMessage(ControllerActionType.SoftDelete, "library", id);
+
+                if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { state = 1, id = id, message = msg });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Library");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                var msg = CreateMessage(ControllerActionType.SoftDelete, "library", id, ex);
+
+                if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { state = 0, id = id, message = msg });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Library");
+                }
+            }
+        }
+        
+        [HttpPost]
+        public IActionResult SoftUnDelete(Int16 id)
+        {
+            try
+            {
+                var originalModel = _libraryContext.Libraries.FirstOrDefault(m => m.Id == id);
+                
+                if(originalModel == null)
+                    throw new Exception("The existing Library with id: " + id + " doesn't exists anymore!");
+
+                originalModel.DeletedAt = null;
+                _libraryContext.Libraries.Attach(originalModel);
+                _libraryContext.Entry(originalModel).State = EntityState.Modified;
+                
+                if (_libraryContext.SaveChanges() == 0)
+                {
+                   throw new Exception("The Library model could not be soft undeleted!");
+                } 
+
+                var msg = CreateMessage(ControllerActionType.SoftUnDelete, "library", id);
+
+                if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { state = 1, id = id, message = msg });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Library");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                var msg = CreateMessage(ControllerActionType.SoftUnDelete, "library", id, ex);
+
+                if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+                {
+                    return Json(new { state = 0, id = id, message = msg });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Library");
+                }
+            }
         }
     }
 }

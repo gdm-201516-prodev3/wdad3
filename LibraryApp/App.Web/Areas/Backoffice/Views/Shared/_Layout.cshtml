@@ -37,7 +37,7 @@
         @* Header Partial *@
         @Html.Partial("_Header")
     
-        @* Sidebar Partial*@
+        @* Sidebar Partial *@
         @Html.Partial("_Sidebar")
     
         @* Main Content *@
@@ -52,10 +52,19 @@
                     <li class="active">Fake 2</li>
                 </ol>
             </div>
+            
+            @* Alert Service container *@
+            <div class="row" id="alert-service-container"></div>
     
             @* Render the body of the view *@
             @RenderBody()
         </main>
+        
+        @* Modal Popup Partial *@
+        @Html.Partial("_Modal")
+        
+        @* Scroll to the top of the page *@
+        <span class="scrolltotop">Scroll To Top</span>
 
         <environment names="Development">
             <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -82,8 +91,20 @@
                     asp-fallback-test="window.Hammer && window.Hammer.Instance">
             </script>
             <script src="~/js/backoffice/sidebar.js" asp-file-version="true"></script>
+            <script src="~/js/backoffice/services/srv_alert.js" asp-file-version="true"></script>
+            <script src="~/js/backoffice/services/srv_security.js" asp-file-version="true"></script>
+            <script src="~/js/backoffice/services/srv_ajax-confirm.js" asp-file-version="true"></script>            
             <script src="~/js/backoffice/site.js" asp-file-version="true"></script>
         </environment>
+        
+        @* Alert Service Partial *@
+        @Html.Partial("_Alert")
+       
+        @* Activate Modal Service *@
+        <script>
+            window.AlertService = new AlertService('#alert-service-container');
+            window.ConfirmService = new ConfirmService('.confirm-link', '#confirm-dialog');
+        </script>
 
         @* Custom scripts specified in the views*@
         @RenderSection("scripts", required: false)
