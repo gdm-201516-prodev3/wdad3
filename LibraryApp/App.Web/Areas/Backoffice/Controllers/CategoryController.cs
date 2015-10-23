@@ -79,7 +79,11 @@ namespace App.Web.Areas.Backoffice.Controllers
                 return new HttpStatusCodeResult(400);
             }
             
-            var model = _libraryContext.Categories.FirstOrDefault(m => m.Id == id);
+            var model = new CategoryViewModel
+            {
+                Category = _libraryContext.Categories.FirstOrDefault(m => m.Id == id),
+                Categories = _libraryContext.Categories.AsEnumerable().Where(m => m.Id != id).OrderBy(m => m.Name)
+            };
             
             if(model == null)
             {
@@ -91,21 +95,21 @@ namespace App.Web.Areas.Backoffice.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Category model)
+        public IActionResult Edit(CategoryViewModel model)
         {
             try 
             {
                 if(!ModelState.IsValid)
                     throw new Exception("The Category model is not valid!");
                     
-                var originalModel = _libraryContext.Categories.FirstOrDefault(m => m.Id == model.Id);
+                var originalModel = _libraryContext.Categories.FirstOrDefault(m => m.Id == model.Category.Id);
                 
                 if(originalModel == null)
-                    throw new Exception("The existing Category: " + model.Name + " doesn't exists anymore!");
+                    throw new Exception("The existing Category: " + model.Category.Name + " doesn't exists anymore!");
                     
-                originalModel.Name = model.Name;
-                originalModel.Description = model.Description;
-                originalModel.UpdatedAt = null;
+                originalModel.Name = model.Category.Name;
+                originalModel.Description = model.Category.Description;
+                originalModel.ParentCategoryId = model.Category.ParentCategoryId;
                 
                 _libraryContext.Categories.Attach(originalModel);
                 _libraryContext.Entry(originalModel).State = EntityState.Modified;

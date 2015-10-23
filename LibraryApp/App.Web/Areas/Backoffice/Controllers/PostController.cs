@@ -72,24 +72,31 @@ namespace App.Web.Areas.Backoffice.Controllers
         [HttpGet]
         public IActionResult Edit(Int32? id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(400);
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(400);
+                }
+                
+                var post = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
+                if(post == null)
+                    throw new Exception("Post does not exists!");
+                
+                var model = new PostViewModel
+                {
+                    Post = post,
+                    Libraries = _libraryContext.Libraries.AsEnumerable() 
+                };
+                
+                if(model == null)
+                {
+                    return RedirectToAction("Index");
+                }
             }
-            
-            var post = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
-            if(post == null)
-                throw new Exception("Post does not exists!");
-            
-            var model = new PostViewModel
+            catch(Exception ex)
             {
-                Post = post,
-                Libraries = _libraryContext.Libraries.AsEnumerable() 
-            };
-            
-            if(model == null)
-            {
-                return RedirectToAction("Index");
+                
             }
             
             return View(model);
