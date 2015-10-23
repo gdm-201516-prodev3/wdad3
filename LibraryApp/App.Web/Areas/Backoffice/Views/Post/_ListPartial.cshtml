@@ -30,7 +30,7 @@
 										data-name="@post.Title"
 										data-cat = "post"
 										data-action="delete"  
-										data-update-target="#libraries-list" 
+										data-update-target="#posts-list" 
 										data-update-href="@Url.Action("Index", "Post")"
 										href="@Url.Action("Delete", new { id = @post.Id })" 
 										title="Delete Mediatheek: @post.Title"><span class="fa fa-trash"></span></a>
@@ -41,7 +41,7 @@
 										data-name="@post.Title"
 										data-cat = "post"
 										data-action="softundelete"  
-										data-update-target="#libraries-list" 
+										data-update-target="#posts-list" 
 										data-update-href="@Url.Action("Index", "Post")"
 										href="@Url.Action("SoftUnDelete", new { id = @post.Id })" 
 										title="Soft UnDelete Mediatheek: @post.Title"><span class="fa fa-eye-slash"></span></a>
@@ -53,7 +53,7 @@
 										data-name="@post..Title"
 										data-cat = "post"
 										data-action="softdelete"  
-										data-update-target="#libraries-list" 
+										data-update-target="#posts-list" 
 										data-update-href="@Url.Action("Index", "Post")"
 										href="@Url.Action("SoftDelete", new { id = @post.Id })" 
 										title="Soft Delete Mediatheek: @post.Title"><span class="fa fa-eye"></span></a>
