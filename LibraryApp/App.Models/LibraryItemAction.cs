@@ -13,11 +13,13 @@ namespace App.Models
     {
         [Key]
         public Int32 LibraryItemId { get; set; }
-        public string UserId { get; set; }
         public string UserAgent { get; set; }
-        public LibraryItemAction Action { get; set; }
+        public LibraryItemActions Action { get; set; }
         public Nullable<Int16> Rating { get; set; }
         public DateTime CreatedAt { get; set; }
+        
+        /* Foreign Key */
+        public string UserId { get; set; }
 
         /* Virtual or Navigational Properties */
         public virtual ApplicationUser User { get; set; }

@@ -10,6 +10,7 @@
 						<tr>
 							<th>Title</th>
 							<th>Synopsis</th>
+							<th>Library</th>
 							<th>Created</th>
 							<th>Actions</th>
 						</tr>
@@ -20,6 +21,7 @@
 							<tr data-id="post-@post.Id">
 								<td>@post.Title</td>
 								<td>@post.Synopsis</td>
+								<td>@if(@post.Library != null){@post.Library.Name}</td>
 								<td>@post.CreatedAt</td>
 								<td>
 									<a href="@Url.Action("Edit", new { id = @post.Id })" title="Edit Mediatheek: @post.Title"><span class="fa fa-edit"></span></a>

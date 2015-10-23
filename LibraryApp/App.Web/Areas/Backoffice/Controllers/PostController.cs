@@ -6,6 +6,7 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Storage;
 using App.Models;
+using App.Models.ViewModels;
 
 namespace App.Web.Areas.Backoffice.Controllers
 {
@@ -15,7 +16,7 @@ namespace App.Web.Areas.Backoffice.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var model = _libraryContext.Posts.AsEnumerable().OrderByDescending(m => m.CreatedAt);
+            var model = _libraryContext.Posts.Include(l => l.Library).AsEnumerable().OrderByDescending(m => m.CreatedAt);
             
             if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest") 
             {
@@ -28,21 +29,26 @@ namespace App.Web.Areas.Backoffice.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var model = new Post();
+            var model = new PostViewModel 
+            {
+                Post = new Post(),
+                Libraries = _libraryContext.Libraries.AsEnumerable()    
+            };
             
             return View(model);
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Post model)
+        public IActionResult Create(PostViewModel model)
         {
+            PostViewModel viewModel = null;
             try
             {
                 if(!ModelState.IsValid)
                     throw new Exception("The Post model is not valid!");
                 
-                _libraryContext.Posts.Add(model);
+                _libraryContext.Posts.Add(model.Post);
                 if (_libraryContext.SaveChanges() == 0)
                 {
                    throw new Exception("The Post model could not be saved!");
@@ -53,8 +59,14 @@ namespace App.Web.Areas.Backoffice.Controllers
             catch(Exception ex)
             {
                 ModelState.AddModelError(string.Empty, "Unable to save changes.");
+                
+                viewModel = new PostViewModel 
+                {
+                    Post = new Post(),
+                    Libraries = _libraryContext.Libraries.AsEnumerable()    
+                };
             }
-            return View(model);
+            return View(viewModel);
         }
         
         [HttpGet]
@@ -65,7 +77,15 @@ namespace App.Web.Areas.Backoffice.Controllers
                 return new HttpStatusCodeResult(400);
             }
             
-            var model = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
+            var post = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
+            if(post == null)
+                throw new Exception("Post does not exists!");
+            
+            var model = new PostViewModel
+            {
+                Post = post,
+                Libraries = _libraryContext.Libraries.AsEnumerable() 
+            };
             
             if(model == null)
             {
@@ -77,22 +97,23 @@ namespace App.Web.Areas.Backoffice.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Post model)
+        public IActionResult Edit(PostViewModel model)
         {
             try 
             {
                 if(!ModelState.IsValid)
                     throw new Exception("The Post model is not valid!");
                     
-                var originalModel = _libraryContext.Posts.FirstOrDefault(m => m.Id == model.Id);
+                var originalModel = _libraryContext.Posts.FirstOrDefault(m => m.Id == model.Post.Id);
                 
                 if(originalModel == null)
-                    throw new Exception("The existing Post: " + model.Title + " doesn't exists anymore!");
+                    throw new Exception("The existing Post: " + model.Post.Title + " doesn't exists anymore!");
                     
-                originalModel.Title = model.Title;
-                originalModel.Synopsis = model.Synopsis;
-                originalModel.Description = model.Description;
-                originalModel.Body = model.Body;
+                originalModel.Title = model.Post.Title;
+                originalModel.Synopsis = model.Post.Synopsis;
+                originalModel.Description = model.Post.Description;
+                originalModel.Body = model.Post.Body;
+                originalModel.LibraryId = model.Post.LibraryId;
                 
                 _libraryContext.Posts.Attach(originalModel);
                 _libraryContext.Entry(originalModel).State = EntityState.Modified;
