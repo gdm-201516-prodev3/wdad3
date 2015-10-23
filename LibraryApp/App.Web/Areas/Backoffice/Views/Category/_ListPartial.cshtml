@@ -10,6 +10,7 @@
 						<tr>
 							<th>Name</th>
 							<th>Description</th>
+							<th>Parent</th>
 							<th>Created</th>
 							<th>Actions</th>
 						</tr>
@@ -20,6 +21,7 @@
 							<tr data-id="category-@category.Id">
 								<td>@category.Name</td>
 								<td>@category.Description</td>
+								<td>@if(@category.ParentCategory != null){@category.ParentCategory.Name}</td>
 								<td>@category.CreatedAt</td>
 								<td>
 									<a href="@Url.Action("Edit", new { id = @category.Id })" title="Edit category: @category.Name"><span class="fa fa-edit"></span></a>

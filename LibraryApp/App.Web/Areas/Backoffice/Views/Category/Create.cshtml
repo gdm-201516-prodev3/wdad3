@@ -1,12 +1,12 @@
-@model App.Models.Category
+@model App.Models.ViewModels.CategoryViewModel
 @{
-    ViewBag.Title = "Mediatheek";
-    ViewBag.SubTitle = @Model.Name;
-    ViewBag.Description = "Wijzig de informatie van de mediatheek @Model.Name";
+    ViewBag.Title = "Categorie";
+    ViewBag.SubTitle = @Model.Category.Name;
+    ViewBag.Description = "Wijzig de informatie van de categorie @Model.Category.Name";
     Layout = "~/Areas/Backoffice/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
-    <div class="col-xs-12" id="libraries-list">
+    <div class="col-xs-12" id="categories-list">
         <div class="panel panel-default">
             <div class="panel-heading">
                 Wijzigen van een bestaande categorie
@@ -16,14 +16,18 @@
                 {
                     @Html.AntiForgeryToken()
                     <fieldset>
-                        <legend class="hidden">Wijzigen van een bestaande categorie @Model.Name</legend>
+                        <legend class="hidden">Wijzigen van een bestaande categorie @Model.Category.Name</legend>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Name)
-                            @Html.TextBoxFor(m => m.Name, new { @class= "form-control" })
+                            @Html.LabelFor(m => m.Category.Name)
+                            @Html.TextBoxFor(m => m.Category.Name, new { @class= "form-control" })
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Description)
-                            @Html.TextAreaFor(m => m.Description, new { @class= "form-control", rows = 4, cols = 50 })
+                            @Html.LabelFor(m => m.Category.Description)
+                            @Html.TextAreaFor(m => m.Category.Description, new { @class= "form-control", rows = 4, cols = 50 })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Category.ParentCategory)
+                            @Html.DropDownListFor(m => m.Category.ParentCategoryId, new SelectList(Model.Categories, "Id", "Name"), "-- Selecteer een categorie --", new { @class= "form-control" })
                         </div>
                         @Html.ActionLink("Terug naar het overzicht", "Index", new { }, new { @class= "btn btn-default" })
                         <input type="submit" value="Save" class="btn btn-primary" />

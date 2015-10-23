@@ -6,6 +6,7 @@ using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Storage;
 using App.Models;
+using App.Models.ViewModels;
 
 namespace App.Web.Areas.Backoffice.Controllers
 {
@@ -15,7 +16,7 @@ namespace App.Web.Areas.Backoffice.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var model = _libraryContext.Categories.AsEnumerable().OrderBy(m => m.Name);
+            var model = _libraryContext.Categories.Include(l => l.ParentCategory).AsEnumerable().OrderBy(m => m.Name);
             
             if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest") 
             {
@@ -28,21 +29,26 @@ namespace App.Web.Areas.Backoffice.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var model = new Category();
+            var model = new CategoryViewModel
+            {
+                Category = new Category(),
+                Categories = _libraryContext.Categories.AsEnumerable().OrderBy(m => m.Name)
+            };
             
             return View(model);
         }
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Category model)
+        public IActionResult Create(CategoryViewModel model)
         {
+            CategoryViewModel viewModel = null;
             try
             {
                 if(!ModelState.IsValid)
                     throw new Exception("The Category model is not valid!");
                 
-                _libraryContext.Categories.Add(model);
+                _libraryContext.Categories.Add(model.Category);
                 if (_libraryContext.SaveChanges() == 0)
                 {
                    throw new Exception("The Category model could not be saved!");
@@ -55,8 +61,14 @@ namespace App.Web.Areas.Backoffice.Controllers
             catch(Exception ex)
             {
                 ModelState.AddModelError(string.Empty, "Unable to save changes.");
+                
+                viewModel = new CategoryViewModel
+                {
+                    Category = model.Category,
+                    Categories = _libraryContext.Categories.AsEnumerable().OrderBy(m => m.Name)
+                };
             }
-            return View(model);
+            return View(viewModel);
         }
         
         [HttpGet]
