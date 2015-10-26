@@ -12,7 +12,7 @@ namespace App.Data.Migrations
     {
         public override string Id
         {
-            get { return "20151019163111_Initial"; }
+            get { return "20151023105346_Initial"; }
         }
 
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

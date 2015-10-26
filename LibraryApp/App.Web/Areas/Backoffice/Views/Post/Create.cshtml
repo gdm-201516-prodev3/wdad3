@@ -33,7 +33,11 @@
                             @Html.LabelFor(m => m.Post.Library)
                             @Html.DropDownListFor(m => m.Post.LibraryId, new SelectList(Model.Libraries, "Id", "Name"), "-- Selecteer een mediatheek --", new { @class= "form-control" })
                         </div>
-                        @Html.ActionLink("Terug naar het overzicht", "Index", new { }, new { @class= "btn btn-default" })
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Post.Categories)
+                            @Html.ListBoxFor(m => m.SelectedCategoryIds, Model.Categories, new { multiple = "multiple", @class= "form-control" })
+                        </div>
+                        @Html.ActionLink("Terug naar het overzicht", "Index", new { }, new {@class= "btn btn-default" })
                         <input type="submit" value="Save" class="btn btn-primary" />
                     </fieldset>
                 }
