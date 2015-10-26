@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Storage;
 using App.Models;
@@ -29,10 +30,13 @@ namespace App.Web.Areas.Backoffice.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            var filteredCategories = _libraryContext.Categories.AsEnumerable();
+            
             var model = new PostViewModel 
             {
                 Post = new Post(),
-                Libraries = _libraryContext.Libraries.AsEnumerable()    
+                Libraries = _libraryContext.Libraries.AsEnumerable()  ,
+                Categories = new MultiSelectList(filteredCategories, "Id", "Name")
             };
             
             return View(model);
@@ -72,31 +76,24 @@ namespace App.Web.Areas.Backoffice.Controllers
         [HttpGet]
         public IActionResult Edit(Int32? id)
         {
-            try
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return new HttpStatusCodeResult(400);
-                }
-                
-                var post = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
-                if(post == null)
-                    throw new Exception("Post does not exists!");
-                
-                var model = new PostViewModel
-                {
-                    Post = post,
-                    Libraries = _libraryContext.Libraries.AsEnumerable() 
-                };
-                
-                if(model == null)
-                {
-                    return RedirectToAction("Index");
-                }
+                return new HttpStatusCodeResult(400);
             }
-            catch(Exception ex)
+            
+            var post = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
+            if(post == null)
+                throw new Exception("Post does not exists!");
+            
+            var model = new PostViewModel
             {
-                
+                Post = post,
+                Libraries = _libraryContext.Libraries.AsEnumerable() 
+            };
+            
+            if(model == null)
+            {
+                return RedirectToAction("Index");
             }
             
             return View(model);
