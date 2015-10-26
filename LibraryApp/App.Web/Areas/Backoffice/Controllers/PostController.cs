@@ -29,13 +29,7 @@ namespace App.Web.Areas.Backoffice.Controllers
         
         [HttpGet]
         public IActionResult Create()
-        {
-<<<<<<< HEAD
-            var model = new PostViewModel 
-            {
-                Post = new Post(),
-                Libraries = _libraryContext.Libraries.AsEnumerable()    
-=======
+        {                
             var filteredCategories = _libraryContext.Categories.AsEnumerable();
             
             var model = new PostViewModel 
@@ -43,7 +37,6 @@ namespace App.Web.Areas.Backoffice.Controllers
                 Post = new Post(),
                 Libraries = _libraryContext.Libraries.AsEnumerable()  ,
                 Categories = new MultiSelectList(filteredCategories, "Id", "Name")
->>>>>>> d1e153b51b4503a390a1401fc746359f168e31e0
             };
             
             return View(model);
@@ -64,6 +57,8 @@ namespace App.Web.Areas.Backoffice.Controllers
                 {
                    throw new Exception("The Post model could not be saved!");
                 }   
+                
+                
                 
                 return RedirectToAction("Index");
             }
@@ -88,16 +83,7 @@ namespace App.Web.Areas.Backoffice.Controllers
                 return new HttpStatusCodeResult(400);
             }
             
-            var post = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
-            if(post == null)
-                throw new Exception("Post does not exists!");
-            
-            var model = new PostViewModel
-            {
-                Post = post,
-                Libraries = _libraryContext.Libraries.AsEnumerable() 
-            };
-            
+            var model = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
             if(model == null)
             {
                 return RedirectToAction("Index");
@@ -108,7 +94,7 @@ namespace App.Web.Areas.Backoffice.Controllers
                 Post = model,
                 Libraries = _libraryContext.Libraries.AsEnumerable() 
             };
-            
+                        
             return View(viewModel);
         }
         
