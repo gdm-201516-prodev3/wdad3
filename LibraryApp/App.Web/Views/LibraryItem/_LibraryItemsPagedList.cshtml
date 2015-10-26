@@ -1,0 +1,18 @@
+@model IPagedList<LibraryItem>
+@using PagedList
+
+@if (Model != null && Model.Count() > 0)
+{
+	<section class="paged-content">
+		@foreach(var libraryItem in Model)
+		{
+			<h3>@libraryItem.Title</h3>
+		}
+	</section>
+}
+else
+{
+	<div class="well well-sm">
+		Geen items gevonden!
+	</div>
+}
