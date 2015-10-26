@@ -11,12 +11,12 @@ using App.Models.ViewModels;
 namespace App.Web.Areas.Backoffice.Controllers
 {
     [Area("Backoffice")]
-    public class PostController : CommonController
+    public class CategoryController : CommonController
     {
         [HttpGet]
         public IActionResult Index()
         {
-            var model = _libraryContext.Posts.Include(l => l.Library).AsEnumerable().OrderByDescending(m => m.CreatedAt);
+            var model = _libraryContext.Categories.Include(l => l.ParentCategory).AsEnumerable().OrderBy(m => m.Name);
             
             if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest") 
             {
@@ -29,10 +29,10 @@ namespace App.Web.Areas.Backoffice.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var model = new PostViewModel 
+            var model = new CategoryViewModel
             {
-                Post = new Post(),
-                Libraries = _libraryContext.Libraries.AsEnumerable()    
+                Category = new Category(),
+                Categories = _libraryContext.Categories.AsEnumerable().OrderBy(m => m.Name)
             };
             
             return View(model);
@@ -40,19 +40,21 @@ namespace App.Web.Areas.Backoffice.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(PostViewModel model)
+        public IActionResult Create(CategoryViewModel model)
         {
-            PostViewModel viewModel = null;
+            CategoryViewModel viewModel = null;
             try
             {
                 if(!ModelState.IsValid)
-                    throw new Exception("The Post model is not valid!");
+                    throw new Exception("The Category model is not valid!");
                 
-                _libraryContext.Posts.Add(model.Post);
+                _libraryContext.Categories.Add(model.Category);
                 if (_libraryContext.SaveChanges() == 0)
                 {
-                   throw new Exception("The Post model could not be saved!");
+                   throw new Exception("The Category model could not be saved!");
                 }   
+                
+                //Success(CreateMessage(ControllerActionType.Create, "library", model.Name), true);
                 
                 return RedirectToAction("Index");
             }
@@ -60,34 +62,34 @@ namespace App.Web.Areas.Backoffice.Controllers
             {
                 ModelState.AddModelError(string.Empty, "Unable to save changes.");
                 
-                viewModel = new PostViewModel 
+                viewModel = new CategoryViewModel
                 {
-                    Post = new Post(),
-                    Libraries = _libraryContext.Libraries.AsEnumerable()    
+                    Category = model.Category,
+                    Categories = _libraryContext.Categories.AsEnumerable().OrderBy(m => m.Name)
                 };
             }
             return View(viewModel);
         }
         
         [HttpGet]
-        public IActionResult Edit(Int32? id)
+        public IActionResult Edit(Int16? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(400);
             }
             
-            var model = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
+            var model = _libraryContext.Categories.FirstOrDefault(m => m.Id == id);
             
             if(model == null)
             {
                 return RedirectToAction("Index");
             }
             
-            var viewModel = new PostViewModel
+            var viewModel = new CategoryViewModel
             {
-                Post = model,
-                Libraries = _libraryContext.Libraries.AsEnumerable() 
+                Category = model,
+                Categories = _libraryContext.Categories.AsEnumerable().Where(m => m.Id != id).OrderBy(m => m.Name)
             };
             
             return View(viewModel);
@@ -95,30 +97,28 @@ namespace App.Web.Areas.Backoffice.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(PostViewModel model)
+        public IActionResult Edit(CategoryViewModel model)
         {
             try 
             {
                 if(!ModelState.IsValid)
-                    throw new Exception("The Post model is not valid!");
+                    throw new Exception("The Category model is not valid!");
                     
-                var originalModel = _libraryContext.Posts.FirstOrDefault(m => m.Id == model.Post.Id);
+                var originalModel = _libraryContext.Categories.FirstOrDefault(m => m.Id == model.Category.Id);
                 
                 if(originalModel == null)
-                    throw new Exception("The existing Post: " + model.Post.Title + " doesn't exists anymore!");
+                    throw new Exception("The existing Category: " + model.Category.Name + " doesn't exists anymore!");
                     
-                originalModel.Title = model.Post.Title;
-                originalModel.Synopsis = model.Post.Synopsis;
-                originalModel.Description = model.Post.Description;
-                originalModel.Body = model.Post.Body;
-                originalModel.LibraryId = model.Post.LibraryId;
+                originalModel.Name = model.Category.Name;
+                originalModel.Description = model.Category.Description;
+                originalModel.ParentCategoryId = model.Category.ParentCategoryId;
                 
-                _libraryContext.Posts.Attach(originalModel);
+                _libraryContext.Categories.Attach(originalModel);
                 _libraryContext.Entry(originalModel).State = EntityState.Modified;
                 
                 if (_libraryContext.SaveChanges() == 0)
                 {
-                   throw new Exception("The Post model could not be saved!");
+                   throw new Exception("The Category model could not be saved!");
                 } 
                 
                 return RedirectToAction("Index");
@@ -132,24 +132,24 @@ namespace App.Web.Areas.Backoffice.Controllers
         }
         
         [HttpPost]
-        public IActionResult Delete(Int32? id)
+        public IActionResult Delete(Int16 id)
         {
             try
             {
-                var originalModel = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
+                var originalModel = _libraryContext.Categories.FirstOrDefault(m => m.Id == id);
                 
                 if(originalModel == null)
-                    throw new Exception("The existing Post with id: " + id + " doesn't exists anymore!");
+                    throw new Exception("The existing Library with id: " + id + " doesn't exists anymore!");
 
-                _libraryContext.Posts.Attach(originalModel);
+                _libraryContext.Categories.Attach(originalModel);
                 _libraryContext.Entry(originalModel).State = EntityState.Deleted;
                 
                 if (_libraryContext.SaveChanges() == 0)
                 {
-                   throw new Exception("The Post model could not be saved!");
+                   throw new Exception("The Category model could not be saved!");
                 } 
 
-                var msg = CreateMessage(ControllerActionType.Delete, "post", id);
+                var msg = CreateMessage(ControllerActionType.Delete, "category", id);
 
                 if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
@@ -157,13 +157,13 @@ namespace App.Web.Areas.Backoffice.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Post");
+                    return RedirectToAction("Index", "Category");
                 }
 
             }
             catch (Exception ex)
             {
-                var msg = CreateMessage(ControllerActionType.Delete, "post", id, ex);
+                var msg = CreateMessage(ControllerActionType.Delete, "category", id, ex);
 
                 if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
@@ -171,7 +171,7 @@ namespace App.Web.Areas.Backoffice.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Post");
+                    return RedirectToAction("Index", "Category");
                 }
             }
         }
@@ -181,21 +181,21 @@ namespace App.Web.Areas.Backoffice.Controllers
         {
             try
             {
-                var originalModel = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
+                var originalModel = _libraryContext.Categories.FirstOrDefault(m => m.Id == id);
                 
                 if(originalModel == null)
-                    throw new Exception("The existing Post with id: " + id + " doesn't exists anymore!");
+                    throw new Exception("The existing Category with id: " + id + " doesn't exists anymore!");
 
                 originalModel.DeletedAt = DateTime.Now;
-                _libraryContext.Posts.Attach(originalModel);
+                _libraryContext.Categories.Attach(originalModel);
                 _libraryContext.Entry(originalModel).State = EntityState.Modified;
                 
                 if (_libraryContext.SaveChanges() == 0)
                 {
-                   throw new Exception("The Post model could not be soft deleted!");
+                   throw new Exception("The Category model could not be soft deleted!");
                 } 
 
-                var msg = CreateMessage(ControllerActionType.SoftDelete, "post", id);
+                var msg = CreateMessage(ControllerActionType.SoftDelete, "category", id);
 
                 if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
@@ -203,13 +203,13 @@ namespace App.Web.Areas.Backoffice.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Post");
+                    return RedirectToAction("Index", "Category");
                 }
 
             }
             catch (Exception ex)
             {
-                var msg = CreateMessage(ControllerActionType.SoftDelete, "post", id, ex);
+                var msg = CreateMessage(ControllerActionType.SoftDelete, "category", id, ex);
 
                 if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
@@ -217,31 +217,31 @@ namespace App.Web.Areas.Backoffice.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Post");
+                    return RedirectToAction("Index", "Category");
                 }
             }
         }
         
         [HttpPost]
-        public IActionResult SoftUnDelete(Int32? id)
+        public IActionResult SoftUnDelete(Int16 id)
         {
             try
             {
-                var originalModel = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
+                var originalModel = _libraryContext.Categories.FirstOrDefault(m => m.Id == id);
                 
                 if(originalModel == null)
-                    throw new Exception("The existing Post with id: " + id + " doesn't exists anymore!");
+                    throw new Exception("The existing Category with id: " + id + " doesn't exists anymore!");
 
                 originalModel.DeletedAt = null;
-                _libraryContext.Posts.Attach(originalModel);
+                _libraryContext.Categories.Attach(originalModel);
                 _libraryContext.Entry(originalModel).State = EntityState.Modified;
                 
                 if (_libraryContext.SaveChanges() == 0)
                 {
-                   throw new Exception("The Post model could not be soft undeleted!");
+                   throw new Exception("The Category model could not be soft undeleted!");
                 } 
 
-                var msg = CreateMessage(ControllerActionType.SoftUnDelete, "post", id);
+                var msg = CreateMessage(ControllerActionType.SoftUnDelete, "category", id);
 
                 if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
@@ -249,13 +249,13 @@ namespace App.Web.Areas.Backoffice.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Post");
+                    return RedirectToAction("Index", "Category");
                 }
 
             }
             catch (Exception ex)
             {
-                var msg = CreateMessage(ControllerActionType.SoftUnDelete, "post", id, ex);
+                var msg = CreateMessage(ControllerActionType.SoftUnDelete, "category", id, ex);
 
                 if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
@@ -263,7 +263,7 @@ namespace App.Web.Areas.Backoffice.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Post");
+                    return RedirectToAction("Index", "Category");
                 }
             }
         }

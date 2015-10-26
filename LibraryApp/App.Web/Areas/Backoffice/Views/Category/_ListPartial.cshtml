@@ -1,0 +1,76 @@
+@model IEnumerable<App.Models.Category>
+@Html.AntiForgeryToken()
+<div class="panel panel-default">
+	<div class="panel-body">
+		@if (Model != null && Model.Count() > 0)
+		{
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Description</th>
+							<th>Parent</th>
+							<th>Created</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var category in Model)
+						{
+							<tr data-id="category-@category.Id">
+								<td>@category.Name</td>
+								<td>@category.Description</td>
+								<td>@if(@category.ParentCategory != null){@category.ParentCategory.Name}</td>
+								<td>@category.CreatedAt</td>
+								<td>
+									<a href="@Url.Action("Edit", new { id = @category.Id })" title="Edit category: @category.Name"><span class="fa fa-edit"></span></a>
+									<a 	class="confirm-link"
+										data-id="@category.Id" 
+										data-name="@category.Name"
+										data-cat = "category"
+										data-action="delete"  
+										data-update-target="#categories-list" 
+										data-update-href="@Url.Action("Index", "Category")"
+										href="@Url.Action("Delete", new { id = @category.Id })" 
+										title="Delete Category: @category.Name"><span class="fa fa-trash"></span></a>
+									@if (@category.DeletedAt != null)
+                                    {
+                                        <a 	class="confirm-link"
+										data-id="@category.Id" 
+										data-name="@category.Name"
+										data-cat = "category"
+										data-action="softundelete"  
+										data-update-target="#categories-list" 
+										data-update-href="@Url.Action("Index", "Category")"
+										href="@Url.Action("SoftUnDelete", new { id = @category.Id })" 
+										title="Soft UnDelete Category: @category.Name"><span class="fa fa-eye-slash"></span></a>
+                                    }
+                                    else
+                                    {
+                                        <a 	class="confirm-link"
+										data-id="@category.Id" 
+										data-name="@category.Name"
+										data-cat = "category"
+										data-action="softdelete"  
+										data-update-target="#categories-list" 
+										data-update-href="@Url.Action("Index", "Category")"
+										href="@Url.Action("SoftDelete", new { id = @category.Id })" 
+										title="Soft Delete Category: @category.Name"><span class="fa fa-eye"></span></a>
+                                    }
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		}
+		else
+        {
+            <p>No libraries in the database!</p>
+        }
+    </div>
+    <div class="panel-footer">
+        @Html.ActionLink("Create a new library", "Create", new { }, new { @class = "btn btn-primary" })
+    </div>
+</div>

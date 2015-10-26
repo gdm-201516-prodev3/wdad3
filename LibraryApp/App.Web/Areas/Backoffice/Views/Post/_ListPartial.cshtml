@@ -10,6 +10,7 @@
 						<tr>
 							<th>Title</th>
 							<th>Synopsis</th>
+							<th>Library</th>
 							<th>Created</th>
 							<th>Actions</th>
 						</tr>
@@ -20,6 +21,7 @@
 							<tr data-id="post-@post.Id">
 								<td>@post.Title</td>
 								<td>@post.Synopsis</td>
+								<td>@if(@post.Library != null){@post.Library.Name}</td>
 								<td>@post.CreatedAt</td>
 								<td>
 									<a href="@Url.Action("Edit", new { id = @post.Id })" title="Edit Mediatheek: @post.Title"><span class="fa fa-edit"></span></a>
@@ -28,7 +30,7 @@
 										data-name="@post.Title"
 										data-cat = "post"
 										data-action="delete"  
-										data-update-target="#libraries-list" 
+										data-update-target="#posts-list" 
 										data-update-href="@Url.Action("Index", "Post")"
 										href="@Url.Action("Delete", new { id = @post.Id })" 
 										title="Delete Mediatheek: @post.Title"><span class="fa fa-trash"></span></a>
@@ -39,7 +41,7 @@
 										data-name="@post.Title"
 										data-cat = "post"
 										data-action="softundelete"  
-										data-update-target="#libraries-list" 
+										data-update-target="#posts-list" 
 										data-update-href="@Url.Action("Index", "Post")"
 										href="@Url.Action("SoftUnDelete", new { id = @post.Id })" 
 										title="Soft UnDelete Mediatheek: @post.Title"><span class="fa fa-eye-slash"></span></a>
@@ -48,10 +50,10 @@
                                     {
                                         <a 	class="confirm-link"
 										data-id="@post.Id" 
-										data-name="@post..Title"
+										data-name="@post.Title"
 										data-cat = "post"
 										data-action="softdelete"  
-										data-update-target="#libraries-list" 
+										data-update-target="#posts-list" 
 										data-update-href="@Url.Action("Index", "Post")"
 										href="@Url.Action("SoftDelete", new { id = @post.Id })" 
 										title="Soft Delete Mediatheek: @post.Title"><span class="fa fa-eye"></span></a>
@@ -65,7 +67,7 @@
 		}
 		else
         {
-            <p>No libraries in the database!</p>
+            <p>No post in the database!</p>
         }
     </div>
     <div class="panel-footer">

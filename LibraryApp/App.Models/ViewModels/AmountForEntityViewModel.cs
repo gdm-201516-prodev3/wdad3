@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace App.Models.ViewModels
 {
-    public class AmountForEntity
+    public class AmountForEntityViewModel
     {
         public int Amount { get; set; }
         public string EntityType { get; set; }

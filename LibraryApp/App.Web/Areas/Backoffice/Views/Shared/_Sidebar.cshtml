@@ -46,6 +46,44 @@
                     </li>
                 </ul>
             </li>
+            <li class="submenu">
+                <a href="#" title="">
+                    <span class="fa fa-book"></span>
+                    <span class="label-menu">Categorieën</span>
+                    <span class="pull-right arrow fa fa-chevron-right"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Index", "Category")" title="Alle categorieën">
+                            <span class="label-menu">Alle categorieën</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "Category")" title="">
+                            <span class="label-menu">Nieuwe categorie</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="submenu">
+                <a href="#" title="">
+                    <span class="fa fa-question"></span>
+                    <span class="label-menu">FAQs</span>
+                    <span class="pull-right arrow fa fa-chevron-right"></span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="@Url.Action("Index", "FAQ")" title="Alle FAQs">
+                            <span class="label-menu">Alle FAQs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Create", "FAQ")" title="">
+                            <span class="label-menu">Nieuwe FAQs</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </nav>
 </aside>

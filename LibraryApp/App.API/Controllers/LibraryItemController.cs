@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using App.Data;
 using App.Models;
+using App.Models.Ahs;
 using App.Services;
 using App.Services.Ahs;
 

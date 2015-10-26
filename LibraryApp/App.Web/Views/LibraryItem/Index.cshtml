@@ -1,0 +1,35 @@
+@model MediatheekSimpleSearchViewModel
+@{
+    ViewData["Title"] = "Catalogus";
+}
+<h2>Catalogus</h2>
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("Index", "LibraryItem", FormMethod.Post, new {@id = "libraryitem-simple-search-form", data_libraryitem_ajax = "true", data_libraryitem_target = "#libraryitems-list"}))
+        {
+            <fieldset>
+                <legend class="hidden">Catalogus</legend>
+                @Html.HiddenFor(m => m.MediatheekSimpleSearch.LibraryCode)
+                @Html.HiddenFor(m => m.MediatheekSimpleSearch.ItemsPerPage)
+                @Html.HiddenFor(m => m.MediatheekSimpleSearch.Offset)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.MediatheekSimpleSearch.SearchField)
+                    @Html.TextBoxFor(m => m.MediatheekSimpleSearch.SearchField, new { @class= "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.MediatheekSimpleSearch.SortOrder)
+                    @Html.DropDownListFor(m => m.MediatheekSimpleSearch.SortOrder, Html.GetEnumSelectList(Model.MediatheekSimpleSearch.SortOrder.GetType()), "-- Selecteer een sorteervolgorde --", new {@class = "form-control"})
+                </div>
+                <input type="submit" value="Zoeken" class="btn btn-primary" />
+            </fieldset>
+        }
+    </div>      
+</div>
+<div class="row">
+    <div class="col-xs-12" id="libraryitems-list">
+        
+    </div>      
+</div>
+@section Scripts {
+    <script src="~/js/libraryitem.js"></script>
+}

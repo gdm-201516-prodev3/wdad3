@@ -28,6 +28,7 @@
     "Microsoft.Framework.Logging.Console": "1.0.0-beta7",
     "Microsoft.Framework.Logging.Debug" : "1.0.0-beta7",
     "Microsoft.AspNet.Server.Kestrel": "1.0.0-beta7",
+    "PagedList": "1.17.0",
     "App.Models" : "1.0.0-*",
     "App.Data": "1.0.0-*",
     "App.Services": "1.0.0-*"
@@ -40,7 +41,10 @@
   },
 
   "frameworks": {
-    "dnx451": {}
+    "dnx451": {
+      "frameworkAssemblies": {
+      }
+    }
   },
 
   "exclude": [

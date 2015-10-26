@@ -28,12 +28,12 @@ namespace App.Web.Areas.Backoffice.ViewComponents
             return View(model);
         }
 
-        private Task<AmountForEntity> GetAmountForEntityAsync(string entityType)
+        private Task<AmountForEntityViewModel> GetAmountForEntityAsync(string entityType)
         {
             return Task.FromResult(GetAmountForEntity(entityType));
 
         }
-        private AmountForEntity GetAmountForEntity(string entityType)
+        private AmountForEntityViewModel GetAmountForEntity(string entityType)
         {
             var amount = 0;
             var entitytype = "Entity";
@@ -80,7 +80,7 @@ namespace App.Web.Areas.Backoffice.ViewComponents
                     break;
             }
             
-            var model = new AmountForEntity()
+            var model = new AmountForEntityViewModel()
             {
                 Amount = amount,
                 EntityType = entitytype,

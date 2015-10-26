@@ -11,12 +11,12 @@ using App.Models.ViewModels;
 namespace App.Web.Areas.Backoffice.Controllers
 {
     [Area("Backoffice")]
-    public class PostController : CommonController
+    public class FAQController : CommonController
     {
         [HttpGet]
         public IActionResult Index()
         {
-            var model = _libraryContext.Posts.Include(l => l.Library).AsEnumerable().OrderByDescending(m => m.CreatedAt);
+            var model = _libraryContext.FAQs.Include(l => l.Library).AsEnumerable().OrderByDescending(m => m.CreatedAt);
             
             if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest") 
             {
@@ -29,9 +29,9 @@ namespace App.Web.Areas.Backoffice.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var model = new PostViewModel 
+            var model = new FAQViewModel 
             {
-                Post = new Post(),
+                FAQ = new FAQ(),
                 Libraries = _libraryContext.Libraries.AsEnumerable()    
             };
             
@@ -40,18 +40,18 @@ namespace App.Web.Areas.Backoffice.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(PostViewModel model)
+        public IActionResult Create(FAQViewModel model)
         {
-            PostViewModel viewModel = null;
+            FAQViewModel viewModel = null;
             try
             {
                 if(!ModelState.IsValid)
-                    throw new Exception("The Post model is not valid!");
+                    throw new Exception("The FAQ model is not valid!");
                 
-                _libraryContext.Posts.Add(model.Post);
+                _libraryContext.FAQs.Add(model.FAQ);
                 if (_libraryContext.SaveChanges() == 0)
                 {
-                   throw new Exception("The Post model could not be saved!");
+                   throw new Exception("The FAQ model could not be saved!");
                 }   
                 
                 return RedirectToAction("Index");
@@ -60,9 +60,9 @@ namespace App.Web.Areas.Backoffice.Controllers
             {
                 ModelState.AddModelError(string.Empty, "Unable to save changes.");
                 
-                viewModel = new PostViewModel 
+                viewModel = new FAQViewModel 
                 {
-                    Post = new Post(),
+                    FAQ = new FAQ(),
                     Libraries = _libraryContext.Libraries.AsEnumerable()    
                 };
             }
@@ -77,16 +77,16 @@ namespace App.Web.Areas.Backoffice.Controllers
                 return new HttpStatusCodeResult(400);
             }
             
-            var model = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
+            var model = _libraryContext.FAQs.FirstOrDefault(m => m.Id == id);
             
             if(model == null)
             {
                 return RedirectToAction("Index");
             }
             
-            var viewModel = new PostViewModel
+            var viewModel = new FAQViewModel
             {
-                Post = model,
+                FAQ = model,
                 Libraries = _libraryContext.Libraries.AsEnumerable() 
             };
             
@@ -95,30 +95,29 @@ namespace App.Web.Areas.Backoffice.Controllers
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(PostViewModel model)
+        public IActionResult Edit(FAQViewModel model)
         {
             try 
             {
                 if(!ModelState.IsValid)
-                    throw new Exception("The Post model is not valid!");
+                    throw new Exception("The FAQ model is not valid!");
                     
-                var originalModel = _libraryContext.Posts.FirstOrDefault(m => m.Id == model.Post.Id);
+                var originalModel = _libraryContext.FAQs.FirstOrDefault(m => m.Id == model.FAQ.Id);
                 
                 if(originalModel == null)
-                    throw new Exception("The existing Post: " + model.Post.Title + " doesn't exists anymore!");
+                    throw new Exception("The existing Post: " + model.FAQ.Question + " doesn't exists anymore!");
                     
-                originalModel.Title = model.Post.Title;
-                originalModel.Synopsis = model.Post.Synopsis;
-                originalModel.Description = model.Post.Description;
-                originalModel.Body = model.Post.Body;
-                originalModel.LibraryId = model.Post.LibraryId;
+                originalModel.Question = model.FAQ.Question;
+                originalModel.Answer = model.FAQ.Answer;
+                originalModel.Description = model.FAQ.Description;
+                originalModel.LibraryId = model.FAQ.LibraryId;
                 
-                _libraryContext.Posts.Attach(originalModel);
+                _libraryContext.FAQs.Attach(originalModel);
                 _libraryContext.Entry(originalModel).State = EntityState.Modified;
                 
                 if (_libraryContext.SaveChanges() == 0)
                 {
-                   throw new Exception("The Post model could not be saved!");
+                   throw new Exception("The FAQ model could not be saved!");
                 } 
                 
                 return RedirectToAction("Index");
@@ -132,24 +131,24 @@ namespace App.Web.Areas.Backoffice.Controllers
         }
         
         [HttpPost]
-        public IActionResult Delete(Int32? id)
+        public IActionResult Delete(Int16? id)
         {
             try
             {
-                var originalModel = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
+                var originalModel = _libraryContext.FAQs.FirstOrDefault(m => m.Id == id);
                 
                 if(originalModel == null)
-                    throw new Exception("The existing Post with id: " + id + " doesn't exists anymore!");
+                    throw new Exception("The existing FAQ with id: " + id + " doesn't exists anymore!");
 
-                _libraryContext.Posts.Attach(originalModel);
+                _libraryContext.FAQs.Attach(originalModel);
                 _libraryContext.Entry(originalModel).State = EntityState.Deleted;
                 
                 if (_libraryContext.SaveChanges() == 0)
                 {
-                   throw new Exception("The Post model could not be saved!");
+                   throw new Exception("The FAQ model could not be saved!");
                 } 
 
-                var msg = CreateMessage(ControllerActionType.Delete, "post", id);
+                var msg = CreateMessage(ControllerActionType.Delete, "faq", id);
 
                 if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
@@ -157,13 +156,13 @@ namespace App.Web.Areas.Backoffice.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Post");
+                    return RedirectToAction("Index", "FAQ");
                 }
 
             }
             catch (Exception ex)
             {
-                var msg = CreateMessage(ControllerActionType.Delete, "post", id, ex);
+                var msg = CreateMessage(ControllerActionType.Delete, "faq", id, ex);
 
                 if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
@@ -171,31 +170,31 @@ namespace App.Web.Areas.Backoffice.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Post");
+                    return RedirectToAction("Index", "FAQ");
                 }
             }
         }
         
         [HttpPost]
-        public IActionResult SoftDelete(Int16 id)
+        public IActionResult SoftDelete(Int16? id)
         {
             try
             {
-                var originalModel = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
+                var originalModel = _libraryContext.FAQs.FirstOrDefault(m => m.Id == id);
                 
                 if(originalModel == null)
-                    throw new Exception("The existing Post with id: " + id + " doesn't exists anymore!");
+                    throw new Exception("The existing FAQ with id: " + id + " doesn't exists anymore!");
 
                 originalModel.DeletedAt = DateTime.Now;
-                _libraryContext.Posts.Attach(originalModel);
+                _libraryContext.FAQs.Attach(originalModel);
                 _libraryContext.Entry(originalModel).State = EntityState.Modified;
                 
                 if (_libraryContext.SaveChanges() == 0)
                 {
-                   throw new Exception("The Post model could not be soft deleted!");
+                   throw new Exception("The FAQ model could not be soft deleted!");
                 } 
 
-                var msg = CreateMessage(ControllerActionType.SoftDelete, "post", id);
+                var msg = CreateMessage(ControllerActionType.SoftDelete, "faq", id);
 
                 if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
@@ -203,13 +202,13 @@ namespace App.Web.Areas.Backoffice.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Post");
+                    return RedirectToAction("Index", "FAQ");
                 }
 
             }
             catch (Exception ex)
             {
-                var msg = CreateMessage(ControllerActionType.SoftDelete, "post", id, ex);
+                var msg = CreateMessage(ControllerActionType.SoftDelete, "faq", id, ex);
 
                 if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
@@ -217,31 +216,31 @@ namespace App.Web.Areas.Backoffice.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Post");
+                    return RedirectToAction("Index", "FAQ");
                 }
             }
         }
         
         [HttpPost]
-        public IActionResult SoftUnDelete(Int32? id)
+        public IActionResult SoftUnDelete(Int16? id)
         {
             try
             {
-                var originalModel = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
+                var originalModel = _libraryContext.FAQs.FirstOrDefault(m => m.Id == id);
                 
                 if(originalModel == null)
-                    throw new Exception("The existing Post with id: " + id + " doesn't exists anymore!");
+                    throw new Exception("The existing FAQ with id: " + id + " doesn't exists anymore!");
 
                 originalModel.DeletedAt = null;
-                _libraryContext.Posts.Attach(originalModel);
+                _libraryContext.FAQs.Attach(originalModel);
                 _libraryContext.Entry(originalModel).State = EntityState.Modified;
                 
                 if (_libraryContext.SaveChanges() == 0)
                 {
-                   throw new Exception("The Post model could not be soft undeleted!");
+                   throw new Exception("The FAQ model could not be soft undeleted!");
                 } 
 
-                var msg = CreateMessage(ControllerActionType.SoftUnDelete, "post", id);
+                var msg = CreateMessage(ControllerActionType.SoftUnDelete, "faq", id);
 
                 if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
@@ -249,13 +248,13 @@ namespace App.Web.Areas.Backoffice.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Post");
+                    return RedirectToAction("Index", "FAQ");
                 }
 
             }
             catch (Exception ex)
             {
-                var msg = CreateMessage(ControllerActionType.SoftUnDelete, "post", id, ex);
+                var msg = CreateMessage(ControllerActionType.SoftUnDelete, "faq", id, ex);
 
                 if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
                 {
@@ -263,7 +262,7 @@ namespace App.Web.Areas.Backoffice.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Post");
+                    return RedirectToAction("Index", "FAQ");
                 }
             }
         }

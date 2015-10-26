@@ -1,33 +1,33 @@
-@model App.Models.Library
+@model App.Models.ViewModels.CategoryViewModel
 @{
-    ViewBag.Title = "Mediatheek";
+    ViewBag.Title = "Categorie";
     ViewBag.SubTitle = "Nieuwe";
-    ViewBag.Description = "Aanmaak van een nieuwe mediatheek";
+    ViewBag.Description = "Aanmaak van een nieuwe categorie";
     Layout = "~/Areas/Backoffice/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
     <div class="col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Aanmaak van een nieuwe mediatheek
+                Aanmaak van een nieuwe categorie
             </div>
             <div class="panel-body">
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()
                     <fieldset>
-                        <legend class="hidden">Aanmaak van een nieuwe mediatheek</legend>
+                        <legend class="hidden">Aanmaak van een nieuwe categorie</legend>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Name)
-                            @Html.TextBoxFor(m => m.Name, new { @class= "form-control" })
+                            @Html.LabelFor(m => m.Category.Name)
+                            @Html.TextBoxFor(m => m.Category.Name, new { @class= "form-control" })
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Code)
-                            @Html.TextBoxFor(m => m.Code, new { @class= "form-control" })
+                            @Html.LabelFor(m => m.Category.Description)
+                            @Html.TextAreaFor(m => m.Category.Description, new { @class= "form-control", rows = 4, cols = 50 })
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Description)
-                            @Html.TextAreaFor(m => m.Description, new { @class= "form-control", rows = 4, cols = 50 })
+                            @Html.LabelFor(m => m.Category.ParentCategory)
+                            @Html.DropDownListFor(m => m.Category.ParentCategoryId, new SelectList(Model.Categories, "Id", "Name"), "-- Selecteer een categorie --", new { @class= "form-control" })
                         </div>
                         @Html.ActionLink("Terug naar het overzicht", "Index", new { }, new { @class= "btn btn-default" })
                         <input type="submit" value="Save" class="btn btn-primary" />
