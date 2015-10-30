@@ -26,7 +26,7 @@
 			name: 'Home',
 			state: mainState.name,
 			order: 1,
-			icon: 'navigation:ic_menu_24px'
+			icon: 'action:ic_home_24px'
 		});
 	}
 

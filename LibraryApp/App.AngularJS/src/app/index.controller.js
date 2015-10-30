@@ -33,7 +33,7 @@
 		/**
 		 * @ngdoc function
 		 * @name closeMainMenu
-		 * @methodOf angularappApp.controller:AppController
+		 * @methodOf ddsApp.controller:AppController
 		 * @description
 		 * Close the main menu sidenav component
 		 * @returns {Promise} The promise from mdSidenav
@@ -43,7 +43,7 @@
 		/**
 		 * @ngdoc function
 		 * @name openMainMenu
-		 * @methodOf angularappApp.controller:AppController
+		 * @methodOf ddsApp.controller:AppController
 		 * @description
 		 * Open the main menu sidenav component
 		 * @returns {Promise} The promise from mdSidenav

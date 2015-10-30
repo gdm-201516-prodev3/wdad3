@@ -26,7 +26,7 @@
 			name: 'Catalogus',
 			state: mainState.name,
 			order: 2,
-			icon: 'navigation:ic_menu_24px'
+			icon: 'action:ic_alarm_24px'
 		});
 	}
 

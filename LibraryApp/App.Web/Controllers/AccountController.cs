@@ -48,20 +48,8 @@ namespace App.Web.Controllers
         // GET: /Account/Login
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(string returnUrl = null)
-        {
-            var user = new ApplicationUser 
-                    { 
-                        UserName = "drdynscript", 
-                        Email = "d@d.be",
-                        Profile = new Profile 
-                        {
-                           FirstName = "Philippe",
-                           SurName = "De Pauw"
-                        }
-                    };
-                    var result = await _userManager.CreateAsync(user, "Slaam_1888");
-                    
+        public IActionResult Login(string returnUrl = null)
+        {           
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
@@ -72,35 +60,44 @@ namespace App.Web.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
-        {
-            EnsureDatabaseCreated(_libraryDbContext);
-            ViewData["ReturnUrl"] = returnUrl;
+        {   
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-                if (result.Succeeded)
+                var user = await _userManager.FindByNameAsync(model.Email);
+                if(user == null)
                 {
-                    return RedirectToLocal(returnUrl);
+                    user = await _userManager.FindByEmailAsync(model.Email);
                 }
-                if (result.RequiresTwoFactor)
+                
+                if(user != null)
                 {
-                    return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                }
-                if (result.IsLockedOut)
-                {
-                    return View("Lockout");
+                    var result =  await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, lockoutOnFailure: false);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToLocal(returnUrl);
+                    }
+                    if (result.RequiresTwoFactor)
+                    {
+                        return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    }
+                    if (result.IsLockedOut)
+                    {
+                        return View("Lockout");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
+                    ModelState.AddModelError("", "Invalid username or email.");
                 }
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
+            
         }
 
         //
