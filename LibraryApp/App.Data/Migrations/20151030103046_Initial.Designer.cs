@@ -12,7 +12,7 @@ namespace App.Data.Migrations
     {
         public override string Id
         {
-            get { return "20151023105346_Initial"; }
+            get { return "20151030103046_Initial"; }
         }
 
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -244,7 +244,7 @@ namespace App.Data.Migrations
                 {
                     b.Property<int>("LibraryItemId");
 
-                    b.Property<int?>("ActionLibraryItemId");
+                    b.Property<int>("Action");
 
                     b.Property<DateTime>("CreatedAt");
 
@@ -298,15 +298,30 @@ namespace App.Data.Migrations
 
             modelBuilder.Entity("App.Models.PostCategory", b =>
                 {
-                    b.Property<short>("PostId");
+                    b.Property<int>("PostId");
 
                     b.Property<short>("CategoryId");
-
-                    b.Property<int?>("PostId1");
 
                     b.Key("PostId", "CategoryId");
 
                     b.Annotation("Relational:TableName", "PostCategories");
+                });
+
+            modelBuilder.Entity("App.Models.Profile", b =>
+                {
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("FirstName")
+                        .Required()
+                        .Annotation("Relational:ColumnType", "nvarchar(64)");
+
+                    b.Property<string>("SurName")
+                        .Required()
+                        .Annotation("Relational:ColumnType", "nvarchar(128)");
+
+                    b.Key("UserId");
+
+                    b.Annotation("Relational:TableName", "Profiles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
@@ -413,10 +428,6 @@ namespace App.Data.Migrations
 
             modelBuilder.Entity("App.Models.LibraryItemAction", b =>
                 {
-                    b.Reference("App.Models.LibraryItemAction")
-                        .InverseCollection()
-                        .ForeignKey("ActionLibraryItemId");
-
                     b.Reference("App.Models.Identity.ApplicationUser")
                         .InverseCollection()
                         .ForeignKey("UserId");
@@ -441,7 +452,14 @@ namespace App.Data.Migrations
 
                     b.Reference("App.Models.Post")
                         .InverseCollection()
-                        .ForeignKey("PostId1");
+                        .ForeignKey("PostId");
+                });
+
+            modelBuilder.Entity("App.Models.Profile", b =>
+                {
+                    b.Reference("App.Models.Identity.ApplicationUser")
+                        .InverseReference()
+                        .ForeignKey("App.Models.Profile", "UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>

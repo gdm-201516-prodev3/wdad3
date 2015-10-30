@@ -13,6 +13,7 @@ using App.Web.ViewModels.Account;
 using App.Models;
 using App.Models.Identity;
 using App.Data;
+using App.Services.RandomUserMe;
 
 namespace App.Web.Controllers
 {
@@ -24,6 +25,7 @@ namespace App.Web.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly LibraryDbContext _libraryDbContext;
+        private readonly IRandomUserMeService _randomUserMeService;
         private static bool _databaseChecked;
 
         public AccountController(
@@ -31,21 +33,35 @@ namespace App.Web.Controllers
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            LibraryDbContext libraryDbContext)
+            LibraryDbContext libraryDbContext,
+            IRandomUserMeService randomUserMeService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
             _libraryDbContext = libraryDbContext;
+            _randomUserMeService = randomUserMeService;
         }
 
         //
         // GET: /Account/Login
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Login(string returnUrl = null)
+        public async Task<IActionResult> Login(string returnUrl = null)
         {
+            var user = new ApplicationUser 
+                    { 
+                        UserName = "drdynscript", 
+                        Email = "d@d.be",
+                        Profile = new Profile 
+                        {
+                           FirstName = "Philippe",
+                           SurName = "De Pauw"
+                        }
+                    };
+                    var result = await _userManager.CreateAsync(user, "Slaam_1888");
+                    
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }

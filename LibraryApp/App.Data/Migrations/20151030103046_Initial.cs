@@ -129,7 +129,7 @@ namespace App.Data.Migrations
                 columns: table => new
                 {
                     LibraryItemId = table.Column<int>(isNullable: false),
-                    ActionLibraryItemId = table.Column<int>(isNullable: true),
+                    Action = table.Column<int>(isNullable: false),
                     CreatedAt = table.Column<DateTime>(isNullable: false),
                     Rating = table.Column<short>(isNullable: true),
                     UserAgent = table.Column<string>(isNullable: true),
@@ -139,12 +139,24 @@ namespace App.Data.Migrations
                 {
                     table.PrimaryKey("PK_LibraryItemAction", x => x.LibraryItemId);
                     table.ForeignKey(
-                        name: "FK_LibraryItemAction_LibraryItemAction_ActionLibraryItemId",
-                        column: x => x.ActionLibraryItemId,
-                        principalTable: "LibraryItemAction",
-                        principalColumn: "LibraryItemId");
-                    table.ForeignKey(
                         name: "FK_LibraryItemAction_ApplicationUser_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+            migrationBuilder.CreateTable(
+                name: "Profiles",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(isNullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(64)", isNullable: false),
+                    SurName = table.Column<string>(type: "nvarchar(128)", isNullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Profile", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_Profile_ApplicationUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
@@ -304,9 +316,8 @@ namespace App.Data.Migrations
                 name: "PostCategories",
                 columns: table => new
                 {
-                    PostId = table.Column<short>(isNullable: false),
-                    CategoryId = table.Column<short>(isNullable: false),
-                    PostId1 = table.Column<int>(isNullable: true)
+                    PostId = table.Column<int>(isNullable: false),
+                    CategoryId = table.Column<short>(isNullable: false)
                 },
                 constraints: table =>
                 {
@@ -317,8 +328,8 @@ namespace App.Data.Migrations
                         principalTable: "Categories",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PostCategory_Post_PostId1",
-                        column: x => x.PostId1,
+                        name: "FK_PostCategory_Post_PostId",
+                        column: x => x.PostId,
                         principalTable: "Posts",
                         principalColumn: "Id");
                 });
@@ -342,6 +353,7 @@ namespace App.Data.Migrations
             migrationBuilder.DropTable("Faqs");
             migrationBuilder.DropTable("LibraryItemAction");
             migrationBuilder.DropTable("PostCategories");
+            migrationBuilder.DropTable("Profiles");
             migrationBuilder.DropTable("AspNetRoleClaims");
             migrationBuilder.DropTable("AspNetUserClaims");
             migrationBuilder.DropTable("AspNetUserLogins");

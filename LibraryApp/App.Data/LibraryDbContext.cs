@@ -17,6 +17,7 @@ namespace App.Data
         public DbSet<FAQ> FAQs { get; set; }        
         public DbSet<Category> Categories { get; set; }
         public DbSet<LibraryItemAction> LibraryItemActions { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
               
         public LibraryDbContext() : base()
         {
@@ -31,6 +32,16 @@ namespace App.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
+            modelBuilder.Entity<Profile>(l =>
+            {  
+               l.ToTable("Profiles");
+               l.Key(m => m.UserId);
+               l.Property(m => m.FirstName).Required().HasColumnType("nvarchar(64)");
+               l.Property(m => m.SurName).Required().HasColumnType("nvarchar(128)");
+               
+               l.Reference(m => m.ApplicationUser).InverseReference(m => m.Profile).ForeignKey<Profile>(m => m.UserId);
+            });
             
             modelBuilder.Entity<Library>(l =>
             {
@@ -179,17 +190,26 @@ namespace App.Data
             var entriesFiltered = entries.Where(e => e.State == EntityState.Added);
             foreach (var entry in entriesFiltered)
             {
-                entry.Property("CreatedAt").CurrentValue = DateTime.UtcNow;
+                TrySetProperty(entry.Entity, "CreatedAt", DateTime.UtcNow);
             }
 
             // Update entry
             entriesFiltered = entries.Where(e => e.State == EntityState.Modified);
             foreach (var entry in entriesFiltered)
             {
-                entry.Property("UpdatedAt").CurrentValue = DateTime.UtcNow;
+                TrySetProperty(entry.Entity, "UpdatedAt", DateTime.UtcNow);
             }
 
             return base.SaveChanges();
+        }
+        
+        private void TrySetProperty(object obj, string p, object value)
+        {
+            var prop = obj.GetType().GetProperty(p);
+            if(prop != null && prop.CanWrite)
+            {
+                prop.SetValue(obj, value, null);
+            }
         }
     }
 }

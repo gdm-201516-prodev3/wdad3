@@ -34,8 +34,8 @@
                             @Html.DropDownListFor(m => m.Post.LibraryId, new SelectList(Model.Libraries, "Id", "Name"), "-- Selecteer een mediatheek --", new { @class= "form-control" })
                         </div>
                         <div class="form-group">
-                            @Html.LabelFor(m => m.Post.Categories)
-                            @Html.ListBoxFor(m => m.SelectedCategoryIds, Model.Categories, new { multiple = "multiple", @class= "form-control" })
+                            @Html.LabelFor(m => m.Post.Categories) 
+                            @Html.ListBoxFor(m => m.SelectedCategoryIds, Model.Categories, new { @class="chosen-select form-control", placeholder="Kies één of meerdere categorieën ..." })
                         </div>
                         @Html.ActionLink("Terug naar het overzicht", "Index", new { }, new {@class= "btn btn-default" })
                         <input type="submit" value="Save" class="btn btn-primary" />
@@ -45,3 +45,6 @@
         </div>
     </div>      
 </div>
+@section Scripts {
+    <script>(function () { $('#SelectedCategoryIds.chosen-select').chosen(); })();</script>
+}

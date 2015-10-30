@@ -22,6 +22,7 @@ using App.Models.Identity;
 using App.Data;
 using App.Data.SampleData;
 using App.Services.Ahs;
+using App.Services.RandomUserMe;
 
 namespace App.Web
 {
@@ -54,6 +55,7 @@ namespace App.Web
             // Add Scoped = Resolve dependency injection
             services.AddScoped<LibraryDbContext, LibraryDbContext>();
             services.AddScoped<IMediatheekService, MediatheekService>();
+            services.AddScoped<IRandomUserMeService, RandomUserMeService>();
             
             // Add Entity Framework services to the services container.
             services.AddEntityFramework()

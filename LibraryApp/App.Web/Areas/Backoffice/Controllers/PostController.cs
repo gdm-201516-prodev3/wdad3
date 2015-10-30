@@ -17,7 +17,7 @@ namespace App.Web.Areas.Backoffice.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var model = _libraryContext.Posts.Include(l => l.Library).AsEnumerable().OrderByDescending(m => m.CreatedAt);
+            var model = _libraryContext.Posts.Include(l => l.Library).Include(c => c.Categories).AsEnumerable().OrderByDescending(m => m.CreatedAt);
             
             if (this.Request.Headers["X-Requested-With"] == "XMLHttpRequest") 
             {
@@ -30,13 +30,13 @@ namespace App.Web.Areas.Backoffice.Controllers
         [HttpGet]
         public IActionResult Create()
         {                
-            var filteredCategories = _libraryContext.Categories.AsEnumerable();
+            var filteredCategories = _libraryContext.Categories.Where(f => f.ParentCategory != null).Include(c => c.ParentCategory).AsEnumerable();
             
             var model = new PostViewModel 
             {
                 Post = new Post(),
                 Libraries = _libraryContext.Libraries.AsEnumerable()  ,
-                Categories = new MultiSelectList(filteredCategories, "Id", "Name")
+                Categories = new MultiSelectList(filteredCategories, "Id", "Name", null, "ParentCategory.Name")
             };
             
             return View(model);
@@ -52,13 +52,34 @@ namespace App.Web.Areas.Backoffice.Controllers
                 if(!ModelState.IsValid)
                     throw new Exception("The Post model is not valid!");
                 
-                _libraryContext.Posts.Add(model.Post);
+                var entityEntry = _libraryContext.Posts.Add(model.Post);
                 if (_libraryContext.SaveChanges() == 0)
                 {
                    throw new Exception("The Post model could not be saved!");
-                }   
+                }
                 
+                var post = entityEntry.Entity;
                 
+                if(model.SelectedCategoryIds != null && model.SelectedCategoryIds.Count() > 0) 
+                {
+                    var postsCategories = new List<PostCategory>();
+                    foreach(var categoryId in model.SelectedCategoryIds)
+                    {
+                        postsCategories.Add(new PostCategory{
+                           PostId = post.Id,
+                           CategoryId = categoryId 
+                        });
+                    }
+                    post.Categories = postsCategories;
+                    
+                    _libraryContext.Posts.Attach(post);
+                    _libraryContext.Entry(post).State = EntityState.Modified;
+                
+                    if (_libraryContext.SaveChanges() == 0)
+                    {
+                        throw new Exception("The Post model could not be saved!");
+                    }
+                }
                 
                 return RedirectToAction("Index");
             }
@@ -66,10 +87,13 @@ namespace App.Web.Areas.Backoffice.Controllers
             {
                 ModelState.AddModelError(string.Empty, "Unable to save changes.");
                 
+                var filteredCategories = _libraryContext.Categories.Where(f => f.ParentCategory != null).Include(c => c.ParentCategory).AsEnumerable();
                 viewModel = new PostViewModel 
                 {
-                    Post = new Post(),
-                    Libraries = _libraryContext.Libraries.AsEnumerable()    
+                    Post = model.Post,
+                    Libraries = _libraryContext.Libraries.AsEnumerable(),
+                    SelectedCategoryIds = model.SelectedCategoryIds,
+                    Categories = new MultiSelectList(filteredCategories, "Id", "Name", model.SelectedCategoryIds, "ParentCategory.Name")
                 };
             }
             return View(viewModel);
@@ -83,16 +107,30 @@ namespace App.Web.Areas.Backoffice.Controllers
                 return new HttpStatusCodeResult(400);
             }
             
-            var model = _libraryContext.Posts.FirstOrDefault(m => m.Id == id);
+            var model = _libraryContext.Posts.Include(c => c.Categories).FirstOrDefault(m => m.Id == id);
             if(model == null)
             {
                 return RedirectToAction("Index");
             }
             
+            Int16[] ids = null;
+            if(model.Categories != null && model.Categories.Count > 0){
+                ids = new Int16[model.Categories.Count];
+                int i = 0;
+                foreach (var postCategory in model.Categories)
+                {
+                    ids[i] = postCategory.CategoryId;
+                    i++;
+                }
+            }
+
+            var filteredCategories = _libraryContext.Categories.Where(f => f.ParentCategory != null).Include(c => c.ParentCategory).AsEnumerable();
             var viewModel = new PostViewModel
             {
                 Post = model,
-                Libraries = _libraryContext.Libraries.AsEnumerable() 
+                Libraries = _libraryContext.Libraries.AsEnumerable(),
+                SelectedCategoryIds = ids,
+                Categories = new MultiSelectList(filteredCategories, "Id", "Name", ids, "ParentCategory.Name")
             };
                         
             return View(viewModel);
@@ -102,6 +140,7 @@ namespace App.Web.Areas.Backoffice.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(PostViewModel model)
         {
+            PostViewModel viewModel = null;
             try 
             {
                 if(!ModelState.IsValid)
@@ -117,23 +156,60 @@ namespace App.Web.Areas.Backoffice.Controllers
                 originalModel.Description = model.Post.Description;
                 originalModel.Body = model.Post.Body;
                 originalModel.LibraryId = model.Post.LibraryId;
-                
-                _libraryContext.Posts.Attach(originalModel);
+                /*if(originalModel.Categories != null) 
+                {
+                    originalModel.Categories.Clear();
+                }
+                else
+                {
+                    originalModel.Categories = new List<PostCategory>();
+                }*/
+               
+                var entityEntry = _libraryContext.Posts.Attach(originalModel);
                 _libraryContext.Entry(originalModel).State = EntityState.Modified;
+                if (_libraryContext.SaveChanges() == 0)
+                {
+                   throw new Exception("The Post model could not be saved!");
+                }
+                
+                /*var post = entityEntry.Entity;
+                
+                if(model.SelectedCategoryIds != null && model.SelectedCategoryIds.Count() > 0) 
+                {
+                    foreach(var categoryId in model.SelectedCategoryIds)
+                    {
+                        post.Categories.Add(new PostCategory{
+                           PostId = originalModel.Id,
+                           CategoryId = categoryId 
+                        });
+                    }
+                }
+                
+                _libraryContext.Posts.Attach(post);
+                _libraryContext.Entry(post).State = EntityState.Modified;
                 
                 if (_libraryContext.SaveChanges() == 0)
                 {
                    throw new Exception("The Post model could not be saved!");
-                } 
+                } */
                 
-                return RedirectToAction("Index");
+               //return RedirectToAction("Index");
             
             }
             catch(Exception ex)
             {
                 ModelState.AddModelError(string.Empty, "Unable to save changes.");
+                
+                var filteredCategories = _libraryContext.Categories.Where(f => f.ParentCategory != null).Include(c => c.ParentCategory).AsEnumerable();
+                viewModel = new PostViewModel
+                {
+                    Post = model.Post,
+                    Libraries = _libraryContext.Libraries.AsEnumerable(),
+                    SelectedCategoryIds = model.SelectedCategoryIds,
+                    Categories = new MultiSelectList(filteredCategories, "Id", "Name", model.SelectedCategoryIds, "ParentCategory.Name")
+                };     
             }
-            return View(model);
+            return View(viewModel);
         }
         
         [HttpPost]

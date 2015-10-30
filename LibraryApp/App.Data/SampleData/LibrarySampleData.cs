@@ -2,26 +2,65 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 using App.Data;
 using App.Models;
+using App.Models.Identity;
+using App.Models.RandomUserMe;
+using App.Services.RandomUserMe;
 
 namespace App.Data.SampleData
 {
     public class LibrarySampleData
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly LibraryDbContext _context;
+        private readonly IRandomUserMeService _randomUserMeService;
         
-        public LibrarySampleData(LibraryDbContext context)
+        public LibrarySampleData(UserManager<ApplicationUser> userManager, LibraryDbContext context, IRandomUserMeService randomUserMeService)
         {
+            _userManager = userManager;
             _context = context;
+            _randomUserMeService = randomUserMeService;
         }
         
         public void InitializeData() 
         {
+            CreateUsers();// 1. Create Users
             CreateLibraries(); 
             CreatePosts();   
             CreateFAQs();
             CreateCategories();
+        }
+        
+        private async void CreateUsers() 
+        {
+            if(_context.Users == null || _context.Users.Count() == 0)
+            {
+                var randomUsers = _randomUserMeService.GetRandomUsers(50);
+                foreach(var randomUserUser in randomUsers)
+                {
+                    var user = new ApplicationUser 
+                    { 
+                        UserName = randomUserUser.User.Username, 
+                        Email = randomUserUser.User.Email
+                    };
+                    var result = await _userManager.CreateAsync(user, "Slaam_1888");
+                    
+                    if(result.Succeeded)
+                    {
+                        var profile = new Profile
+                        {
+                            FirstName = randomUserUser.User.Name.FirstName,
+                            SurName = randomUserUser.User.Name.SurName,
+                            ApplicationUser = _context.Users.Where(m => m.UserName == randomUserUser.User.Username).FirstOrDefault()
+                        };
+                        
+                        _context.Profiles.Add(profile);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+            }
         }
         
         private void CreateLibraries() 
