@@ -24,7 +24,7 @@
 								<td>@user.UserName</td>
 								<td>@user.Email</td>
 								<td>@if(@user.Profile != null){<text>@user.Profile.FirstName</text><text> @user.Profile.SurName</text>}</td>
-								<td>@user.CreatedAt</td>
+								<td>@Convert.ToString(string.Format("{0:dd-MM-yyyy}", user.CreatedAt))</td>
 								<td>
 									<a href="@Url.Action("Edit", new { id = @user.Id })" title="Edit Mediatheek: @user.UserName"><span class="fa fa-edit"></span></a>
 									<a 	class="confirm-link"
