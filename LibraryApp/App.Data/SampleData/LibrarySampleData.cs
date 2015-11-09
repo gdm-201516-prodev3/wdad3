@@ -124,7 +124,7 @@ namespace App.Data.SampleData
                 if(await _context.SaveChangesAsync() == 0)
                     return false;
             }
-            return false;
+            return true;
         }
         
         private async Task<bool> CreatePosts() 

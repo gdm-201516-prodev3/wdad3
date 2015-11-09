@@ -8,7 +8,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
 using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.Data.Entity;
-using App.WWW.Models;
+using App.Models;
+using App.Models.Identity;
+using App.Data;
 using App.WWW.Services;
 using App.WWW.ViewModels.Account;
 
@@ -21,7 +23,7 @@ namespace App.WWW.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
-        private readonly ApplicationDbContext _applicationDbContext;
+        private readonly LibraryDbContext _applicationDbContext;
         private static bool _databaseChecked;
 
         public AccountController(
@@ -29,7 +31,7 @@ namespace App.WWW.Controllers
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ApplicationDbContext applicationDbContext)
+            LibraryDbContext applicationDbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -447,7 +449,7 @@ namespace App.WWW.Controllers
         // not yet supported in this release.
         // Please see this http://go.microsoft.com/fwlink/?LinkID=615859 for more information on how to do deploy the database
         // when publishing your application.
-        private static void EnsureDatabaseCreated(ApplicationDbContext context)
+        private static void EnsureDatabaseCreated(LibraryDbContext context)
         {
             if (!_databaseChecked)
             {

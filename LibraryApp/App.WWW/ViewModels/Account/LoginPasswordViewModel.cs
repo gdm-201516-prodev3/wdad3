@@ -8,8 +8,8 @@ namespace App.WWW.ViewModels.Account
 {
     public class LoginViewModel
     {
+        [Display(Name = "Email or UserName?")]
         [Required]
-        [EmailAddress]
         public string Email { get; set; }
 
         [Required]

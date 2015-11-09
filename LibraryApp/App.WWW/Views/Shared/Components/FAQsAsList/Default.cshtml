@@ -1,0 +1,33 @@
+@model IEnumerable<App.Models.FAQ>
+
+@if(Model != null && Model.Count() > 0)
+{
+	<div class="mdl-grid">
+		<h3 class="mdl-cell mdl-cell--12-col">Frequently Asked Questions (FAQ)</h3>
+		@foreach(var faq in Model)
+		{
+			<div class="dds-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col">
+				<div class="mdl-card__title">
+					<h2 class="mdl-card__title-text">@faq.Question</h2>
+				</div>
+				<div class="mdl-card__supporting-text">
+					@Html.Raw(@faq.Answer)
+				</div>
+				<div class="mdl-card__menu">
+					<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+					<i class="material-icons">share</i>
+					</button>
+				</div>
+			</div>
+		}
+	</div>
+}
+else
+{
+	<div class="mdl-grid">
+		<h3 class="mdl-cell mdl-cell--12-col">Frequently Asked Questions (FAQ)</h3>
+		<div class="mdl-cell mdl-cell--12-col">
+			Geen FAQ's beschikbaar!
+		</div>
+	</div>
+}

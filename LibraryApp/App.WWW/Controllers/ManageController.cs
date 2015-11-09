@@ -6,7 +6,9 @@ using System.Security.Claims;
 using Microsoft.AspNet.Authorization;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Mvc;
-using App.WWW.Models;
+using App.Models;
+using App.Models.Identity;
+using App.Data;
 using App.WWW.Services;
 using App.WWW.ViewModels.Manage;
 

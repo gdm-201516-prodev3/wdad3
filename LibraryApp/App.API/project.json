@@ -27,7 +27,8 @@
   },
 
   "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel"
+    "kestrel": "Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:9030",
+    "web": "Microsoft.AspNet.Server.WebListener --server.urls http://localhost:9030"
   },
 
   "frameworks": {
