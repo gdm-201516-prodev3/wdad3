@@ -1,0 +1,16 @@
+@model App.Models.Post
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="dds-container">
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--12-desktop">
+        @await Component.InvokeAsync("Post", Model.Id)
+    </div>
+    <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--12-desktop">
+        SIDEBAR
+    </div>
+  </div>
+</div>

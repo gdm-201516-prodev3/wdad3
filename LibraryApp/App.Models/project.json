@@ -8,9 +8,9 @@
   
   "dependencies": {
     "Newtonsoft.Json": "7.0.1",
-    "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-beta6-*",
+    "Microsoft.AspNet.Identity.EntityFramework": "3.0.0-beta8",
     "PagedList": "1.17.0",
-    "Microsoft.AspNet.Mvc": "6.0.0-beta7"
+    "Microsoft.AspNet.Mvc": "6.0.0-beta8"
   },
 
   "frameworks": {

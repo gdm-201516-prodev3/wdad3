@@ -16,8 +16,9 @@ namespace App.Data
         public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
         {
             // Setup configuration sources.
-            var builder = new ConfigurationBuilder(appEnv.ApplicationBasePath)
-                .AddJsonFile("../App.Web/config.json");
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(appEnv.ApplicationBasePath)
+                .AddJsonFile("../App.WWW/appsettings.json");
                 
             Configuration = builder.Build();
         }

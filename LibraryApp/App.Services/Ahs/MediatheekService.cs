@@ -142,7 +142,7 @@ namespace App.Services.Ahs
             
             foreach (var jsonLibraryItem in jsonSimpleSearch.res)
             {
-                Nullable<short> year = null;
+                Nullable<int> year = null;
                 string jsonYear = (string)jsonLibraryItem.r.ElementAt(4);
 
                 if (!string.IsNullOrEmpty(jsonYear))
@@ -313,9 +313,9 @@ namespace App.Services.Ahs
 
             do
             {    
-                d = Convert.ToUInt16(searchFieldsArray[h++]);
-                c = Convert.ToUInt16(searchFieldsArray[h++]);
-                b = Convert.ToUInt16(searchFieldsArray[h++]);
+                d = Convert.ToInt32(searchFieldsArray[h++]);
+                c = Convert.ToInt32(searchFieldsArray[h++]);
+                b = Convert.ToInt32(searchFieldsArray[h++]);
                 o = d << 16 | c << 8 | b;
                 n = o >> 18 & 63;
                 m = o >> 12 & 63;

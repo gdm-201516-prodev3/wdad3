@@ -8,17 +8,13 @@ using App.Data;
 namespace App.Data.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
+    [Migration("20151104143843_Initial")]
     partial class Initial
     {
-        public override string Id
-        {
-            get { return "20151030103046_Initial"; }
-        }
-
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .Annotation("ProductVersion", "7.0.0-beta7-15540");
+                .Annotation("ProductVersion", "7.0.0-beta8-15964");
 
             modelBuilder.Entity("App.Models.Category", b =>
                 {
@@ -36,7 +32,7 @@ namespace App.Data.Migrations
                         .Annotation("Relational:ColumnType", "nvarchar(1024)");
 
                     b.Property<string>("Name")
-                        .Required()
+                        .IsRequired()
                         .Annotation("Relational:ColumnType", "nvarchar(255)");
 
                     b.Property<short?>("ParentCategoryId");
@@ -46,7 +42,7 @@ namespace App.Data.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Key("Id");
+                    b.HasKey("Id");
 
                     b.Annotation("Relational:TableName", "Categories");
                 });
@@ -57,7 +53,7 @@ namespace App.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Body")
-                        .Required()
+                        .IsRequired()
                         .Annotation("Relational:ColumnType", "nvarchar(65536)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -79,7 +75,7 @@ namespace App.Data.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Key("Id");
+                    b.HasKey("Id");
 
                     b.Annotation("Relational:TableName", "Comments");
                 });
@@ -90,7 +86,7 @@ namespace App.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Answer")
-                        .Required()
+                        .IsRequired()
                         .Annotation("Relational:ColumnType", "nvarchar(4096)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -106,7 +102,7 @@ namespace App.Data.Migrations
                     b.Property<short?>("LibraryId");
 
                     b.Property<string>("Question")
-                        .Required()
+                        .IsRequired()
                         .Annotation("Relational:ColumnType", "nvarchar(1024)");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -114,7 +110,7 @@ namespace App.Data.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Key("Id");
+                    b.HasKey("Id");
 
                     b.Annotation("Relational:TableName", "Faqs");
                 });
@@ -124,7 +120,7 @@ namespace App.Data.Migrations
                     b.Property<string>("Id");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .ConcurrencyToken();
+                        .IsConcurrencyToken();
 
                     b.Property<DateTime>("CreatedAt");
 
@@ -140,7 +136,7 @@ namespace App.Data.Migrations
 
                     b.Property<DateTime?>("UpdatedAt");
 
-                    b.Key("Id");
+                    b.HasKey("Id");
 
                     b.Index("NormalizedName")
                         .Annotation("Relational:Name", "RoleNameIndex");
@@ -155,7 +151,7 @@ namespace App.Data.Migrations
                     b.Property<int>("AccessFailedCount");
 
                     b.Property<string>("ConcurrencyStamp")
-                        .ConcurrencyToken();
+                        .IsConcurrencyToken();
 
                     b.Property<DateTime>("CreatedAt");
 
@@ -193,7 +189,7 @@ namespace App.Data.Migrations
                     b.Property<string>("UserName")
                         .Annotation("MaxLength", 256);
 
-                    b.Key("Id");
+                    b.HasKey("Id");
 
                     b.Index("NormalizedEmail")
                         .Annotation("Relational:Name", "EmailIndex");
@@ -210,7 +206,7 @@ namespace App.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Code")
-                        .Required()
+                        .IsRequired()
                         .Annotation("Relational:ColumnType", "char(3)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -224,7 +220,7 @@ namespace App.Data.Migrations
                         .Annotation("Relational:ColumnType", "nvarchar(1024)");
 
                     b.Property<string>("Name")
-                        .Required()
+                        .IsRequired()
                         .Annotation("Relational:ColumnType", "nvarchar(128)");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -235,14 +231,15 @@ namespace App.Data.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Key("Id");
+                    b.HasKey("Id");
 
                     b.Annotation("Relational:TableName", "Libraries");
                 });
 
             modelBuilder.Entity("App.Models.LibraryItemAction", b =>
                 {
-                    b.Property<int>("LibraryItemId");
+                    b.Property<int>("LibraryItemId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Action");
 
@@ -254,7 +251,7 @@ namespace App.Data.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Key("LibraryItemId");
+                    b.HasKey("LibraryItemId");
                 });
 
             modelBuilder.Entity("App.Models.Post", b =>
@@ -263,7 +260,7 @@ namespace App.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Body")
-                        .Required()
+                        .IsRequired()
                         .Annotation("Relational:ColumnType", "nvarchar(65536)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -279,11 +276,11 @@ namespace App.Data.Migrations
                     b.Property<short?>("LibraryId");
 
                     b.Property<string>("Synopsis")
-                        .Required()
+                        .IsRequired()
                         .Annotation("Relational:ColumnType", "nvarchar(1024)");
 
                     b.Property<string>("Title")
-                        .Required()
+                        .IsRequired()
                         .Annotation("Relational:ColumnType", "nvarchar(128)");
 
                     b.Property<DateTime?>("UpdatedAt")
@@ -291,7 +288,7 @@ namespace App.Data.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Key("Id");
+                    b.HasKey("Id");
 
                     b.Annotation("Relational:TableName", "Posts");
                 });
@@ -302,7 +299,7 @@ namespace App.Data.Migrations
 
                     b.Property<short>("CategoryId");
 
-                    b.Key("PostId", "CategoryId");
+                    b.HasKey("PostId", "CategoryId");
 
                     b.Annotation("Relational:TableName", "PostCategories");
                 });
@@ -312,14 +309,20 @@ namespace App.Data.Migrations
                     b.Property<string>("UserId");
 
                     b.Property<string>("FirstName")
-                        .Required()
+                        .IsRequired()
                         .Annotation("Relational:ColumnType", "nvarchar(64)");
 
+                    b.Property<string>("PictureLarge");
+
+                    b.Property<string>("PictureMedium");
+
+                    b.Property<string>("PictureSmall");
+
                     b.Property<string>("SurName")
-                        .Required()
+                        .IsRequired()
                         .Annotation("Relational:ColumnType", "nvarchar(128)");
 
-                    b.Key("UserId");
+                    b.HasKey("UserId");
 
                     b.Annotation("Relational:TableName", "Profiles");
                 });
@@ -335,7 +338,7 @@ namespace App.Data.Migrations
 
                     b.Property<string>("RoleId");
 
-                    b.Key("Id");
+                    b.HasKey("Id");
 
                     b.Annotation("Relational:TableName", "AspNetRoleClaims");
                 });
@@ -351,7 +354,7 @@ namespace App.Data.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Key("Id");
+                    b.HasKey("Id");
 
                     b.Annotation("Relational:TableName", "AspNetUserClaims");
                 });
@@ -366,7 +369,7 @@ namespace App.Data.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Key("LoginProvider", "ProviderKey");
+                    b.HasKey("LoginProvider", "ProviderKey");
 
                     b.Annotation("Relational:TableName", "AspNetUserLogins");
                 });
@@ -377,120 +380,120 @@ namespace App.Data.Migrations
 
                     b.Property<string>("RoleId");
 
-                    b.Key("UserId", "RoleId");
+                    b.HasKey("UserId", "RoleId");
 
                     b.Annotation("Relational:TableName", "AspNetUserRoles");
                 });
 
             modelBuilder.Entity("App.Models.Category", b =>
                 {
-                    b.Reference("App.Models.Category")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Category")
+                        .WithMany()
                         .ForeignKey("ParentCategoryId");
 
-                    b.Reference("App.Models.Identity.ApplicationUser")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Identity.ApplicationUser")
+                        .WithMany()
                         .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("App.Models.Comment", b =>
                 {
-                    b.Reference("App.Models.Comment")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Comment")
+                        .WithMany()
                         .ForeignKey("ParentCommentId");
 
-                    b.Reference("App.Models.Post")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Post")
+                        .WithMany()
                         .ForeignKey("PostId");
 
-                    b.Reference("App.Models.Identity.ApplicationUser")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Identity.ApplicationUser")
+                        .WithMany()
                         .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("App.Models.FAQ", b =>
                 {
-                    b.Reference("App.Models.Library")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Library")
+                        .WithMany()
                         .ForeignKey("LibraryId");
 
-                    b.Reference("App.Models.Identity.ApplicationUser")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Identity.ApplicationUser")
+                        .WithMany()
                         .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("App.Models.Library", b =>
                 {
-                    b.Reference("App.Models.Identity.ApplicationUser")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Identity.ApplicationUser")
+                        .WithMany()
                         .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("App.Models.LibraryItemAction", b =>
                 {
-                    b.Reference("App.Models.Identity.ApplicationUser")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Identity.ApplicationUser")
+                        .WithMany()
                         .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("App.Models.Post", b =>
                 {
-                    b.Reference("App.Models.Library")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Library")
+                        .WithMany()
                         .ForeignKey("LibraryId");
 
-                    b.Reference("App.Models.Identity.ApplicationUser")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Identity.ApplicationUser")
+                        .WithMany()
                         .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("App.Models.PostCategory", b =>
                 {
-                    b.Reference("App.Models.Category")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Category")
+                        .WithMany()
                         .ForeignKey("CategoryId");
 
-                    b.Reference("App.Models.Post")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Post")
+                        .WithMany()
                         .ForeignKey("PostId");
                 });
 
             modelBuilder.Entity("App.Models.Profile", b =>
                 {
-                    b.Reference("App.Models.Identity.ApplicationUser")
-                        .InverseReference()
+                    b.HasOne("App.Models.Identity.ApplicationUser")
+                        .WithOne()
                         .ForeignKey("App.Models.Profile", "UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
                 {
-                    b.Reference("App.Models.Identity.ApplicationRole")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Identity.ApplicationRole")
+                        .WithMany()
                         .ForeignKey("RoleId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
                 {
-                    b.Reference("App.Models.Identity.ApplicationUser")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Identity.ApplicationUser")
+                        .WithMany()
                         .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
                 {
-                    b.Reference("App.Models.Identity.ApplicationUser")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Identity.ApplicationUser")
+                        .WithMany()
                         .ForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
                 {
-                    b.Reference("App.Models.Identity.ApplicationRole")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Identity.ApplicationRole")
+                        .WithMany()
                         .ForeignKey("RoleId");
 
-                    b.Reference("App.Models.Identity.ApplicationUser")
-                        .InverseCollection()
+                    b.HasOne("App.Models.Identity.ApplicationUser")
+                        .WithMany()
                         .ForeignKey("UserId");
                 });
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using Microsoft.Data.Entity;
 using App.Data;
 using App.Models;
 using App.Services;
@@ -20,7 +21,7 @@ namespace App.API.Controllers
             return _libraryContext.Libraries.AsEnumerable();          
         }
         
-        // GET api/libraries/5
+        // GET api/library/5
         [HttpGet("{libraryId:int}", Name = "GetLibraryById")]
         public IActionResult GetLibraryById(int libraryId)
         {
@@ -39,7 +40,7 @@ namespace App.API.Controllers
         {
             if (!ModelState.IsValid)
             {
-                Context.Response.StatusCode = 400;
+                HttpContext.Response.StatusCode = 400;
                 return new ObjectResult(new LibraryStatus { Id = StatusTypes.ModelInvalid, Description = "Library model is invalid" + ModelState.ToString() });
             }
             else
@@ -51,13 +52,13 @@ namespace App.API.Controllers
                 {
                     string url = Url.RouteUrl("GetLibraryById", new { libraryId = library.Id }, Request.Scheme, Request.Host.ToUriComponent());
 
-                    Context.Response.StatusCode = 201;
-                    Context.Response.Headers["Location"] = url;
+                    HttpContext.Response.StatusCode = 201;
+                    HttpContext.Response.Headers["Location"] = url;
                     return new ObjectResult(addedLibrary);
                 }
                 else
                 {
-                    Context.Response.StatusCode = 400;
+                    HttpContext.Response.StatusCode = 400;
                     return new ObjectResult(new LibraryStatus { Id = StatusTypes.AddedFailure, Description = "Failed to save library" });
                 }
             }
@@ -65,9 +66,29 @@ namespace App.API.Controllers
 
         // PUT api/library/5
         [HttpPut("{libraryId:int}", Name = "UpdateLibrary")]
-        public void UpdateLibrary(int libraryId, [FromBody]Library library)
+        public IActionResult UpdateLibrary(int libraryId, [FromBody]Library library)
         {
-
+            var originalLibrary = _libraryContext.Libraries.FirstOrDefault(c => c.Id == libraryId);
+            
+            if (originalLibrary == null)
+            {
+                return HttpNotFound();
+            }
+            
+            originalLibrary.Name = library.Name;
+            originalLibrary.Code = library.Code;
+            originalLibrary.Description = library.Description;
+            
+            _libraryContext.Entry(originalLibrary).State = EntityState.Modified;
+            
+            if (_libraryContext.SaveChanges() > 0)
+            {
+                return new HttpStatusCodeResult(204);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
         }
 
         // DELETE api/library/5
@@ -82,6 +103,8 @@ namespace App.API.Controllers
             }
                 
             _libraryContext.Libraries.Remove(library);
+            _libraryContext.Entry(library).State = EntityState.Deleted;
+            
             if (_libraryContext.SaveChanges() > 0)
             {
                 return new HttpStatusCodeResult(204);

@@ -1,0 +1,18 @@
+@model IEnumerable<App.Models.Identity.ApplicationRole>
+@{
+    ViewBag.Title = "Roles";
+    ViewBag.SubTitle = "Overzicht: lijst, edit en delete";
+    ViewBag.Description = "Overzicht: lijst, edit en delete";
+    Layout = "~/Areas/Backoffice/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-xs-12" id="roles-list">
+        @Html.Partial("_ListPartial", @Model)
+    </div>      
+</div>
+@section Scripts {
+    <script>
+        window.ConfirmService.registerClickHandlers();
+        window.ConfirmService.registerModalHandlers();
+    </script>
+}

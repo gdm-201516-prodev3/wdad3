@@ -1,0 +1,105 @@
+@model IEnumerable<App.Models.Identity.ApplicationUser>
+@Html.AntiForgeryToken()
+<div class="panel panel-default">
+	<div class="panel-body">
+		@if (Model != null && Model.Count() > 0)
+		{
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th></th>
+							<th>UserName</th>
+							<th>Email</th>
+							<th>Name</th>
+							<th>Created</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var user in Model)
+						{
+							<tr data-id="user-@user.Id">
+								<td>@if(@user.Profile != null){<img src="@user.Profile.PictureSmall" />}</td>
+								<td>@user.UserName</td>
+								<td>@user.Email</td>
+								<td>@if(@user.Profile != null){<text>@user.Profile.FirstName</text><text> @user.Profile.SurName</text>}</td>
+								<td>@user.CreatedAt</td>
+								<td>
+									<a href="@Url.Action("Edit", new { id = @user.Id })" title="Edit Mediatheek: @user.UserName"><span class="fa fa-edit"></span></a>
+									<a 	class="confirm-link"
+										data-id="@user.Id" 
+										data-name="@user.UserName"
+										data-cat = "user"
+										data-action="delete"  
+										data-update-target="#users-list" 
+										data-update-href="@Url.Action("Index", "User")"
+										href="@Url.Action("Delete", new { id = @user.Id })" 
+										title="Delete Mediatheek: @user.UserName"><span class="fa fa-trash"></span></a>
+									@if (@user.DeletedAt != null)
+                                    {
+                                        <a 	class="confirm-link"
+										data-id="@user.Id" 
+										data-name="@user.UserName"
+										data-cat = "user"
+										data-action="softundelete"  
+										data-update-target="#users-list" 
+										data-update-href="@Url.Action("Index", "User")"
+										href="@Url.Action("SoftUnDelete", new { id = @user.Id })" 
+										title="Soft UnDelete User: @user.UserName"><span class="fa fa-eye-slash"></span></a>
+                                    }
+                                    else
+                                    {
+                                        <a 	class="confirm-link"
+										data-id="@user.Id" 
+										data-name="@user.UserName"
+										data-cat = "user"
+										data-action="softdelete"  
+										data-update-target="#users-list" 
+										data-update-href="@Url.Action("Index", "User")"
+										href="@Url.Action("SoftDelete", new { id = @user.Id })" 
+										title="Soft Delete User: @user.UserName"><span class="fa fa-eye"></span></a>
+                                    }
+									@if (@user.LockoutEnabled)
+									{
+										@if (@user.LockoutEnd != null && @user.LockoutEnd > DateTimeOffset.MinValue)
+										{
+											<a 	class="confirm-link"
+											data-id="@user.Id" 
+											data-name="@user.UserName"
+											data-cat = "user"
+											data-action="unlock"  
+											data-update-target="#users-list" 
+											data-update-href="@Url.Action("Index", "User")"
+											href="@Url.Action("UnLock", new { id = @user.Id })" 
+											title="Unlock User: @user.UserName"><span class="fa fa-lock"></span></a>
+										}
+										else
+										{
+											<a 	class="confirm-link"
+											data-id="@user.Id" 
+											data-name="@user.UserName"
+											data-cat = "user"
+											data-action="lock"  
+											data-update-target="#users-list" 
+											data-update-href="@Url.Action("Index", "User")"
+											href="@Url.Action("Lock", new { id = @user.Id })" 
+											title="Lock User: @user.UserName"><span class="fa fa-unlock"></span></a>
+										}
+									}
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		}
+		else
+        {
+            <p>No user in the database!</p>
+        }
+    </div>
+    <div class="panel-footer">
+        @Html.ActionLink("Create a new user", "Create", new { }, new { @class = "btn btn-primary" })
+    </div>
+</div>

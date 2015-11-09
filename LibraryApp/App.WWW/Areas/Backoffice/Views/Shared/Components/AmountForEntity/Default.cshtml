@@ -1,0 +1,33 @@
+@model App.Models.ViewModels.AmountForEntityViewModel
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="viz-amount @Model.EntityType">
+            @Model.Amount <small>@if(@Model.Amount != 1){@Model.PluralizeName}else{@Model.Name}</small>
+            @switch (Model.EntityType)
+            {
+                case "Library":
+                    <span class="fa fa-university"></span>
+                    break;
+                case "Post":
+                    <span class="fa fa-newspaper-o"></span>
+                    break;
+                case "Category":
+                    <span class="fa fa-book"></span>
+                    break;
+                case "Tag":
+                    <span class="fa fa-tags"></span>
+                    break;
+                case "FAQ":
+                    <span class="fa fa-question"></span>
+                    break;
+                case "User":
+                    <span class="fa fa-users"></span>
+                    break;
+                default:
+                    <span class="fa fa-question"></span>
+                    break;
+            }
+        </div>
+    </div>
+</div>

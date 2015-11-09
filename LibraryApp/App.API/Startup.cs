@@ -4,12 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Http;
-using Microsoft.AspNet.Routing;
-using Microsoft.Framework.DependencyInjection;
+using Microsoft.AspNet.Mvc;
+using Microsoft.AspNet.Mvc.Formatters;
 using Microsoft.Framework.Configuration;
+using Microsoft.Framework.DependencyInjection;
+using Microsoft.Framework.Logging;
+using Microsoft.Framework.OptionsModel;
 using Microsoft.Dnx.Runtime;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Data.Entity;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using AspnetWebApi2Helpers.Serialization;
+using AspnetWebApi2Helpers.Serialization.Protobuf;
 using App.Data;
 using App.Models;
 using App.Services;
@@ -23,9 +30,10 @@ namespace App.API
         {
             // Setup configuration sources.
 
-            var builder = new ConfigurationBuilder(appEnv.ApplicationBasePath)
-                .AddJsonFile("config.json")
-                .AddJsonFile($"config.{env.EnvironmentName}.json", optional: true);
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(appEnv.ApplicationBasePath)
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
             if (env.IsDevelopment())
             {
@@ -34,7 +42,6 @@ namespace App.API
                 builder.AddUserSecrets();
             }
             builder.AddEnvironmentVariables();
-            
             Configuration = builder.Build();
         }
         
@@ -58,11 +65,35 @@ namespace App.API
                 .AddSqlite()
                 .AddDbContext<LibraryDbContext>(options =>
                     options.UseSqlite(Configuration["Data:DefaultConnection:ConnectionString"]));
+            
+            // Formatter JSON        
+            services.Configure<MvcOptions>(options =>
+            {  
+                options.OutputFormatters.Clear();
+                
+                var jsonOutputFormatter = new JsonOutputFormatter();
+                jsonOutputFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                jsonOutputFormatter.SerializerSettings.DefaultValueHandling = Newtonsoft.Json.DefaultValueHandling.Ignore;
+                jsonOutputFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.All;
+    
+                options.OutputFormatters.Insert(0, jsonOutputFormatter);
+                
+            });
         }
 
         // Configure is called after ConfigureServices is called.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            loggerFactory.MinimumLevel = LogLevel.Information;
+            loggerFactory.AddConsole();
+            loggerFactory.AddDebug();
+
+            // Add the platform handler to the request pipeline.
+            app.UseIISPlatformHandler();
+
+            // Add the following route for porting Web API 2 controllers.
+            // routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
+            
             // Configure the HTTP request pipeline.
             app.UseStaticFiles();
             
@@ -72,8 +103,7 @@ namespace App.API
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-                // Add the following route for porting Web API 2 controllers.
-                //routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
+
             });
         }
     }

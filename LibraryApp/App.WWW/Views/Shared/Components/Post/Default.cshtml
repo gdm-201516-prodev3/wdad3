@@ -1,0 +1,26 @@
+@model App.Models.Post
+
+@if(Model != null)
+{
+	<div class="dds-card-wide mdl-card mdl-shadow--2dp">
+		<div class="mdl-card__title">
+			<h2 class="mdl-card__title-text">@Model.Title</h2>
+		</div>
+		<div class="mdl-color-text--grey-700 mdl-card__supporting-text">
+			<blockquote>@Model.Synopsis</blockquote>
+			@Html.Raw(@Model.Body)
+		</div>
+		<div class="mdl-card__actions mdl-card--border">
+			
+		</div>
+		<div class="mdl-card__menu">
+			<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+			<i class="material-icons">share</i>
+			</button>
+		</div>
+	</div>
+}
+else
+{
+	<div>Geen post beschikbaar!</div>
+}

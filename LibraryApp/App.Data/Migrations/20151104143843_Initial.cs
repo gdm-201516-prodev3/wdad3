@@ -12,14 +12,14 @@ namespace App.Data.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(isNullable: false),
-                    ConcurrencyStamp = table.Column<string>(isNullable: true),
-                    CreatedAt = table.Column<DateTime>(isNullable: false),
-                    DeletedAt = table.Column<DateTime>(isNullable: true),
-                    Description = table.Column<string>(isNullable: true),
-                    Name = table.Column<string>(isNullable: true),
-                    NormalizedName = table.Column<string>(isNullable: true),
-                    UpdatedAt = table.Column<DateTime>(isNullable: true)
+                    Id = table.Column<string>(nullable: false),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    DeletedAt = table.Column<DateTime>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    NormalizedName = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -29,25 +29,25 @@ namespace App.Data.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(isNullable: false),
-                    AccessFailedCount = table.Column<int>(isNullable: false),
-                    ConcurrencyStamp = table.Column<string>(isNullable: true),
-                    CreatedAt = table.Column<DateTime>(isNullable: false),
-                    DeletedAt = table.Column<DateTime>(isNullable: true),
-                    Description = table.Column<string>(isNullable: true),
-                    Email = table.Column<string>(isNullable: true),
-                    EmailConfirmed = table.Column<bool>(isNullable: false),
-                    LockoutEnabled = table.Column<bool>(isNullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(isNullable: true),
-                    NormalizedEmail = table.Column<string>(isNullable: true),
-                    NormalizedUserName = table.Column<string>(isNullable: true),
-                    PasswordHash = table.Column<string>(isNullable: true),
-                    PhoneNumber = table.Column<string>(isNullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(isNullable: false),
-                    SecurityStamp = table.Column<string>(isNullable: true),
-                    TwoFactorEnabled = table.Column<bool>(isNullable: false),
-                    UpdatedAt = table.Column<DateTime>(isNullable: true),
-                    UserName = table.Column<string>(isNullable: true)
+                    Id = table.Column<string>(nullable: false),
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    ConcurrencyStamp = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    DeletedAt = table.Column<DateTime>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    EmailConfirmed = table.Column<bool>(nullable: false),
+                    LockoutEnabled = table.Column<bool>(nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
+                    NormalizedEmail = table.Column<string>(nullable: true),
+                    NormalizedUserName = table.Column<string>(nullable: true),
+                    PasswordHash = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(nullable: false),
+                    SecurityStamp = table.Column<string>(nullable: true),
+                    TwoFactorEnabled = table.Column<bool>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    UserName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -57,11 +57,11 @@ namespace App.Data.Migrations
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(isNullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ClaimType = table.Column<string>(isNullable: true),
-                    ClaimValue = table.Column<string>(isNullable: true),
-                    RoleId = table.Column<string>(isNullable: true)
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true),
+                    RoleId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -76,15 +76,15 @@ namespace App.Data.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<short>(isNullable: false)
+                    Id = table.Column<short>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", isNullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
-                    Description = table.Column<string>(type: "nvarchar(1024)", isNullable: true),
-                    Name = table.Column<string>(type: "nvarchar(255)", isNullable: false),
-                    ParentCategoryId = table.Column<short>(isNullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
-                    UserId = table.Column<string>(isNullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(1024)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(255)", nullable: false),
+                    ParentCategoryId = table.Column<short>(nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -104,16 +104,16 @@ namespace App.Data.Migrations
                 name: "Libraries",
                 columns: table => new
                 {
-                    Id = table.Column<short>(isNullable: false)
+                    Id = table.Column<short>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Code = table.Column<string>(type: "char(3)", isNullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", isNullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
-                    Description = table.Column<string>(type: "nvarchar(1024)", isNullable: true),
-                    Name = table.Column<string>(type: "nvarchar(128)", isNullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
-                    Url = table.Column<string>(type: "nvarchar(512)", isNullable: true),
-                    UserId = table.Column<string>(isNullable: true)
+                    Code = table.Column<string>(type: "char(3)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(1024)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(128)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Url = table.Column<string>(type: "nvarchar(512)", nullable: true),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -128,12 +128,13 @@ namespace App.Data.Migrations
                 name: "LibraryItemAction",
                 columns: table => new
                 {
-                    LibraryItemId = table.Column<int>(isNullable: false),
-                    Action = table.Column<int>(isNullable: false),
-                    CreatedAt = table.Column<DateTime>(isNullable: false),
-                    Rating = table.Column<short>(isNullable: true),
-                    UserAgent = table.Column<string>(isNullable: true),
-                    UserId = table.Column<string>(isNullable: true)
+                    LibraryItemId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Action = table.Column<int>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    Rating = table.Column<short>(nullable: true),
+                    UserAgent = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -148,9 +149,12 @@ namespace App.Data.Migrations
                 name: "Profiles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(isNullable: false),
-                    FirstName = table.Column<string>(type: "nvarchar(64)", isNullable: false),
-                    SurName = table.Column<string>(type: "nvarchar(128)", isNullable: false)
+                    UserId = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(64)", nullable: false),
+                    PictureLarge = table.Column<string>(nullable: true),
+                    PictureMedium = table.Column<string>(nullable: true),
+                    PictureSmall = table.Column<string>(nullable: true),
+                    SurName = table.Column<string>(type: "nvarchar(128)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -165,11 +169,11 @@ namespace App.Data.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(isNullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    ClaimType = table.Column<string>(isNullable: true),
-                    ClaimValue = table.Column<string>(isNullable: true),
-                    UserId = table.Column<string>(isNullable: true)
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -184,10 +188,10 @@ namespace App.Data.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(isNullable: false),
-                    ProviderKey = table.Column<string>(isNullable: false),
-                    ProviderDisplayName = table.Column<string>(isNullable: true),
-                    UserId = table.Column<string>(isNullable: true)
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
+                    ProviderDisplayName = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -202,8 +206,8 @@ namespace App.Data.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(isNullable: false),
-                    RoleId = table.Column<string>(isNullable: false)
+                    UserId = table.Column<string>(nullable: false),
+                    RoleId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -223,16 +227,16 @@ namespace App.Data.Migrations
                 name: "Faqs",
                 columns: table => new
                 {
-                    Id = table.Column<short>(isNullable: false)
+                    Id = table.Column<short>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Answer = table.Column<string>(type: "nvarchar(4096)", isNullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", isNullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
-                    Description = table.Column<string>(type: "nvarchar(1024)", isNullable: true),
-                    LibraryId = table.Column<short>(isNullable: true),
-                    Question = table.Column<string>(type: "nvarchar(1024)", isNullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
-                    UserId = table.Column<string>(isNullable: true)
+                    Answer = table.Column<string>(type: "nvarchar(4096)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(1024)", nullable: true),
+                    LibraryId = table.Column<short>(nullable: true),
+                    Question = table.Column<string>(type: "nvarchar(1024)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -252,17 +256,17 @@ namespace App.Data.Migrations
                 name: "Posts",
                 columns: table => new
                 {
-                    Id = table.Column<int>(isNullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Body = table.Column<string>(type: "nvarchar(65536)", isNullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", isNullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
-                    Description = table.Column<string>(type: "nvarchar(1024)", isNullable: true),
-                    LibraryId = table.Column<short>(isNullable: true),
-                    Synopsis = table.Column<string>(type: "nvarchar(1024)", isNullable: false),
-                    Title = table.Column<string>(type: "nvarchar(128)", isNullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
-                    UserId = table.Column<string>(isNullable: true)
+                    Body = table.Column<string>(type: "nvarchar(65536)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(1024)", nullable: true),
+                    LibraryId = table.Column<short>(nullable: true),
+                    Synopsis = table.Column<string>(type: "nvarchar(1024)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(128)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -282,16 +286,16 @@ namespace App.Data.Migrations
                 name: "Comments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(isNullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Body = table.Column<string>(type: "nvarchar(65536)", isNullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime", isNullable: false),
-                    DeletedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
-                    Description = table.Column<string>(type: "nvarchar(1024)", isNullable: true),
-                    ParentCommentId = table.Column<int>(isNullable: true),
-                    PostId = table.Column<int>(isNullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime", isNullable: true),
-                    UserId = table.Column<string>(isNullable: true)
+                    Body = table.Column<string>(type: "nvarchar(65536)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(1024)", nullable: true),
+                    ParentCommentId = table.Column<int>(nullable: true),
+                    PostId = table.Column<int>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime", nullable: true),
+                    UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -316,8 +320,8 @@ namespace App.Data.Migrations
                 name: "PostCategories",
                 columns: table => new
                 {
-                    PostId = table.Column<int>(isNullable: false),
-                    CategoryId = table.Column<short>(isNullable: false)
+                    PostId = table.Column<int>(nullable: false),
+                    CategoryId = table.Column<short>(nullable: false)
                 },
                 constraints: table =>
                 {

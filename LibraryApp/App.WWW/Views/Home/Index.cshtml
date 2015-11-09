@@ -1,0 +1,11 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="dds-container">
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col">
+        @await Component.InvokeAsync("LibraryItemsArrivalsAsList")
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+@model App.Models.Identity.ViewModels.RoleViewModel
+@{
+    ViewBag.Title = "Role";
+    ViewBag.SubTitle = "Nieuwe";
+    ViewBag.Description = "Aanmaak van een nieuwe Role";
+    Layout = "~/Areas/Backoffice/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Aanmaak van een nieuwe Role
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <fieldset>
+                        <legend class="hidden">Aanmaak van een nieuwe Role</legend>
+                        @Html.ValidationSummary("", new {@class="alert-danger"})
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Name)
+                            @Html.TextBoxFor(m => m.Name, new { @class= "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Description)
+                            @Html.TextBoxFor(m => m.Description, new { @class= "form-control" })
+                        </div>
+                        @Html.ActionLink("Terug naar het overzicht", "Index", new { }, new { @class= "btn btn-default" })
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </fieldset>
+                }
+            </div>
+        </div>
+    </div>      
+</div>

@@ -1,0 +1,21 @@
+﻿@using App.Models
+@{
+    if(TempData.ContainsKey("SRVALERT"))
+    {
+        var alerts = (List<Alert>)TempData["SRVALERT"];
+        
+        if (alerts.Any())
+        {
+            <script>
+                (function ($) {
+                    foreach (var alert in alerts)
+                    {
+                        <text>
+                            
+                        </text>
+                    }
+                })(jQuery);
+            </script>
+        }
+    }
+}

@@ -28,8 +28,8 @@ namespace App.Models.Ahs
     {
         public string LibraryCode { get; set; }
         public string SearchField { get; set; }
-        public UInt16 ItemsPerPage { get; set; }
-        public UInt16 Offset { get; set; }
+        public int ItemsPerPage { get; set; }
+        public int Offset { get; set; }
         public MediatheekSortOrder SortOrder { get; set; } 
     }
 
@@ -37,10 +37,10 @@ namespace App.Models.Ahs
     {
         public string LibraryCode { get; set; }
         public MediatheekAdvancedSearchBool SearchBool { get; set; }
-        public UInt16 Material = 0;
+        public int Material = 0;
         public string YearReach { get; set; }
-        public UInt16 ItemsPerPage { get; set; }
-        public UInt16 Offset { get; set; }
+        public int ItemsPerPage { get; set; }
+        public int Offset { get; set; }
         public MediatheekSortOrder SortOrder { get; set; }
         public ICollection<MediatheekAdvancedSearchArray> SearchArrays { get; set; }
     }
@@ -90,9 +90,9 @@ namespace App.Models.Ahs
     public class MediatheekArrivalsSearch
     {
         public string LibraryCode { get; set; }
-        public Nullable<UInt16> DaysAge { get; set; }
-        public UInt16 ItemsPerPage { get; set; }
-        public UInt16 Offset { get; set; }
+        public Nullable<int> DaysAge { get; set; }
+        public int ItemsPerPage { get; set; }
+        public int Offset { get; set; }
         public MediatheekSortOrder SortOrder { get; set; }
     }
     

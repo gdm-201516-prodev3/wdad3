@@ -1,0 +1,26 @@
+@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.SubTitle = "Overview and statistics";
+    ViewBag.Description = "Dashboard overview and statistics";
+    Layout = "~/Areas/Backoffice/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        @await Component.InvokeAsync("AmountForEntity", "Library")
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        @await Component.InvokeAsync("AmountForEntity", "Post")
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        @await Component.InvokeAsync("AmountForEntity", "Category")
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        @await Component.InvokeAsync("AmountForEntity", "FAQ")
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        @await Component.InvokeAsync("AmountForEntity", "User")
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+        @await Component.InvokeAsync("AmountForEntity", "Role")
+    </div>
+</div>

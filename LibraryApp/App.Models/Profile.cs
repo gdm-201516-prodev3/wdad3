@@ -14,8 +14,8 @@ namespace App.Models
         public string UserId { get; set; } 
         public string FirstName { get; set; }
 		public string SurName { get; set; }
-        
-        /* Virtual or Navigation Properties */
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        public string PictureLarge { get; set; }
+        public string PictureMedium { get; set; }
+        public string PictureSmall { get; set; }
     }
 }

@@ -1,0 +1,23 @@
+@using System.Security.Claims
+
+<button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
+    <i class="material-icons">more_vert</i>
+</button>
+@if (User.Identity.IsAuthenticated)
+{
+    <form asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm">
+        <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+            <li class="mdl-menu__item">
+                <a asp-controller="Manage" asp-action="Index" title="Manage">@User.GetUserName()</a>
+            </li>
+            <li class="mdl-menu__item"><a href="javascript:document.getElementById('logoutForm').submit()">Uitloggen</a></li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+        <li class="mdl-menu__item"><a asp-controller="Account" asp-action="Register">Registreren</a></li>
+        <li class="mdl-menu__item"><a asp-controller="Account" asp-action="Login">Inloggen</a></li>
+    </ul>
+}

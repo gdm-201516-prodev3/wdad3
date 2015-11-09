@@ -21,5 +21,7 @@ namespace App.Models.RandomUserMe
 		public string Username { get; set; }
         [JsonProperty("email")]
 		public string Email { get; set; } 
+        [JsonProperty("picture")]
+        public RandomUserPicture Picture { get; set; }
     }
 }

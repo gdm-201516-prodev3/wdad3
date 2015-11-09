@@ -24,20 +24,20 @@ namespace App.Data.SampleData
             _randomUserMeService = randomUserMeService;
         }
         
-        public void InitializeData() 
+        public async void InitializeData() 
         {
-            CreateUsers();// 1. Create Users
-            CreateLibraries(); 
-            CreatePosts();   
+            await CreateUsers();// 1. Create Users
+            await CreateLibraries();// 2. Create Users 
+            await CreatePosts();// 3. Create Posts   
             CreateFAQs();
             CreateCategories();
         }
         
-        private async void CreateUsers() 
+        private async Task<bool> CreateUsers() 
         {
             if(_context.Users == null || _context.Users.Count() == 0)
             {
-                var randomUsers = _randomUserMeService.GetRandomUsers(50);
+                var randomUsers = _randomUserMeService.GetRandomUsers(100);
                 foreach(var randomUserUser in randomUsers)
                 {
                     var user = new ApplicationUser 
@@ -47,23 +47,29 @@ namespace App.Data.SampleData
                     };
                     var result = await _userManager.CreateAsync(user, "Slaam_1888");
                     
-                    if(result.Succeeded)
+                    if(!result.Succeeded)
+                        return false;
+                    
+                    var profile = new Profile
                     {
-                        var profile = new Profile
-                        {
-                            FirstName = randomUserUser.User.Name.FirstName,
-                            SurName = randomUserUser.User.Name.SurName,
-                            ApplicationUser = _context.Users.Where(m => m.UserName == randomUserUser.User.Username).FirstOrDefault()
-                        };
-                        
-                        _context.Profiles.Add(profile);
-                        await _context.SaveChangesAsync();
-                    }
+                        FirstName = randomUserUser.User.Name.FirstName,
+                        SurName = randomUserUser.User.Name.SurName,
+                        PictureLarge = randomUserUser.User.Picture.Large,
+                        PictureMedium = randomUserUser.User.Picture.Medium,
+                        PictureSmall = randomUserUser.User.Picture.Small,
+                        UserId = _context.Users.Where(m => m.UserName == randomUserUser.User.Username).FirstOrDefault().Id
+                    };
+                    
+                    _context.Profiles.Add(profile);
+                    var resultProfile = await _context.SaveChangesAsync();
+                    if(resultProfile == 0)
+                        return false;
                 }
             }
+            return true;
         }
         
-        private void CreateLibraries() 
+        private async Task<bool> CreateLibraries() 
         {
             if(_context.Libraries == null || _context.Libraries.Count() == 0)
             {
@@ -79,7 +85,7 @@ namespace App.Data.SampleData
                 {
                     Name = "Mediatheek Kantienberg",
                     Code = "KAN",
-                    Description = "Mediatheek Kantienberg",
+                    Description = "Domein: Gezondheidszorg - Handelswetenschappen en bedrijfskunde",
                     Url = "http://arteveldehogeschool.be/studeren/mediatheken/mediatheek-kantienberg"
                 });
                 
@@ -87,7 +93,7 @@ namespace App.Data.SampleData
                 {
                     Name = "Mediatheek Kattenberg",
                     Code = "KAT",
-                    Description = "Mediatheek Kattenberg",
+                    Description = "Domein: Onderwijs",
                     Url = "http://arteveldehogeschool.be/studeren/mediatheken/mediatheek-kattenberg-en-mediatheekpunt-bps"
                 });
                 
@@ -95,7 +101,7 @@ namespace App.Data.SampleData
                 {
                     Name = "Mediatheek Mariakerke",
                     Code = "MAR",
-                    Description = "Mediatheek Mariakerke",
+                    Description = "Domein: Grafische en digitale media",
                     Url = "http://arteveldehogeschool.be/studeren/mediatheken/mediatheek-mariakerke"
                 });
                 
@@ -103,7 +109,7 @@ namespace App.Data.SampleData
                 {
                     Name = "Mediatheek Sint-Amandsberg",
                     Code = "SAB",
-                    Description = "Mediatheek Sint-Amandsberg",
+                    Description = "Domein: Opvoeding en onderwijs van het jonge kind",
                     Url = "http://arteveldehogeschool.be/studeren/mediatheken/mediatheek-sint-amandsberg"
                 });
                 
@@ -111,35 +117,157 @@ namespace App.Data.SampleData
                 {
                     Name = "Mediatheek Sint-Annaplein",
                     Code = "SAT",
-                    Description = "Mediatheek Sint-Annaplein",
+                    Description = "Domein: Sociaal werk",
                     Url = "http://arteveldehogeschool.be/studeren/mediatheken/mediatheek-sint-annaplein"
                 });
                 
-                _context.SaveChanges();
+                if(await _context.SaveChangesAsync() == 0)
+                    return false;
             }
+            return false;
         }
         
-        private void CreatePosts() 
+        private async Task<bool> CreatePosts() 
         {
             if(_context.Posts == null || _context.Posts.Count() == 0)
             {
+                var libraries = _context.Libraries.AsEnumerable();
+                var random = new Random();
+                
                 _context.Posts.Add(new Post()
                 {
-                    Title = "Herbekijk het openingscollege Björn Soenens",
-                    Synopsis = "ART",
-                    Description = "Op vrijdag 18 september gaf Björn Soenens, VRT-hoofdredacteur van Het Journaal, zijn kijk op constructieve journalistiek tijdens het allereerste openingscollege van de opleiding Bachelor in de journalistiek aan de Arteveldehogeschool.",
+                    Title = "Finse overheid publiceert 'onbreekbaar'-emoji van Nokia 3310",
+                    Synopsis = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Description = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
                     Body = @"
-                    <p>Op vrijdag 18 september gaf Björn Soenens, VRT-hoofdredacteur van Het Journaal, zijn kijk op constructieve journalistiek tijdens het allereerste openingscollege van de opleiding Bachelor in de journalistiek aan de Arteveldehogeschool.</p>
-                    <p>“Ook jullie generatie zoekt diepgang” en “Het is onze journalistieke taak om de ruis van het internet te halen” zijn maar enkele van de krachtige oneliners uit de lezing die hij gaf. (Her)bekijk hieronder zijn pleidooi en enkele foto’s van het openingscollege.</p>                    
-                    <p>Met dank aan de studentenvertegenwoordigers van Journalistiek. Meer info: https://www.facebook.com/groups/Stuverjournalistiek/
-                    Op vrijdag 18 september gaf Björn Soenens, VRT-hoofdredacteur van Het Journaal, zijn kijk op constructieve journalistiek tijdens het allereerste openingscollege van de opleiding Bachelor in de journalistiek aan de Arteveldehogeschool.</p>                    
-                    <p>“Ook jullie generatie zoekt diepgang” en “Het is onze journalistieke taak om de ruis van het internet te halen” zijn maar enkele van de krachtige oneliners uit de lezing die hij gaf. (Her)bekijk hieronder zijn pleidooi en enkele foto’s van het openingscollege.</p>                    
-                    <p>Met dank aan de studentenvertegenwoordigers van Journalistiek. Meer info: https://www.facebook.com/groups/Stuverjournalistiek/
-                    </p>"
+                    <p>Vanaf 1 december zal er een collectie van meer dan dertig Finse emoji's verschijnen. Iedere dag wordt een nieuw plaatje gepresenteerd in een kerstkalender met 24 hokjes. De kalender wordt zichtbaar op een website, maar er zullen ook apps verschijnen. We zijn vooral niet serieus geweest bij het maken van deze emoji's. Hopelijk zullen ze niet alleen onze vreemde, maar ook onze sterke eigenschappen openbaren, verklaart het ministerie.</p><p>De emoji's zijn een initiatief van het Finse ministerie van Buitenlandse Zaken om het land te promoten. De icoontjes moeten Finse emoties uitdrukken. Als voorproefje zijn de drie emoji's Sauna, Headbanger en Unbreakable te bekijken.</p>",
+                    Library = libraries.ElementAt(random.Next(0, libraries.Count() - 1))
                 });
                 
-                _context.SaveChanges();
+                _context.Posts.Add(new Post()
+                {
+                    Title = "Finse overheid publiceert 'onbreekbaar'-emoji van Nokia 3310",
+                    Synopsis = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Description = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Body = @"
+                    <p>Vanaf 1 december zal er een collectie van meer dan dertig Finse emoji's verschijnen. Iedere dag wordt een nieuw plaatje gepresenteerd in een kerstkalender met 24 hokjes. De kalender wordt zichtbaar op een website, maar er zullen ook apps verschijnen. We zijn vooral niet serieus geweest bij het maken van deze emoji's. Hopelijk zullen ze niet alleen onze vreemde, maar ook onze sterke eigenschappen openbaren, verklaart het ministerie.</p><p>De emoji's zijn een initiatief van het Finse ministerie van Buitenlandse Zaken om het land te promoten. De icoontjes moeten Finse emoties uitdrukken. Als voorproefje zijn de drie emoji's Sauna, Headbanger en Unbreakable te bekijken.</p>",
+                    Library = libraries.ElementAt(random.Next(0, libraries.Count() - 1))
+                });
+                
+                _context.Posts.Add(new Post()
+                {
+                    Title = "Finse overheid publiceert 'onbreekbaar'-emoji van Nokia 3310",
+                    Synopsis = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Description = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Body = @"
+                    <p>Vanaf 1 december zal er een collectie van meer dan dertig Finse emoji's verschijnen. Iedere dag wordt een nieuw plaatje gepresenteerd in een kerstkalender met 24 hokjes. De kalender wordt zichtbaar op een website, maar er zullen ook apps verschijnen. We zijn vooral niet serieus geweest bij het maken van deze emoji's. Hopelijk zullen ze niet alleen onze vreemde, maar ook onze sterke eigenschappen openbaren, verklaart het ministerie.</p><p>De emoji's zijn een initiatief van het Finse ministerie van Buitenlandse Zaken om het land te promoten. De icoontjes moeten Finse emoties uitdrukken. Als voorproefje zijn de drie emoji's Sauna, Headbanger en Unbreakable te bekijken.</p>",
+                    Library = libraries.ElementAt(random.Next(0, libraries.Count() - 1))
+                });
+                
+                _context.Posts.Add(new Post()
+                {
+                    Title = "Finse overheid publiceert 'onbreekbaar'-emoji van Nokia 3310",
+                    Synopsis = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Description = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Body = @"
+                    <p>Vanaf 1 december zal er een collectie van meer dan dertig Finse emoji's verschijnen. Iedere dag wordt een nieuw plaatje gepresenteerd in een kerstkalender met 24 hokjes. De kalender wordt zichtbaar op een website, maar er zullen ook apps verschijnen. We zijn vooral niet serieus geweest bij het maken van deze emoji's. Hopelijk zullen ze niet alleen onze vreemde, maar ook onze sterke eigenschappen openbaren, verklaart het ministerie.</p><p>De emoji's zijn een initiatief van het Finse ministerie van Buitenlandse Zaken om het land te promoten. De icoontjes moeten Finse emoties uitdrukken. Als voorproefje zijn de drie emoji's Sauna, Headbanger en Unbreakable te bekijken.</p>",
+                    Library = libraries.ElementAt(random.Next(0, libraries.Count() - 1))
+                });
+                
+                _context.Posts.Add(new Post()
+                {
+                    Title = "Finse overheid publiceert 'onbreekbaar'-emoji van Nokia 3310",
+                    Synopsis = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Description = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Body = @"
+                    <p>Vanaf 1 december zal er een collectie van meer dan dertig Finse emoji's verschijnen. Iedere dag wordt een nieuw plaatje gepresenteerd in een kerstkalender met 24 hokjes. De kalender wordt zichtbaar op een website, maar er zullen ook apps verschijnen. We zijn vooral niet serieus geweest bij het maken van deze emoji's. Hopelijk zullen ze niet alleen onze vreemde, maar ook onze sterke eigenschappen openbaren, verklaart het ministerie.</p><p>De emoji's zijn een initiatief van het Finse ministerie van Buitenlandse Zaken om het land te promoten. De icoontjes moeten Finse emoties uitdrukken. Als voorproefje zijn de drie emoji's Sauna, Headbanger en Unbreakable te bekijken.</p>",
+                    Library = libraries.ElementAt(random.Next(0, libraries.Count() - 1))
+                });
+                
+                _context.Posts.Add(new Post()
+                {
+                    Title = "Finse overheid publiceert 'onbreekbaar'-emoji van Nokia 3310",
+                    Synopsis = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Description = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Body = @"
+                    <p>Vanaf 1 december zal er een collectie van meer dan dertig Finse emoji's verschijnen. Iedere dag wordt een nieuw plaatje gepresenteerd in een kerstkalender met 24 hokjes. De kalender wordt zichtbaar op een website, maar er zullen ook apps verschijnen. We zijn vooral niet serieus geweest bij het maken van deze emoji's. Hopelijk zullen ze niet alleen onze vreemde, maar ook onze sterke eigenschappen openbaren, verklaart het ministerie.</p><p>De emoji's zijn een initiatief van het Finse ministerie van Buitenlandse Zaken om het land te promoten. De icoontjes moeten Finse emoties uitdrukken. Als voorproefje zijn de drie emoji's Sauna, Headbanger en Unbreakable te bekijken.</p>",
+                    Library = libraries.ElementAt(random.Next(0, libraries.Count() - 1))
+                });
+                
+                _context.Posts.Add(new Post()
+                {
+                    Title = "Finse overheid publiceert 'onbreekbaar'-emoji van Nokia 3310",
+                    Synopsis = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Description = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Body = @"
+                    <p>Vanaf 1 december zal er een collectie van meer dan dertig Finse emoji's verschijnen. Iedere dag wordt een nieuw plaatje gepresenteerd in een kerstkalender met 24 hokjes. De kalender wordt zichtbaar op een website, maar er zullen ook apps verschijnen. We zijn vooral niet serieus geweest bij het maken van deze emoji's. Hopelijk zullen ze niet alleen onze vreemde, maar ook onze sterke eigenschappen openbaren, verklaart het ministerie.</p><p>De emoji's zijn een initiatief van het Finse ministerie van Buitenlandse Zaken om het land te promoten. De icoontjes moeten Finse emoties uitdrukken. Als voorproefje zijn de drie emoji's Sauna, Headbanger en Unbreakable te bekijken.</p>",
+                    Library = libraries.ElementAt(random.Next(0, libraries.Count() - 1))
+                });
+                
+                _context.Posts.Add(new Post()
+                {
+                    Title = "Finse overheid publiceert 'onbreekbaar'-emoji van Nokia 3310",
+                    Synopsis = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Description = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Body = @"
+                    <p>Vanaf 1 december zal er een collectie van meer dan dertig Finse emoji's verschijnen. Iedere dag wordt een nieuw plaatje gepresenteerd in een kerstkalender met 24 hokjes. De kalender wordt zichtbaar op een website, maar er zullen ook apps verschijnen. We zijn vooral niet serieus geweest bij het maken van deze emoji's. Hopelijk zullen ze niet alleen onze vreemde, maar ook onze sterke eigenschappen openbaren, verklaart het ministerie.</p><p>De emoji's zijn een initiatief van het Finse ministerie van Buitenlandse Zaken om het land te promoten. De icoontjes moeten Finse emoties uitdrukken. Als voorproefje zijn de drie emoji's Sauna, Headbanger en Unbreakable te bekijken.</p>",
+                    Library = libraries.ElementAt(random.Next(0, libraries.Count() - 1))
+                });
+                
+                _context.Posts.Add(new Post()
+                {
+                    Title = "Finse overheid publiceert 'onbreekbaar'-emoji van Nokia 3310",
+                    Synopsis = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Description = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Body = @"
+                    <p>Vanaf 1 december zal er een collectie van meer dan dertig Finse emoji's verschijnen. Iedere dag wordt een nieuw plaatje gepresenteerd in een kerstkalender met 24 hokjes. De kalender wordt zichtbaar op een website, maar er zullen ook apps verschijnen. We zijn vooral niet serieus geweest bij het maken van deze emoji's. Hopelijk zullen ze niet alleen onze vreemde, maar ook onze sterke eigenschappen openbaren, verklaart het ministerie.</p><p>De emoji's zijn een initiatief van het Finse ministerie van Buitenlandse Zaken om het land te promoten. De icoontjes moeten Finse emoties uitdrukken. Als voorproefje zijn de drie emoji's Sauna, Headbanger en Unbreakable te bekijken.</p>",
+                    Library = libraries.ElementAt(random.Next(0, libraries.Count() - 1))
+                });
+                
+                _context.Posts.Add(new Post()
+                {
+                    Title = "Finse overheid publiceert 'onbreekbaar'-emoji van Nokia 3310",
+                    Synopsis = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Description = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Body = @"
+                    <p>Vanaf 1 december zal er een collectie van meer dan dertig Finse emoji's verschijnen. Iedere dag wordt een nieuw plaatje gepresenteerd in een kerstkalender met 24 hokjes. De kalender wordt zichtbaar op een website, maar er zullen ook apps verschijnen. We zijn vooral niet serieus geweest bij het maken van deze emoji's. Hopelijk zullen ze niet alleen onze vreemde, maar ook onze sterke eigenschappen openbaren, verklaart het ministerie.</p><p>De emoji's zijn een initiatief van het Finse ministerie van Buitenlandse Zaken om het land te promoten. De icoontjes moeten Finse emoties uitdrukken. Als voorproefje zijn de drie emoji's Sauna, Headbanger en Unbreakable te bekijken.</p>",
+                    Library = libraries.ElementAt(random.Next(0, libraries.Count() - 1))
+                });
+                
+                _context.Posts.Add(new Post()
+                {
+                    Title = "Finse overheid publiceert 'onbreekbaar'-emoji van Nokia 3310",
+                    Synopsis = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Description = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Body = @"
+                    <p>Vanaf 1 december zal er een collectie van meer dan dertig Finse emoji's verschijnen. Iedere dag wordt een nieuw plaatje gepresenteerd in een kerstkalender met 24 hokjes. De kalender wordt zichtbaar op een website, maar er zullen ook apps verschijnen. We zijn vooral niet serieus geweest bij het maken van deze emoji's. Hopelijk zullen ze niet alleen onze vreemde, maar ook onze sterke eigenschappen openbaren, verklaart het ministerie.</p><p>De emoji's zijn een initiatief van het Finse ministerie van Buitenlandse Zaken om het land te promoten. De icoontjes moeten Finse emoties uitdrukken. Als voorproefje zijn de drie emoji's Sauna, Headbanger en Unbreakable te bekijken.</p>",
+                    Library = libraries.ElementAt(random.Next(0, libraries.Count() - 1))
+                });
+                
+                _context.Posts.Add(new Post()
+                {
+                    Title = "Finse overheid publiceert 'onbreekbaar'-emoji van Nokia 3310",
+                    Synopsis = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Description = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Body = @"
+                    <p>Vanaf 1 december zal er een collectie van meer dan dertig Finse emoji's verschijnen. Iedere dag wordt een nieuw plaatje gepresenteerd in een kerstkalender met 24 hokjes. De kalender wordt zichtbaar op een website, maar er zullen ook apps verschijnen. We zijn vooral niet serieus geweest bij het maken van deze emoji's. Hopelijk zullen ze niet alleen onze vreemde, maar ook onze sterke eigenschappen openbaren, verklaart het ministerie.</p><p>De emoji's zijn een initiatief van het Finse ministerie van Buitenlandse Zaken om het land te promoten. De icoontjes moeten Finse emoties uitdrukken. Als voorproefje zijn de drie emoji's Sauna, Headbanger en Unbreakable te bekijken.</p>",
+                    Library = libraries.ElementAt(random.Next(0, libraries.Count() - 1))
+                });
+                
+                _context.Posts.Add(new Post()
+                {
+                    Title = "Finse overheid publiceert 'onbreekbaar'-emoji van Nokia 3310",
+                    Synopsis = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Description = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
+                    Body = @"
+                    <p>Vanaf 1 december zal er een collectie van meer dan dertig Finse emoji's verschijnen. Iedere dag wordt een nieuw plaatje gepresenteerd in een kerstkalender met 24 hokjes. De kalender wordt zichtbaar op een website, maar er zullen ook apps verschijnen. We zijn vooral niet serieus geweest bij het maken van deze emoji's. Hopelijk zullen ze niet alleen onze vreemde, maar ook onze sterke eigenschappen openbaren, verklaart het ministerie.</p><p>De emoji's zijn een initiatief van het Finse ministerie van Buitenlandse Zaken om het land te promoten. De icoontjes moeten Finse emoties uitdrukken. Als voorproefje zijn de drie emoji's Sauna, Headbanger en Unbreakable te bekijken.</p>",
+                    Library = libraries.ElementAt(random.Next(0, libraries.Count() - 1))
+                });
+                
+                if(await _context.SaveChangesAsync() == 0)
+                    return false;
             }
+            return true;
         }
         
         private void CreateFAQs() 

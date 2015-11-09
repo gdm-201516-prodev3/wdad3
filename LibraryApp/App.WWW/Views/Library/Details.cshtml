@@ -1,0 +1,21 @@
+@model App.Models.Library
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if(Model != null)
+{
+  int libraryId =	Model.Id;
+  
+  <div class="dds-container">
+    <div class="mdl-grid">
+      <div class="mdl-cell mdl-cell--8-col mdl-cell--8-col-tablet mdl-cell--12-desktop">
+          @await Component.InvokeAsync("PostsAsList", @libraryId)
+      </div>
+      <div class="mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-cell--12-desktop">
+          @await Component.InvokeAsync("Library", @libraryId)
+      </div>
+    </div>
+  </div>
+}

@@ -11,7 +11,7 @@ namespace App.Models
     public class LibraryItem
     {
         [Key]
-        public Int32 Id { get; set; }
+        public int Id { get; set; }
         [Required]
         [JsonProperty("Titel")]
         public string Title { get; set; }
@@ -24,7 +24,7 @@ namespace App.Models
         [JsonProperty("Uitgever")]
         public string Publisher { get; set; }
         [JsonProperty("Jaar", ItemConverterType = typeof(StringToIntJsonConverter))]
-        public Nullable<Int16> Year { get; set; }
+        public Nullable<int> Year { get; set; }
         [JsonProperty("Bladzijden")]
         public string Pages { get; set; }
         [JsonProperty("ISBN")]
