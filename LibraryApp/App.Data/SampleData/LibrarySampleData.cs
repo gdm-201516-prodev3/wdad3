@@ -37,7 +37,7 @@ namespace App.Data.SampleData
         {
             if(_context.Users == null || _context.Users.Count() == 0)
             {
-                var randomUsers = _randomUserMeService.GetRandomUsers(100);
+                var randomUsers = _randomUserMeService.GetRandomUsers(50);
                 foreach(var randomUserUser in randomUsers)
                 {
                     var user = new ApplicationUser 

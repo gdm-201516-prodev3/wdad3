@@ -8,7 +8,7 @@ using App.Data;
 namespace App.Data.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    [Migration("20151104143843_Initial")]
+    [Migration("20151109075610_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
