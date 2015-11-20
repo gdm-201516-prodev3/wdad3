@@ -59,6 +59,24 @@ Milestone 1
 |3PRODEV-13|Denys Nick|Maandag|
 |3PRODEV-14|Vanhove|Maandag|
 
+Milestone 2
+-----------
+|Groep|Studenten|Evaluatie|
+|-----|---------|---------|
+|3PRODEV-01|x - Overmacht|
+|3PRODEV-02|Vandewalle Michiel, Goossens Bert|Sitemap backoffice is niet juist! |
+|3PRODEV-03|Mergan Lien, Vervaet Ellen|Filtering van producten en diensten. Blog, FAQ's ontbreken in de App. Statistieken ontbreken in Backoffice.|
+|3PRODEV-04|Vanbrabant Wesley, Lierman Benjamin|Uitwerking frontoffice meer in detail. Groep dashboard moet een samenvatting bevatten van: blog, laatste producten/diensten, laatst toegevoegde leden, algemene info. Onderscheid maken tusen category, tags, ... . Zoekmachine uitbreiden. Design backoffice ontbreken.|
+|3PRODEV-06|Verplanken Valérie, Chanterie Neeltje|Alles in het Engels. Statistieken integreren in backoffice. Groepsblog toevoegen. Schenkingenis een leuk menu.|
+|3PRODEV-07|Goetynck Gertjan|x - Where are you?|
+|3PRODEV-08|Bultynck Laurens, Knockaert Jeroen|Zoekmachine beter uitwerken. Uitgebreid zoeken! FAQs en Posts toevoegen.|
+|3PRODEV-09|Sas Pieter-Jan, Tang Cheng|Backoffice visual designs. Aanduiden pagina title, sitemap nummer in visual designs.|
+|3PRODEV-10|Simoen Enzo, Beeckman Pieter-Jan|Nummering sitemap backoffice. Geen designs aanwezig. Rechtstreeks templates gemaak in HTML, CSS. Geen duidelijk overzicht van het geheel.|
+|3PRODEV-11|Meert Sander|x - Where are you?|
+|3PRODEV-12|Balcaen Charlotte|x - Where are you?|
+|3PRODEV-13|Denys Nick|Nummering sitemap, Logo moet nog ontwikkeld worden. Notifications, Backoffice designs ontbreken. Mockups ontbreken = advanced versie van low-fidelity wireframes. Vermelden van URI's.|
+|3PRODEV-14|Vanhove Maxim|Dashboard per groep: blog, FAQs, leden, ... . Broodkruimels.|
+
 Omschrijving
 ------------
 
