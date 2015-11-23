@@ -1,10 +1,11 @@
-using Microsoft.AspNet.Mvc.Rendering;
 using System.Text;
+using Microsoft.AspNet.Razor.TagHelpers;
 using Microsoft.AspNet.Razor.Runtime.TagHelpers;
+using Microsoft.AspNet.Mvc.TagHelpers;
 
 namespace App.WWW.Helpers
 {
-    [Microsoft.AspNet.Razor.Runtime.TagHelpers.HtmlTargetElementAttribute("ajaxpager", Attributes = "current-page, total-pages, search-form-target, update-link, update-target")]
+    [HtmlTargetElement("ajaxpager", Attributes = "current-page, total-pages, search-form-target, update-link, update-target")]
     public class AjaxPagerTagHelper : TagHelper
     {
         public int CurrentPage { get; set; }

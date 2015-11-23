@@ -21,7 +21,7 @@
       'toastr',
       'ddsApp.mainMenu',
       'ddsApp.catalog',
-      'ddsApp.blog',
+      'ddsApp.post',
       'ddsApp.faq',
       'ddsApp.main'
     ])

@@ -29,7 +29,7 @@ Groepsindeling
 |3PRODEV-02|Vandewalle Michiel, Goossens Bert|
 |3PRODEV-03|Mergan Lien, Vervaet Ellen|
 |3PRODEV-04|Vanbrabant Wesley, Lierman Benjamin|
-|3PRODEV-05|Beelprez Seppe, Mares Quinten|
+|3PRODEV-05|Mares Quinten|
 |3PRODEV-06|Verplanken Valérie, Chanterie Neeltje|
 |3PRODEV-07|Goetynck Gertjan|
 |3PRODEV-08|Bultynck Laurens, Knockaert Jeroen|
@@ -39,6 +39,7 @@ Groepsindeling
 |3PRODEV-12|Balcaen Charlotte|
 |3PRODEV-13|Denys Nick|
 |3PRODEV-14|Vanhove Maxim|
+|3PRODEV-15|Beelprez Seppe|
 
 Milestone 1
 -----------
@@ -67,6 +68,8 @@ Milestone 2
 |3PRODEV-02|Vandewalle Michiel, Goossens Bert|Sitemap backoffice is niet juist! |
 |3PRODEV-03|Mergan Lien, Vervaet Ellen|Filtering van producten en diensten. Blog, FAQ's ontbreken in de App. Statistieken ontbreken in Backoffice.|
 |3PRODEV-04|Vanbrabant Wesley, Lierman Benjamin|Uitwerking frontoffice meer in detail. Groep dashboard moet een samenvatting bevatten van: blog, laatste producten/diensten, laatst toegevoegde leden, algemene info. Onderscheid maken tusen category, tags, ... . Zoekmachine uitbreiden. Design backoffice ontbreken.|
+|3PRODEV-05|Eigen backoffice, product en dienst, tag en categorieën, lijntje duidelijker in design
+en meer filteren (zoeken en meer filteren) icoontje (3 bolletjes op elkaar)|
 |3PRODEV-06|Verplanken Valérie, Chanterie Neeltje|Alles in het Engels. Statistieken integreren in backoffice. Groepsblog toevoegen. Schenkingenis een leuk menu.|
 |3PRODEV-07|Goetynck Gertjan|x - Where are you?|
 |3PRODEV-08|Bultynck Laurens, Knockaert Jeroen|Zoekmachine beter uitwerken. Uitgebreid zoeken! FAQs en Posts toevoegen.|

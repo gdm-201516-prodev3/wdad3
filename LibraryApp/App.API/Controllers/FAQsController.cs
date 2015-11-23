@@ -12,7 +12,7 @@ using App.Services.Ahs;
 namespace App.API.Controllers
 {
     [Route("api/[controller]")]
-    public class FAQController : CommonController
+    public class FAQsController : CommonController
     {
         // GET: api/faq
         [HttpGet(Name = "GetFAQs")]

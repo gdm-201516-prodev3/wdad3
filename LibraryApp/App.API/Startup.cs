@@ -99,10 +99,10 @@ namespace App.API
             
             // Add MVC to the request pipeline.            
             app.UseMvc(routes =>
-            {
+            {       
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{libraryCode?}/{id?}");
 
             });
         }

@@ -13,7 +13,7 @@ namespace App.Data.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .Annotation("ProductVersion", "7.0.0-beta8-15964");
+                .HasAnnotation("ProductVersion", "7.0.0-rc1-16348");
 
             modelBuilder.Entity("App.Models.Category", b =>
                 {
@@ -22,28 +22,28 @@ namespace App.Data.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .Annotation("Relational:ColumnType", "datetime");
+                        .HasAnnotation("Relational:ColumnType", "datetime");
 
                     b.Property<DateTime?>("DeletedAt")
-                        .Annotation("Relational:ColumnType", "datetime");
+                        .HasAnnotation("Relational:ColumnType", "datetime");
 
                     b.Property<string>("Description")
-                        .Annotation("Relational:ColumnType", "nvarchar(1024)");
+                        .HasAnnotation("Relational:ColumnType", "nvarchar(1024)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .Annotation("Relational:ColumnType", "nvarchar(255)");
+                        .HasAnnotation("Relational:ColumnType", "nvarchar(255)");
 
                     b.Property<short?>("ParentCategoryId");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .Annotation("Relational:ColumnType", "datetime");
+                        .HasAnnotation("Relational:ColumnType", "datetime");
 
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
-                    b.Annotation("Relational:TableName", "Categories");
+                    b.HasAnnotation("Relational:TableName", "Categories");
                 });
 
             modelBuilder.Entity("App.Models.Comment", b =>
@@ -53,30 +53,30 @@ namespace App.Data.Migrations
 
                     b.Property<string>("Body")
                         .IsRequired()
-                        .Annotation("Relational:ColumnType", "nvarchar(65536)");
+                        .HasAnnotation("Relational:ColumnType", "nvarchar(65536)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .Annotation("Relational:ColumnType", "datetime");
+                        .HasAnnotation("Relational:ColumnType", "datetime");
 
                     b.Property<DateTime?>("DeletedAt")
-                        .Annotation("Relational:ColumnType", "datetime");
+                        .HasAnnotation("Relational:ColumnType", "datetime");
 
                     b.Property<string>("Description")
-                        .Annotation("Relational:ColumnType", "nvarchar(1024)");
+                        .HasAnnotation("Relational:ColumnType", "nvarchar(1024)");
 
                     b.Property<int?>("ParentCommentId");
 
                     b.Property<int>("PostId");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .Annotation("Relational:ColumnType", "datetime");
+                        .HasAnnotation("Relational:ColumnType", "datetime");
 
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
-                    b.Annotation("Relational:TableName", "Comments");
+                    b.HasAnnotation("Relational:TableName", "Comments");
                 });
 
             modelBuilder.Entity("App.Models.FAQ", b =>
@@ -86,32 +86,32 @@ namespace App.Data.Migrations
 
                     b.Property<string>("Answer")
                         .IsRequired()
-                        .Annotation("Relational:ColumnType", "nvarchar(4096)");
+                        .HasAnnotation("Relational:ColumnType", "nvarchar(4096)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .Annotation("Relational:ColumnType", "datetime");
+                        .HasAnnotation("Relational:ColumnType", "datetime");
 
                     b.Property<DateTime?>("DeletedAt")
-                        .Annotation("Relational:ColumnType", "datetime");
+                        .HasAnnotation("Relational:ColumnType", "datetime");
 
                     b.Property<string>("Description")
-                        .Annotation("Relational:ColumnType", "nvarchar(1024)");
+                        .HasAnnotation("Relational:ColumnType", "nvarchar(1024)");
 
                     b.Property<short?>("LibraryId");
 
                     b.Property<string>("Question")
                         .IsRequired()
-                        .Annotation("Relational:ColumnType", "nvarchar(1024)");
+                        .HasAnnotation("Relational:ColumnType", "nvarchar(1024)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .Annotation("Relational:ColumnType", "datetime");
+                        .HasAnnotation("Relational:ColumnType", "datetime");
 
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
-                    b.Annotation("Relational:TableName", "Faqs");
+                    b.HasAnnotation("Relational:TableName", "Faqs");
                 });
 
             modelBuilder.Entity("App.Models.Identity.ApplicationRole", b =>
@@ -128,19 +128,19 @@ namespace App.Data.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("Name")
-                        .Annotation("MaxLength", 256);
+                        .HasAnnotation("MaxLength", 256);
 
                     b.Property<string>("NormalizedName")
-                        .Annotation("MaxLength", 256);
+                        .HasAnnotation("MaxLength", 256);
 
                     b.Property<DateTime?>("UpdatedAt");
 
                     b.HasKey("Id");
 
-                    b.Index("NormalizedName")
-                        .Annotation("Relational:Name", "RoleNameIndex");
+                    b.HasIndex("NormalizedName")
+                        .HasAnnotation("Relational:Name", "RoleNameIndex");
 
-                    b.Annotation("Relational:TableName", "AspNetRoles");
+                    b.HasAnnotation("Relational:TableName", "AspNetRoles");
                 });
 
             modelBuilder.Entity("App.Models.Identity.ApplicationUser", b =>
@@ -159,7 +159,7 @@ namespace App.Data.Migrations
                     b.Property<string>("Description");
 
                     b.Property<string>("Email")
-                        .Annotation("MaxLength", 256);
+                        .HasAnnotation("MaxLength", 256);
 
                     b.Property<bool>("EmailConfirmed");
 
@@ -168,10 +168,10 @@ namespace App.Data.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
                     b.Property<string>("NormalizedEmail")
-                        .Annotation("MaxLength", 256);
+                        .HasAnnotation("MaxLength", 256);
 
                     b.Property<string>("NormalizedUserName")
-                        .Annotation("MaxLength", 256);
+                        .HasAnnotation("MaxLength", 256);
 
                     b.Property<string>("PasswordHash");
 
@@ -186,17 +186,17 @@ namespace App.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt");
 
                     b.Property<string>("UserName")
-                        .Annotation("MaxLength", 256);
+                        .HasAnnotation("MaxLength", 256);
 
                     b.HasKey("Id");
 
-                    b.Index("NormalizedEmail")
-                        .Annotation("Relational:Name", "EmailIndex");
+                    b.HasIndex("NormalizedEmail")
+                        .HasAnnotation("Relational:Name", "EmailIndex");
 
-                    b.Index("NormalizedUserName")
-                        .Annotation("Relational:Name", "UserNameIndex");
+                    b.HasIndex("NormalizedUserName")
+                        .HasAnnotation("Relational:Name", "UserNameIndex");
 
-                    b.Annotation("Relational:TableName", "AspNetUsers");
+                    b.HasAnnotation("Relational:TableName", "AspNetUsers");
                 });
 
             modelBuilder.Entity("App.Models.Library", b =>
@@ -206,33 +206,33 @@ namespace App.Data.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .Annotation("Relational:ColumnType", "char(3)");
+                        .HasAnnotation("Relational:ColumnType", "char(3)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .Annotation("Relational:ColumnType", "datetime");
+                        .HasAnnotation("Relational:ColumnType", "datetime");
 
                     b.Property<DateTime?>("DeletedAt")
-                        .Annotation("Relational:ColumnType", "datetime");
+                        .HasAnnotation("Relational:ColumnType", "datetime");
 
                     b.Property<string>("Description")
-                        .Annotation("Relational:ColumnType", "nvarchar(1024)");
+                        .HasAnnotation("Relational:ColumnType", "nvarchar(1024)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .Annotation("Relational:ColumnType", "nvarchar(128)");
+                        .HasAnnotation("Relational:ColumnType", "nvarchar(128)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .Annotation("Relational:ColumnType", "datetime");
+                        .HasAnnotation("Relational:ColumnType", "datetime");
 
                     b.Property<string>("Url")
-                        .Annotation("Relational:ColumnType", "nvarchar(512)");
+                        .HasAnnotation("Relational:ColumnType", "nvarchar(512)");
 
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
-                    b.Annotation("Relational:TableName", "Libraries");
+                    b.HasAnnotation("Relational:TableName", "Libraries");
                 });
 
             modelBuilder.Entity("App.Models.LibraryItemAction", b =>
@@ -260,36 +260,36 @@ namespace App.Data.Migrations
 
                     b.Property<string>("Body")
                         .IsRequired()
-                        .Annotation("Relational:ColumnType", "nvarchar(65536)");
+                        .HasAnnotation("Relational:ColumnType", "nvarchar(65536)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .Annotation("Relational:ColumnType", "datetime");
+                        .HasAnnotation("Relational:ColumnType", "datetime");
 
                     b.Property<DateTime?>("DeletedAt")
-                        .Annotation("Relational:ColumnType", "datetime");
+                        .HasAnnotation("Relational:ColumnType", "datetime");
 
                     b.Property<string>("Description")
-                        .Annotation("Relational:ColumnType", "nvarchar(1024)");
+                        .HasAnnotation("Relational:ColumnType", "nvarchar(1024)");
 
                     b.Property<short?>("LibraryId");
 
                     b.Property<string>("Synopsis")
                         .IsRequired()
-                        .Annotation("Relational:ColumnType", "nvarchar(1024)");
+                        .HasAnnotation("Relational:ColumnType", "nvarchar(1024)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .Annotation("Relational:ColumnType", "nvarchar(128)");
+                        .HasAnnotation("Relational:ColumnType", "nvarchar(128)");
 
                     b.Property<DateTime?>("UpdatedAt")
-                        .Annotation("Relational:ColumnType", "datetime");
+                        .HasAnnotation("Relational:ColumnType", "datetime");
 
                     b.Property<string>("UserId");
 
                     b.HasKey("Id");
 
-                    b.Annotation("Relational:TableName", "Posts");
+                    b.HasAnnotation("Relational:TableName", "Posts");
                 });
 
             modelBuilder.Entity("App.Models.PostCategory", b =>
@@ -300,7 +300,7 @@ namespace App.Data.Migrations
 
                     b.HasKey("PostId", "CategoryId");
 
-                    b.Annotation("Relational:TableName", "PostCategories");
+                    b.HasAnnotation("Relational:TableName", "PostCategories");
                 });
 
             modelBuilder.Entity("App.Models.Profile", b =>
@@ -309,7 +309,7 @@ namespace App.Data.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .Annotation("Relational:ColumnType", "nvarchar(64)");
+                        .HasAnnotation("Relational:ColumnType", "nvarchar(64)");
 
                     b.Property<string>("PictureLarge");
 
@@ -319,11 +319,11 @@ namespace App.Data.Migrations
 
                     b.Property<string>("SurName")
                         .IsRequired()
-                        .Annotation("Relational:ColumnType", "nvarchar(128)");
+                        .HasAnnotation("Relational:ColumnType", "nvarchar(128)");
 
                     b.HasKey("UserId");
 
-                    b.Annotation("Relational:TableName", "Profiles");
+                    b.HasAnnotation("Relational:TableName", "Profiles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
@@ -335,11 +335,12 @@ namespace App.Data.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<string>("RoleId");
+                    b.Property<string>("RoleId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.Annotation("Relational:TableName", "AspNetRoleClaims");
+                    b.HasAnnotation("Relational:TableName", "AspNetRoleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
@@ -351,11 +352,12 @@ namespace App.Data.Migrations
 
                     b.Property<string>("ClaimValue");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.Annotation("Relational:TableName", "AspNetUserClaims");
+                    b.HasAnnotation("Relational:TableName", "AspNetUserClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
@@ -366,11 +368,12 @@ namespace App.Data.Migrations
 
                     b.Property<string>("ProviderDisplayName");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.Annotation("Relational:TableName", "AspNetUserLogins");
+                    b.HasAnnotation("Relational:TableName", "AspNetUserLogins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
@@ -381,119 +384,119 @@ namespace App.Data.Migrations
 
                     b.HasKey("UserId", "RoleId");
 
-                    b.Annotation("Relational:TableName", "AspNetUserRoles");
+                    b.HasAnnotation("Relational:TableName", "AspNetUserRoles");
                 });
 
             modelBuilder.Entity("App.Models.Category", b =>
                 {
                     b.HasOne("App.Models.Category")
                         .WithMany()
-                        .ForeignKey("ParentCategoryId");
+                        .HasForeignKey("ParentCategoryId");
 
                     b.HasOne("App.Models.Identity.ApplicationUser")
                         .WithMany()
-                        .ForeignKey("UserId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("App.Models.Comment", b =>
                 {
                     b.HasOne("App.Models.Comment")
                         .WithMany()
-                        .ForeignKey("ParentCommentId");
+                        .HasForeignKey("ParentCommentId");
 
                     b.HasOne("App.Models.Post")
                         .WithMany()
-                        .ForeignKey("PostId");
+                        .HasForeignKey("PostId");
 
                     b.HasOne("App.Models.Identity.ApplicationUser")
                         .WithMany()
-                        .ForeignKey("UserId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("App.Models.FAQ", b =>
                 {
                     b.HasOne("App.Models.Library")
                         .WithMany()
-                        .ForeignKey("LibraryId");
+                        .HasForeignKey("LibraryId");
 
                     b.HasOne("App.Models.Identity.ApplicationUser")
                         .WithMany()
-                        .ForeignKey("UserId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("App.Models.Library", b =>
                 {
                     b.HasOne("App.Models.Identity.ApplicationUser")
                         .WithMany()
-                        .ForeignKey("UserId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("App.Models.LibraryItemAction", b =>
                 {
                     b.HasOne("App.Models.Identity.ApplicationUser")
                         .WithMany()
-                        .ForeignKey("UserId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("App.Models.Post", b =>
                 {
                     b.HasOne("App.Models.Library")
                         .WithMany()
-                        .ForeignKey("LibraryId");
+                        .HasForeignKey("LibraryId");
 
                     b.HasOne("App.Models.Identity.ApplicationUser")
                         .WithMany()
-                        .ForeignKey("UserId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("App.Models.PostCategory", b =>
                 {
                     b.HasOne("App.Models.Category")
                         .WithMany()
-                        .ForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId");
 
                     b.HasOne("App.Models.Post")
                         .WithMany()
-                        .ForeignKey("PostId");
+                        .HasForeignKey("PostId");
                 });
 
             modelBuilder.Entity("App.Models.Profile", b =>
                 {
                     b.HasOne("App.Models.Identity.ApplicationUser")
                         .WithOne()
-                        .ForeignKey("App.Models.Profile", "UserId");
+                        .HasForeignKey("App.Models.Profile", "UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("App.Models.Identity.ApplicationRole")
                         .WithMany()
-                        .ForeignKey("RoleId");
+                        .HasForeignKey("RoleId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<string>", b =>
                 {
                     b.HasOne("App.Models.Identity.ApplicationUser")
                         .WithMany()
-                        .ForeignKey("UserId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<string>", b =>
                 {
                     b.HasOne("App.Models.Identity.ApplicationUser")
                         .WithMany()
-                        .ForeignKey("UserId");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<string>", b =>
                 {
                     b.HasOne("App.Models.Identity.ApplicationRole")
                         .WithMany()
-                        .ForeignKey("RoleId");
+                        .HasForeignKey("RoleId");
 
                     b.HasOne("App.Models.Identity.ApplicationUser")
                         .WithMany()
-                        .ForeignKey("UserId");
+                        .HasForeignKey("UserId");
                 });
         }
     }

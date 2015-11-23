@@ -12,7 +12,7 @@ using App.Services.Ahs;
 namespace App.API.Controllers
 {
     [Route("api/[controller]")]
-    public class LibraryItemController : CommonController
+    public class LibraryItemsController : CommonController
     {
         // GET: api/libraryitem?LibraryCode=MAR&SearchField=JavaScript&ItemsPerPage=60&Offset=0&SortOrder=0
         [HttpGet(Name = "GetLibraryItems")]
@@ -22,8 +22,8 @@ namespace App.API.Controllers
         }
         
         // GET api/libraryitem/MAR/693221
-        [HttpGet("{libraryItemId:int}", Name = "GetLibraryItemById")]
-        public IActionResult GetLibraryItemById(int libraryItemId)
+        [HttpGet("{libraryCode}/{libraryItemId}", Name = "GetLibraryItemById")]
+        public IActionResult GetLibraryItemById(string libraryCode, int libraryItemId)
         {
             var libraryItem = _mediatheekService.GetLibraryItemById("MAR", libraryItemId);
             if (libraryItem == null)
@@ -32,6 +32,13 @@ namespace App.API.Controllers
             }
 
             return new ObjectResult(libraryItem);
+        }
+        
+        // GET: api/libraryitem/arrivals/?LibraryCode=MAR&DaysAge=20&ItemsPerPage=60&Offset=0&SortOrder=0
+        [HttpGet("Arrivals", Name = "GetLibraryItemsArrivals")]
+        public IEnumerable<LibraryItem> GetLibraryItemsArrivals([FromQuery]MediatheekArrivalsSearch search)
+        {
+            return _mediatheekService.GetLibraryItemsByArrivalsSearch(search);
         }
     }
 }

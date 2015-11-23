@@ -61,7 +61,7 @@ namespace App.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true),
-                    RoleId = table.Column<string>(nullable: true)
+                    RoleId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -70,7 +70,8 @@ namespace App.Data.Migrations
                         name: "FK_IdentityRoleClaim<string>_ApplicationRole_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
             migrationBuilder.CreateTable(
                 name: "Categories",
@@ -93,12 +94,14 @@ namespace App.Data.Migrations
                         name: "FK_Category_Category_ParentCategoryId",
                         column: x => x.ParentCategoryId,
                         principalTable: "Categories",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Category_ApplicationUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
             migrationBuilder.CreateTable(
                 name: "Libraries",
@@ -122,7 +125,8 @@ namespace App.Data.Migrations
                         name: "FK_Library_ApplicationUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
             migrationBuilder.CreateTable(
                 name: "LibraryItemAction",
@@ -143,7 +147,8 @@ namespace App.Data.Migrations
                         name: "FK_LibraryItemAction_ApplicationUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
             migrationBuilder.CreateTable(
                 name: "Profiles",
@@ -163,7 +168,8 @@ namespace App.Data.Migrations
                         name: "FK_Profile_ApplicationUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
             migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
@@ -173,7 +179,7 @@ namespace App.Data.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     ClaimType = table.Column<string>(nullable: true),
                     ClaimValue = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -182,7 +188,8 @@ namespace App.Data.Migrations
                         name: "FK_IdentityUserClaim<string>_ApplicationUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
             migrationBuilder.CreateTable(
                 name: "AspNetUserLogins",
@@ -191,7 +198,7 @@ namespace App.Data.Migrations
                     LoginProvider = table.Column<string>(nullable: false),
                     ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -200,7 +207,8 @@ namespace App.Data.Migrations
                         name: "FK_IdentityUserLogin<string>_ApplicationUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
             migrationBuilder.CreateTable(
                 name: "AspNetUserRoles",
@@ -216,12 +224,14 @@ namespace App.Data.Migrations
                         name: "FK_IdentityUserRole<string>_ApplicationRole_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_IdentityUserRole<string>_ApplicationUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
             migrationBuilder.CreateTable(
                 name: "Faqs",
@@ -245,12 +255,14 @@ namespace App.Data.Migrations
                         name: "FK_FAQ_Library_LibraryId",
                         column: x => x.LibraryId,
                         principalTable: "Libraries",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_FAQ_ApplicationUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
             migrationBuilder.CreateTable(
                 name: "Posts",
@@ -275,12 +287,14 @@ namespace App.Data.Migrations
                         name: "FK_Post_Library_LibraryId",
                         column: x => x.LibraryId,
                         principalTable: "Libraries",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Post_ApplicationUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
             migrationBuilder.CreateTable(
                 name: "Comments",
@@ -304,17 +318,20 @@ namespace App.Data.Migrations
                         name: "FK_Comment_Comment_ParentCommentId",
                         column: x => x.ParentCommentId,
                         principalTable: "Comments",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Comment_Post_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Comment_ApplicationUser_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
             migrationBuilder.CreateTable(
                 name: "PostCategories",
@@ -330,12 +347,14 @@ namespace App.Data.Migrations
                         name: "FK_PostCategory_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PostCategory_Post_PostId",
                         column: x => x.PostId,
                         principalTable: "Posts",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",

@@ -12,7 +12,7 @@ using App.Services.Ahs;
 namespace App.API.Controllers
 {
     [Route("api/[controller]")]
-    public class CategoryController : CommonController
+    public class CategoriesController : CommonController
     {
         // GET: api/category
         [HttpGet(Name = "GetCategories")]

@@ -13,7 +13,7 @@ using App.Services.Ahs;
 namespace App.API.Controllers
 {
     [Route("api/[controller]")]
-    public class UserController : CommonController
+    public class UsersController : CommonController
     {
         // GET: api/post
         [HttpGet(Name = "GetUsers")]

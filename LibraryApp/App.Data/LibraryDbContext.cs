@@ -35,7 +35,7 @@ namespace App.Data
             
             modelBuilder.Entity<ApplicationUser>(l =>
             {  
-               l.HasOne(m => m.Profile).WithOne().ForeignKey<Profile>(m => m.UserId);
+               l.HasOne(m => m.Profile).WithOne().HasForeignKey<Profile>(m => m.UserId);
             });
             
             modelBuilder.Entity<Profile>(l =>
@@ -61,7 +61,7 @@ namespace App.Data
                
                l.HasOne(m => m.User)
                .WithMany(m => m.Libraries)
-               .ForeignKey(m => m.UserId);
+               .HasForeignKey(m => m.UserId);
             });
             
             modelBuilder.Entity<Post>(l =>
@@ -80,11 +80,13 @@ namespace App.Data
                // Library => 0 to many Posts
                l.HasOne(m => m.Library)
                .WithMany(m => m.Posts)
-               .ForeignKey(m => m.LibraryId);
+               .HasForeignKey(m => m.LibraryId);
                
                l.HasOne(m => m.User)
                .WithMany(m => m.Posts)
-               .ForeignKey(m => m.UserId);
+               .HasForeignKey(m => m.UserId);
+               
+               
                
             });
             
@@ -103,11 +105,11 @@ namespace App.Data
                // Library => 0 to many FAQs
                l.HasOne(m => m.Library)
                .WithMany(m => m.FAQs)
-               .ForeignKey(m => m.LibraryId);
+               .HasForeignKey(m => m.LibraryId);
                
                l.HasOne(m => m.User)
                .WithMany(m => m.FAQs)
-               .ForeignKey(m => m.UserId);
+               .HasForeignKey(m => m.UserId);
                
             });
             
@@ -125,11 +127,11 @@ namespace App.Data
                // Category => 0 to many Child categories
                l.HasOne(m => m.ParentCategory)
                .WithMany(m => m.ChildCategories)
-               .ForeignKey(m => m.ParentCategoryId);
+               .HasForeignKey(m => m.ParentCategoryId);
                
                l.HasOne(m => m.User)
                .WithMany(m => m.Categories)
-               .ForeignKey(m => m.UserId);
+               .HasForeignKey(m => m.UserId);
                
             });
             
@@ -137,6 +139,15 @@ namespace App.Data
             {
                l.ToTable("PostCategories");
                l.HasKey(m => new { m.PostId, m.CategoryId });
+               
+               l.HasOne(pc => pc.Post)
+               .WithMany(p => p.Categories)
+               .HasForeignKey(pc => pc.PostId);
+               
+               l.HasOne(pc => pc.Category)
+               .WithMany(p => p.Posts)
+               .HasForeignKey(pc => pc.CategoryId);
+               
             });
             
             modelBuilder.Entity<Comment>(l =>
@@ -153,16 +164,16 @@ namespace App.Data
                // Comment => 0 to many Child comments
                l.HasOne(m => m.ParentComment)
                .WithMany(m => m.ChildComments)
-               .ForeignKey(m => m.ParentCommentId);
+               .HasForeignKey(m => m.ParentCommentId);
                
                // Post => 0 to many comments
                l.HasOne(m => m.Post)
                .WithMany(m => m.Comments)
-               .ForeignKey(m => m.PostId);
+               .HasForeignKey(m => m.PostId);
                
                l.HasOne(m => m.User)
                .WithMany(m => m.Comments)
-               .ForeignKey(m => m.UserId);
+               .HasForeignKey(m => m.UserId);
                
             });
             
@@ -178,7 +189,7 @@ namespace App.Data
                // ApplicationUser => 0 to many Actions
                l.Reference(m => m.User)
                .InverseCollection(m => m.Actions)
-               .ForeignKey(m => m.UserId);
+               .HasHasForeignKey(m => m.UserId);
             })*/
             
         }

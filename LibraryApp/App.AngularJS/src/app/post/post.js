@@ -3,27 +3,29 @@
 
 	// register the route config on the application
 	angular
-		.module('ddsApp.blog', ['ui.router'])
-		.config(configBlogRoute);
+		.module('ddsApp.post', [
+			'ui.router'
+		])
+		.config(configPostRoute);
 
-	// inject configBlogRoute dependencies
-	configBlogRoute.$inject = ['$stateProvider', 'mainMenuProvider'];
+	// inject configPostRoute dependencies
+	configPostRoute.$inject = ['$stateProvider', 'mainMenuProvider'];
 
 	// route config function configuring the passed $stateProvider
-	function configBlogRoute($stateProvider, mainMenuProvider) {
+	function configPostRoute($stateProvider, mainMenuProvider) {
 		var mainState = {
-			name: 'blog',
-			url: '/blog',
+			name: 'post',
+			url: '/post',
 			authenticate: false,
-			templateUrl: 'app/blog/blog.html',
-			controller: 'BlogController',
+			templateUrl: 'app/post/templates/post.list.html',
+			controller: 'PostController',
 			controllerAs: 'vm'
 		};
 
 		$stateProvider.state(mainState);
 
 		mainMenuProvider.addMenuItem({
-			name: 'Blog',
+			name: 'Post',
 			state: mainState.name,
 			order: 2,
 			icon: 'navigation:ic_menu_24px'

@@ -240,12 +240,7 @@ namespace App.Services.Ahs
 
         private string ConstructArrivalsUrl(MediatheekArrivalsSearch search)
         {
-            if (search.DaysAge == null)
-            {
-                return null;
-            }
-
-            string searchFields = "dg#" + "arrivals_callback" + "#" + search.LibraryCode + "#" + search.Offset + "#" + search.ItemsPerPage + "#s" + search.SortOrder + "s#" + search.DaysAge + "    ";
+            string searchFields = "dg#" + "arrivals_callback" + "#" + search.LibraryCode + "#" + search.Offset + "#" + search.ItemsPerPage + "#s" + (int)search.SortOrder + "s#" + search.DaysAge + "    ";
             return ConstructURL(searchFields);
         }
 

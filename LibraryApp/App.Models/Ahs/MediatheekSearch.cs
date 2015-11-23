@@ -90,7 +90,7 @@ namespace App.Models.Ahs
     public class MediatheekArrivalsSearch
     {
         public string LibraryCode { get; set; }
-        public Nullable<int> DaysAge { get; set; }
+        public int DaysAge { get; set; }
         public int ItemsPerPage { get; set; }
         public int Offset { get; set; }
         public MediatheekSortOrder SortOrder { get; set; }

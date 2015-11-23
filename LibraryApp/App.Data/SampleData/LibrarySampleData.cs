@@ -8,6 +8,8 @@ using App.Models;
 using App.Models.Identity;
 using App.Models.RandomUserMe;
 using App.Services.RandomUserMe;
+using App.Models.RandomText;
+using App.Services.RandomText;
 
 namespace App.Data.SampleData
 {
@@ -16,12 +18,14 @@ namespace App.Data.SampleData
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly LibraryDbContext _context;
         private readonly IRandomUserMeService _randomUserMeService;
+        private readonly IRandomTextService _randomTextService;
         
-        public LibrarySampleData(UserManager<ApplicationUser> userManager, LibraryDbContext context, IRandomUserMeService randomUserMeService)
+        public LibrarySampleData(UserManager<ApplicationUser> userManager, LibraryDbContext context, IRandomUserMeService randomUserMeService, IRandomTextService randomTextService)
         {
             _userManager = userManager;
             _context = context;
             _randomUserMeService = randomUserMeService;
+            _randomTextService = randomTextService;
         }
         
         public async void InitializeData() 
@@ -137,10 +141,9 @@ namespace App.Data.SampleData
                 _context.Posts.Add(new Post()
                 {
                     Title = "Finse overheid publiceert 'onbreekbaar'-emoji van Nokia 3310",
-                    Synopsis = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
-                    Description = "Finland heeft naar eigen zeggen als eerste land ter wereld een reeks eigen emoji's gepubliceerd. De reeks bevat onder andere emoticons van een headbanger, een sauna en de Nokia 3310. De emoji van de telefoon is bedoeld om aan te geven dat iets onbreekbaar is.",
-                    Body = @"
-                    <p>Vanaf 1 december zal er een collectie van meer dan dertig Finse emoji's verschijnen. Iedere dag wordt een nieuw plaatje gepresenteerd in een kerstkalender met 24 hokjes. De kalender wordt zichtbaar op een website, maar er zullen ook apps verschijnen. We zijn vooral niet serieus geweest bij het maken van deze emoji's. Hopelijk zullen ze niet alleen onze vreemde, maar ook onze sterke eigenschappen openbaren, verklaart het ministerie.</p><p>De emoji's zijn een initiatief van het Finse ministerie van Buitenlandse Zaken om het land te promoten. De icoontjes moeten Finse emoties uitdrukken. Als voorproefje zijn de drie emoji's Sauna, Headbanger en Unbreakable te bekijken.</p>",
+                    Synopsis = _randomTextService.GetRandomText(1, 5, 15, "p").Results,
+                    Description = _randomTextService.GetRandomText(1, 5, 15, "p").Results,
+                    Body = _randomTextService.GetRandomText(5, 15, 25, "p").Results,
                     Library = libraries.ElementAt(random.Next(0, libraries.Count() - 1))
                 });
                 

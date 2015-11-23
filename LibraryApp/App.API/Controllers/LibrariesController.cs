@@ -12,7 +12,7 @@ using App.Services.Ahs;
 namespace App.API.Controllers
 {
     [Route("api/[controller]")]
-    public class LibraryController : CommonController
+    public class LibrariesController : CommonController
     {
         // GET: api/library
         [HttpGet(Name = "GetLibraries")]
@@ -32,6 +32,14 @@ namespace App.API.Controllers
             }
 
             return new ObjectResult(model);
+        }
+        
+                
+        // GET: api/post/MAR
+        [HttpGet("{libraryId}/posts", Name = "GetPostsFromLibrary")]
+        public IActionResult GetPostsFromLibrary(int libraryId)
+        {
+            return new ObjectResult(_libraryContext.Posts.Where(l => l.Library.Id == libraryId).Include(c => c.Categories).AsEnumerable());          
         }
         
         // POST api/library

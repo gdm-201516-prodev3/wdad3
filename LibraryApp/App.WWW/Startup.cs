@@ -2,19 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNet.Authentication.Facebook;
-using Microsoft.AspNet.Authentication.Google;
-using Microsoft.AspNet.Authentication.MicrosoftAccount;
-using Microsoft.AspNet.Authentication.Twitter;
 using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Diagnostics.Entity;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Session;
 using Microsoft.Data.Entity;
-using Microsoft.Dnx.Runtime;
-using Microsoft.Framework.Configuration;
-using Microsoft.Framework.DependencyInjection;
-using Microsoft.Framework.Logging;
+using Microsoft.Extensions.PlatformAbstractions;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using App.WWW.Services;
 using App.Models;
 using App.Models.Identity;
@@ -22,6 +18,8 @@ using App.Data;
 using App.Data.SampleData;
 using App.Services.Ahs;
 using App.Services.RandomUserMe;
+using App.Services.RandomText;
+using Glimpse;
 
 namespace App.WWW
 {
@@ -50,11 +48,12 @@ namespace App.WWW
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {  
             // Add Scoped = Resolve dependency injection
             services.AddScoped<LibraryDbContext, LibraryDbContext>();
             services.AddScoped<IMediatheekService, MediatheekService>();
             services.AddScoped<IRandomUserMeService, RandomUserMeService>();
+            services.AddScoped<IRandomTextService, RandomTextService>();
             
             // Add Entity Framework services to the services container.
             services.AddEntityFramework()
@@ -67,73 +66,56 @@ namespace App.WWW
                 .AddEntityFrameworkStores<LibraryDbContext>()
                 .AddDefaultTokenProviders();
 
-            // Add MVC services to the services container.
             services.AddMvc();
-
-            // Uncomment the following line to add Web API services which makes it easier to port Web API 2 controllers.
-            // You will also need to add the Microsoft.AspNet.Mvc.WebApiCompatShim package to the 'dependencies' section of project.json.
-            // services.AddWebApiConventions();
-
-            // Register application services.
+            
+            // Sessions and caching
+            services.AddCaching();
+            services.AddSession();
+            
+            // Ultimate reporting tool
+            //services.AddGlimpse();
+            
+            // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
-        // Configure is called after ConfigureServices is called.
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-        {
-            loggerFactory.MinimumLevel = LogLevel.Information;
-            loggerFactory.AddConsole();
+        {  
+            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            // Configure the HTTP request pipeline.
-
-            // Add the platform handler to the request pipeline.
-            app.UseIISPlatformHandler();
-
-            // Add the following to the request pipeline only in development environment.
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage(DatabaseErrorPageOptions.ShowAll);
+                app.UseDatabaseErrorPage();
+                // Use Glimpse the ultimate reporting tool
+                //app.UseGlimpse();
             }
             else
             {
-                // Add Error handling middleware which catches all application specific errors and
-                // sends the request to the following path or controller action.
                 app.UseExceptionHandler("/Home/Error");
+
+                // For more details on creating database during deployment see http://go.microsoft.com/fwlink/?LinkID=615859
+                try
+                {
+                    using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+                        .CreateScope())
+                    {
+                        serviceScope.ServiceProvider.GetService<LibraryDbContext>()
+                             .Database.Migrate();
+                    }
+                }
+                catch { }
             }
 
-            // Add static files to the request pipeline.
+            app.UseIISPlatformHandler(options => options.AuthenticationDescriptions.Clear());
+
             app.UseStaticFiles();
-
-            // Add cookie-based authentication to the request pipeline.
             app.UseIdentity();
-
-            // Add and configure the options for authentication middleware to the request pipeline.
-            // You can add options for middleware as shown below.
-            // For more information see http://go.microsoft.com/fwlink/?LinkID=532715
-            //app.UseFacebookAuthentication(options =>
-            //{
-            //    options.AppId = Configuration["Authentication:Facebook:AppId"];
-            //    options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
-            //});
-            //app.UseGoogleAuthentication(options =>
-            //{
-            //    options.ClientId = Configuration["Authentication:Google:ClientId"];
-            //    options.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
-            //});
-            //app.UseMicrosoftAccountAuthentication(options =>
-            //{
-            //    options.ClientId = Configuration["Authentication:MicrosoftAccount:ClientId"];
-            //    options.ClientSecret = Configuration["Authentication:MicrosoftAccount:ClientSecret"];
-            //});
-            //app.UseTwitterAuthentication(options =>
-            //{
-            //    options.ConsumerKey = Configuration["Authentication:Twitter:ConsumerKey"];
-            //    options.ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"];
-            //});
-
+            app.UseSession();
+            
             // Add MVC to the request pipeline.
             app.UseMvc(routes =>
             {
@@ -154,5 +136,8 @@ namespace App.WWW
             var librarySampleData = ActivatorUtilities.CreateInstance<LibrarySampleData>(app.ApplicationServices);
             librarySampleData.InitializeData();
         }
+
+        // Entry point for the application.
+        public static void Main(string[] args) => Microsoft.AspNet.Hosting.WebApplication.Run<Startup>(args);
     }
 }
