@@ -1,6 +1,9 @@
 {
   "webroot": "wwwroot",
   "version": "1.0.0-*",
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
   "tooling": {
     "defaultNamespace": "App.API"
   },
@@ -29,11 +32,10 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc1-final",
     "AspnetWebApi2Helpers.Serialization": "1.0.0-*",
     "AspnetWebApi2Helpers.Serialization.Protobuf": "1.0.0-*",
-    "Glimpse": "2.0.0-*",
     "PagedList": "1.17.0",
     "App.Models": "1.0.0-*",
     "App.Data": "1.0.0-*",
-    "App.Services": "1.0.0-*" 
+    "App.Services": "1.0.0-*"
   },
 
   "commands": {
