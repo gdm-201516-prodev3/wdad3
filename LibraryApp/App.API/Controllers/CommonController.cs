@@ -17,5 +17,6 @@ namespace App.API.Controllers
         
         [FromServices]
         public IMediatheekService _mediatheekService { get; set; } 
+        
     }
 }

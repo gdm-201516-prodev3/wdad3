@@ -45,9 +45,10 @@ namespace App.Services.Ahs
                 string result = client.GetStringAsync(url).Result;
                 if (result == null)
                     return null;
-
-
-                return ConvertSimpleSearchToPagedList(result, 1, search.ItemsPerPage);
+                    
+                int page = Convert.ToInt32(Math.Floor(Convert.ToDecimal(search.Offset/search.ItemsPerPage) + 1));
+                    
+                return ConvertSimpleSearchToPagedList(result, page, search.ItemsPerPage);
             }
         }
 
@@ -64,9 +65,10 @@ namespace App.Services.Ahs
                 string result = client.GetStringAsync(url).Result;
                 if (result == null)
                     return null;
+                    
+                int page = Convert.ToInt32(Math.Floor(Convert.ToDecimal(search.Offset/search.ItemsPerPage) + 1));
 
-
-                return ConvertAdvancedSearchToPagedList(result, 1, search.ItemsPerPage);
+                return ConvertAdvancedSearchToPagedList(result, page, search.ItemsPerPage);
             }
         }
 
@@ -83,8 +85,10 @@ namespace App.Services.Ahs
                 string result = client.GetStringAsync(url).Result;
                 if (result == null)
                     return null;
+                    
+                int page = Convert.ToInt32(Math.Floor(Convert.ToDecimal(search.Offset/search.ItemsPerPage) + 1));
 
-                return ConvertArrialsSearchToPagedList(result, 1, search.ItemsPerPage);
+                return ConvertArrialsSearchToPagedList(result, page, search.ItemsPerPage);
             }
         }
 
@@ -142,23 +146,13 @@ namespace App.Services.Ahs
             
             foreach (var jsonLibraryItem in jsonSimpleSearch.res)
             {
-                Nullable<int> year = null;
-                string jsonYear = (string)jsonLibraryItem.r.ElementAt(4);
-
-                if (!string.IsNullOrEmpty(jsonYear))
-                {
-                    jsonYear = jsonYear.Replace("-", "");
-                    jsonYear = jsonYear.Replace("dep.", "");
-                    year = Convert.ToInt16(jsonYear);
-                }
-
                 LibraryItem libraryItem = new LibraryItem
                 {
                     Id = Convert.ToInt32(jsonLibraryItem.r.ElementAt(0)),
                     Author = (string)jsonLibraryItem.r.ElementAt(1),
                     Title = (string)jsonLibraryItem.r.ElementAt(2),
                     Type = (string)jsonLibraryItem.r.ElementAt(3),
-                    Year = year
+                    Year = (string)jsonLibraryItem.r.ElementAt(4)
                 };
                 libraryItems.Add(libraryItem);
             }

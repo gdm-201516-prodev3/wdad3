@@ -16,8 +16,11 @@ namespace App.API.Controllers
     {
         // GET: api/post
         [HttpGet(Name = "GetPosts")]
-        public IActionResult GetPosts()
+        public IActionResult GetPosts([FromQuery] int? libraryId)
         {
+            if(libraryId != null) {
+                return new ObjectResult(_libraryContext.Posts.Include(c => c.Categories).Where(l => l.LibraryId == libraryId).AsEnumerable()); 
+            }
             return new ObjectResult(_libraryContext.Posts.Include(c => c.Categories).AsEnumerable());          
         }
         

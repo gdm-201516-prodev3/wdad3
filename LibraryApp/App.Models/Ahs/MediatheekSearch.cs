@@ -32,6 +32,15 @@ namespace App.Models.Ahs
         public int Offset { get; set; }
         public MediatheekSortOrder SortOrder { get; set; } 
     }
+    
+    public class MediatheekArrivalsSearch
+    {
+        public string LibraryCode { get; set; }
+        public int DaysAge { get; set; }
+        public int ItemsPerPage { get; set; }
+        public int Offset { get; set; }
+        public MediatheekSortOrder SortOrder { get; set; }
+    }
 
     public class MediatheekAdvancedSearch
     {
@@ -86,14 +95,5 @@ namespace App.Models.Ahs
         Before = 6,
         After = 5
     }
-
-    public class MediatheekArrivalsSearch
-    {
-        public string LibraryCode { get; set; }
-        public int DaysAge { get; set; }
-        public int ItemsPerPage { get; set; }
-        public int Offset { get; set; }
-        public MediatheekSortOrder SortOrder { get; set; }
-    }
-    
+   
 }   

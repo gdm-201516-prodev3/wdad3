@@ -25,7 +25,7 @@ namespace App.API.Controllers
         [HttpGet("{libraryCode}/{libraryItemId}", Name = "GetLibraryItemById")]
         public IActionResult GetLibraryItemById(string libraryCode, int libraryItemId)
         {
-            var libraryItem = _mediatheekService.GetLibraryItemById("MAR", libraryItemId);
+            var libraryItem = _mediatheekService.GetLibraryItemById(libraryCode, libraryItemId);
             if (libraryItem == null)
             {
                 return HttpNotFound();

@@ -16,13 +16,15 @@ namespace App.Data.SampleData
     public class LibrarySampleData
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
         private readonly LibraryDbContext _context;
         private readonly IRandomUserMeService _randomUserMeService;
         private readonly IRandomTextService _randomTextService;
         
-        public LibrarySampleData(UserManager<ApplicationUser> userManager, LibraryDbContext context, IRandomUserMeService randomUserMeService, IRandomTextService randomTextService)
+        public LibrarySampleData(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager, LibraryDbContext context, IRandomUserMeService randomUserMeService, IRandomTextService randomTextService)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _context = context;
             _randomUserMeService = randomUserMeService;
             _randomTextService = randomTextService;
@@ -30,11 +32,61 @@ namespace App.Data.SampleData
         
         public async void InitializeData() 
         {
-            await CreateUsers();// 1. Create Users
+            await CreateRoles();// 1. Create Roles
+            await CreateUsers();// 2. Create Users
             await CreateLibraries();// 2. Create Users 
             await CreatePosts();// 3. Create Posts   
             CreateFAQs();
             CreateCategories();
+        }
+        
+        private async Task<bool> CreateRoles() 
+        {
+            if(_context.Roles == null || _context.Roles.Count() == 0)
+            {
+                var role = new ApplicationRole 
+                { 
+                    Name = "Administrator", 
+                    Description = "Administrator: administration of all the content."
+                };
+                var result = await _roleManager.CreateAsync(role);
+                
+                if(!result.Succeeded)
+                    return false;
+                    
+                role = new ApplicationRole 
+                { 
+                    Name = "LibrariesPrincipal", 
+                    Description = "Libraries principal: principal for all the libraries"
+                };
+                result = await _roleManager.CreateAsync(role);
+                
+                if(!result.Succeeded)
+                    return false;
+                    
+                role = new ApplicationRole 
+                { 
+                    Name = "LibraryCoordinator", 
+                    Description = "Library coordinator: coordinator for a specific library"
+                };
+                result = await _roleManager.CreateAsync(role);
+                
+                if(!result.Succeeded)
+                    return false;
+                    
+                role = new ApplicationRole 
+                { 
+                    Name = "LibraryCoordinator", 
+                    Description = "Library coordinator: coordinator for a specific library"
+                };
+                result = await _roleManager.CreateAsync(role);
+                
+                if(!result.Succeeded)
+                    return false;
+                    
+                    
+            }
+            return true;
         }
         
         private async Task<bool> CreateUsers() 
@@ -47,7 +99,8 @@ namespace App.Data.SampleData
                     var user = new ApplicationUser 
                     { 
                         UserName = randomUserUser.User.Username, 
-                        Email = randomUserUser.User.Email
+                        Email = randomUserUser.User.Email,
+                        CreatedAt = DateTime.UtcNow
                     };
                     var result = await _userManager.CreateAsync(user, "Slaam_1888");
                     

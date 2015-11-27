@@ -23,8 +23,8 @@ namespace App.Models
         public string Type { get; set; }
         [JsonProperty("Uitgever")]
         public string Publisher { get; set; }
-        [JsonProperty("Jaar", ItemConverterType = typeof(StringToIntJsonConverter))]
-        public Nullable<int> Year { get; set; }
+        [JsonProperty("Jaar")]
+        public string Year { get; set; }
         [JsonProperty("Bladzijden")]
         public string Pages { get; set; }
         [JsonProperty("ISBN")]

@@ -1,0 +1,45 @@
+<md-toolbar>
+	<div class="md-toolbar-tools">
+		<md-button class="md-icon-button" ng-click="appController.openMainMenu()" aria-label="Open main menu">
+			<md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
+		</md-button>
+		<h2>
+			<span>Mediatheek App</span>
+		</h2>
+		<span flex></span>
+		<md-button class="md-icon-button" aria-label="Favorite">
+			<md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
+		</md-button>
+		<md-button class="md-icon-button" aria-label="More">
+			<md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
+		</md-button>
+	</div>
+</md-toolbar>
+<md-content>
+
+			<h2>Post Lists</h2>
+			
+			<!-- Post item -->
+			<md-card data-ng-repeat="post in vm.posts">
+				<md-card-title>
+					<md-card-title-text>
+						<span class="md-headline">{{ post.title }}</span>
+					</md-card-title-text>
+				</md-card-title>
+				
+				<md-card-content>
+					{{ post.synopsis }}
+				</md-card-content>
+				<md-card-actions layout="row" layout-align="start center">
+					<md-button data-ui-sref="post.details({postId: {{ post.id }} })" md-no-ink class="md-primary">Read more</md-button>
+					<md-button>Action 1</md-button>
+					<md-button>Action 2</md-button>
+					<md-card-icon-actions>
+						<md-button class="md-icon-button" aria-label="icon">
+							<md-icon md-svg-icon="icon"></md-icon>
+						</md-button>
+					</md-card-icon-actions>
+				</md-card-actions>
+			</md-card><!-- End Post item -->
+
+</md-content>

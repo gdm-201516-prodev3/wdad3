@@ -25,6 +25,7 @@
       'ddsApp.faq',
       'ddsApp.main'
     ])
+    .constant('LIBRARYAPPAPIURL', 'http://localhost:8081/api')
 		.config(appConfig)
 		.run(appRun);
    
@@ -44,6 +45,10 @@
       $urlRouterProvider.otherwise('/');
       $urlMatcherFactoryProvider.strictMode(false);
       $locationProvider.html5Mode(true);
+      
+      // Enable CORS (Cross-Origin Resource Sharing)
+      $httpProvider.defaults.useXDomain = true;
+      delete $httpProvider.defaults.headers.common['X-Requested-With'];
       
       //$httpProvider.interceptors.push('AuthInterceptor');
       
@@ -74,7 +79,7 @@
     /* App run bootstrap */
 
     // add appConfig dependencies to inject
-    appRun.$inject = ['$rootScope', '$location'];
+    appRun.$inject = ['$rootScope', '$location', '$http'];
     
     /**
     * Application run function
@@ -83,7 +88,8 @@
     * @param $location
     * @param Auth
     */
-    function appRun($rootScope, $location) {
+    function appRun($rootScope, $location, $http) {
+  
       // Redirect to login if route requires auth and you're not logged in
       /*$rootScope.$on('$stateChangeStart', function (event, next) {
         if (!next.authenticate) {

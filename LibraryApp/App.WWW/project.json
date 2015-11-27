@@ -36,8 +36,8 @@
   },
 
   "commands": {
-    "kestrel": "Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:9000",
-    "web": "Microsoft.AspNet.Server.WebListener --server.urls http://localhost:9000",
+    "kestrel": "Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:8080",
+    "web": "Microsoft.AspNet.Server.WebListener --server.urls http://localhost:8080",
     "ef": "EntityFramework.Commands"
   },
 

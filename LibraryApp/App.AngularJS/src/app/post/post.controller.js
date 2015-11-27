@@ -1,6 +1,6 @@
 /**
  * @ngdoc controller
- * @name ddsApp.blog.controller:PostController
+ * @name ddsApp.post:PostController
  * @description
  * Controls mainly nothing currently
  */
@@ -10,12 +10,17 @@
   // register the controller as PostController
   angular
     .module('ddsApp.post')
-    .controller('BlogController', PostController);
+    .controller('PostController', PostController);
 
-  PostController.$inject = ['$timeout'];
+  // Inject dependencies
+  PostController.$inject = ['$timeout', 'Post'];
   
-  function PostController($timeout) {
+  function PostController($timeout, Post) {
     var vm = this;
+    
+    vm.posts = Post.query({libraryId:3}, function(data) {
+      console.log(data);
+    });
   }
   
 })();
