@@ -11,12 +11,12 @@
     .module('ddsApp.post')
     .controller('PostItemController', PostItemController);
 
-  PostItemController.$inject = ['$timeout', 'post'];
+  PostItemController.$inject = ['$timeout'];
   
-  function PostItemController($timeout, post) {
+  function PostItemController($timeout) {
     var vm = this;
     
-    vm.post = post;
+    console.log('sla');
   }
   
 })();

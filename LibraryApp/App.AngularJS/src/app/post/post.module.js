@@ -28,11 +28,6 @@
             parent: post,
             url: '/:postId',
             template: 'app/post/post.details.html',
-			resolve: {
-                post: ['$stateParams', 'Post', function($stateParams, Post) {
-                    return Post.get({post_id: $stateParams.postId}).$promise;
-                }]
-            },
 			Controller: 'PostItemController',
             controllerAs: 'vm',
         };
@@ -45,7 +40,7 @@
 			name: 'Post',
 			state: post.name,
 			order: 2,
-			icon: 'navigation:ic_menu_24px'
+			icon: 'action:ic_description_24px'
 		});
 	}
 

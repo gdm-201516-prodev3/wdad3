@@ -3,7 +3,7 @@
 
 	// register the service as _
 	angular
-		.module('ddsApp.lodash', [])
+		.module('ddsApp.comp-lodash', [])
 		.factory('_', LodashService);
 
 	// add LodashService dependencies to inject

@@ -11,22 +11,23 @@
 
 	// route config function configuring the passed $stateProvider
 	function configFAQRoute($stateProvider, mainMenuProvider) {
-		var mainState = {
+		var faq = {
 			name: 'faq',
 			url: '/faq',
 			authenticate: false,
-			templateUrl: 'app/faq/faq.html',
+			templateUrl: 'app/faq/faq.list.html',
 			controller: 'FAQController',
 			controllerAs: 'vm'
 		};
 
-		$stateProvider.state(mainState);
+		$stateProvider
+			.state(faq);
 
 		mainMenuProvider.addMenuItem({
 			name: 'FAQ',
-			state: mainState.name,
+			state: faq.name,
 			order: 3,
-			icon: 'navigation:ic_menu_24px'
+			icon: 'action:ic_question_answer_24px'
 		});
 	}
 

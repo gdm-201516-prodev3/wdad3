@@ -9,7 +9,7 @@
 	'use strict';
 
 	// register the service as MenuService
-	angular.module('ddsApp.mainMenu')
+	angular.module('ddsApp.comp-mainMenu')
 		.provider('mainMenu', mainMenuProvider);
 
 	/**
@@ -84,7 +84,7 @@
 		}
 
 		// Method for instantiating
-		this.$get = function mainMenuFactory() {
+		this.$get = function() {
 			return new MainMenu();
 		};
 	}

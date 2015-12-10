@@ -12,10 +12,14 @@
     .module('ddsApp.faq')
     .controller('FAQController', FAQController);
 
-  FAQController.$inject = ['$timeout'];
+  FAQController.$inject = ['$timeout', 'FAQ'];
   
-  function FAQController($timeout) {
+  function FAQController($timeout, FAQ) {
     var vm = this;
+    
+    vm.faqs = FAQ.query(function(data) {
+      
+    });
   }
   
 })();

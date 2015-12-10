@@ -11,7 +11,7 @@
 
 	// register the controller as MainMenuController
 	angular
-		.module('ddsApp.mainMenu')
+		.module('ddsApp.comp-mainMenu')
 		.controller('MainMenuController', MainMenuController);
 
 

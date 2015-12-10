@@ -3,7 +3,9 @@
 
 	// register the route config on the application
 	angular
-		.module('ddsApp.catalog', ['ui.router'])
+		.module('ddsApp.catalog', [
+			'ui.router'
+		])
 		.config(configCatalogRoute);
 
 	// inject configCatalogRoute dependencies
@@ -14,6 +16,7 @@
 		var catalog = {
 			name: 'catalog',
 			url: '/catalog',
+			abstract: true,
 			authenticate: false,
 			templateUrl: 'app/catalog/catalog.html',
 			controller: 'CatalogController',
@@ -24,27 +27,48 @@
             name: 'catalog.search',
             parent: catalog,
             url: '/search',
-            templateUrl: 'app/catalog/catalog.searh.html',
-            controller:'CatalogSearchController',
-            controllerAs: 'vm'
+			data: {
+				'selectedTab' : 0
+			},
+			authenticate: false,
+            templateUrl: 'app/catalog/catalog.search.html'
         };
 		
 		var catalogArrivals  = {
             name: 'catalog.arrivals',
             parent: catalog,
             url: '/arrivals',
-            templateUrl: 'app/catalog/catalog.arrivals.html',
-            controller:'CatalogArrivalsController',
-            controllerAs: 'vm'
+			data: {
+				'selectedTab' : 1
+			},
+			authenticate: false,
+            templateUrl: 'app/catalog/catalog.arrivals.html'
+        };
+		
+		var catalogAdvancedSearch = {
+            name: 'catalog.advancedsearch',
+            parent: catalog,
+            url: '/advancedsearch',
+			data: {
+				'selectedTab' : 2
+			},
+			authenticate: false,
+            templateUrl: 'app/catalog/catalog.advancedsearch.html'
         };
 
         var catalogItemDetails = {
             name: 'catalog.details',
-            parent: catalog,
-            url: '/:libraryItemId',
-            template: 'app/catalog/catalog.details.html',
+			parent: catalog,
+            url: '/{catalogItemId:[0-9]+}',
+			authenticate: false,
+            templateUrl: 'app/catalog/catalog.item.html',
             controller:'CatalogItemController',
-            controllerAs: 'vm'
+            controllerAs: 'vm',
+			resolve:{
+				catalogItem: ['CatalogService', '$stateParams', function(CatalogService, $stateParams){
+					return CatalogService.getCatalogItem($stateParams.catalogItemId, 'MAR');
+				}]
+			}
         };
 
 		$stateProvider
@@ -55,9 +79,9 @@
 
 		mainMenuProvider.addMenuItem({
 			name: 'Catalog',
-			state: catalog.name,
+			state: catalogSearch.name,
 			order: 2,
-			icon: 'action:ic_alarm_24px'
+			icon: 'action:ic_book_24px'
 		});
 	}
 

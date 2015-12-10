@@ -1,9 +1,9 @@
 (function () {
 	'use strict';
 
-	// register the service as MainMenu
+	// register the service as MainToolbar
 	angular
-		.module('ddsApp.mainMenu')
+		.module('ddsApp.comp-mainMenu')
 		.directive('mainMenu', MainMenu);
 
 	// add MainMenu dependencies to inject

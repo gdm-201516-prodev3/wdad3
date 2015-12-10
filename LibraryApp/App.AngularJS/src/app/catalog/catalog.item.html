@@ -1,0 +1,113 @@
+<md-card data-id="{{vm.catalogItem.id}}" class="catalog-item catalog-item--large">
+	<picture ng-if="vm.googlebook.volumeInfo.imageLinks.thumbnailMedium" class="catalog-item__cover">
+		<img ng-src="{{vm.googlebook.volumeInfo.imageLinks.thumbnailMedium}}" class="md-card-image catalog-item__cover-img" alt="{{vm.catalogItem.titel}}">
+	</picture>
+	<md-card-title>
+		<md-card-title-text>
+		<span class="md-headline catalog-item__title" ng-bind-html="vm.catalogItem.titel | renderHTML"></span>
+		</md-card-title-text>
+	</md-card-title>
+	<md-card-content>
+		<section class="md-card-content-section">
+			<span class="md-card-content-section-header">Mediatheek Informatie</span>
+			<section class="md-card-content-section-content catalog-item__meta">
+				<div ng-if="vm.catalogItem.auteur" class="catalog-item__group" layout="column" layout-gt-sm="row">
+					<div class="catalog-item__label" flex flex-gt-sm="20">
+						Auteur
+					</div>
+					<div class="catalog-item__value" flex flex-gt-sm="80">
+						<span class="catalog-item__author" ng-bind-html="vm.catalogItem.auteur | renderHTML"></span>
+					</div>
+				</div>
+				<div ng-if="vm.catalogItem.uitgever" class="catalog-item__group" layout="column" layout-gt-sm="row">
+					<div class="catalog-item__label" flex flex-gt-sm="20">
+						Uitgever
+					</div>
+					<div class="catalog-item__value" flex flex-gt-sm="80">
+						<span class="catalog-item__producer"><span>Uitgegeven door </span>{{vm.catalogItem.uitgever}}</span><span class="catalog-item__year"><span> in </span><span ng-bind-html="vm.catalogItem.jaar | renderHTML"></span></span>
+					</div>
+				</div>
+				<div class="catalog-item__group" layout="column" layout-gt-sm="row">
+					<div class="catalog-item__label" flex flex-gt-sm="20">
+						Uitgavevorm
+					</div>
+					<div class="catalog-item__value" flex flex-gt-sm="80">
+						<span class="catalog-item__type"><md-icon md-svg-icon="{{ vm.catalogItem.uitgavenvorm  | iconForCatalogItemType }}"></md-icon><span ng-bind-html="vm.catalogItem.uitgavenvorm | renderHTML"></span>
+					</div>
+				</div>
+				<div ng-if="vm.catalogItem.taal" class="catalog-item__group" layout="column" layout-gt-sm="row">
+					<div class="catalog-item__label" flex flex-gt-sm="20">
+						Taal
+					</div>
+					<div class="catalog-item__value" flex flex-gt-sm="80">
+						<span class="catalog-item__language" ng-bind-html="vm.catalogItem.taal | renderHTML"></span>
+					</div>
+				</div>
+				<div ng-if="vm.catalogItem.bladzijden"  class="catalog-item__group" layout="column" layout-gt-sm="row">
+					<div class="catalog-item__label" flex flex-gt-sm="20">
+						Kenmerken
+					</div>
+					<div class="catalog-item__value" flex flex-gt-sm="80">
+						<span class="catalog-item__pages" ng-bind-html="vm.catalogItem.bladzijden | renderHTML"></span>
+					</div>
+				</div>
+				<div ng-if="vm.catalogItem.isbn" class="catalog-item__group" layout="column" layout-gt-sm="row">
+					<div class="catalog-item__label" flex flex-gt-sm="20">
+						ISBN
+					</div>
+					<div class="catalog-item__value" flex flex-gt-sm="80">
+						<span class="catalog-item__isbn">{{vm.catalogItem.isbn}}</span>
+					</div>
+				</div>
+				<div ng-if="vm.catalogItem.trefwoord" class="catalog-item__group" layout="column" layout-gt-sm="row">
+					<div class="catalog-item__label" flex flex-gt-sm="20">
+						Trefwoorden
+					</div>
+					<div class="catalog-item__value" flex flex-gt-sm="80">
+						<span class="catalog-item__keywords" ng-bind-html="vm.catalogItem.trefwoord | renderHTML"></span>
+					</div>
+				</div>
+				<div ng-if="vm.catalogItem.category" class="catalog-item__group" layout="column" layout-gt-sm="row">
+					<div class="catalog-item__label" flex flex-gt-sm="20">
+						Categorieën
+					</div>
+					<div class="catalog-item__value" flex flex-gt-sm="80">
+						<span class="catalog-item__categories" ng-bind-html="vm.catalogItem.category | renderHTML"></span>
+					</div>
+				</div>
+				<div ng-if="vm.catalogItem.siso"  class="catalog-item__group" layout="column" layout-gt-sm="row">
+					<div class="catalog-item__label" flex flex-gt-sm="20">
+						SISO
+					</div>
+					<div class="catalog-item__value" flex flex-gt-sm="80">
+						<span class="catalog-item__siso"><span class="icon-siso"></span>{{vm.catalogItem.siso}}</span>
+					</div>
+				</div>
+			</section>
+		</section>
+		<section ng-if="vm.googlebook" class="md-card-content-section catalog-item__gb">
+			<span class="md-card-content-section-header">Google Books Informatie</span>
+			<section class="md-card-content-section-content">
+				<span class="catalog-item__gbdescription">{{vm.googlebook.volumeInfo.description | renderHTML}}</span>
+			</section>
+			<section class="md-card-content-section-content">
+				<div ng-if="vm.googlebook.volumeInfo.averageRating" class="catalog-item__group" layout="column" layout-gt-sm="row">
+					<div class="catalog-item__label" flex flex-gt-sm="20">
+						Rating
+					</div>
+					<div class="catalog-item__value" flex flex-gt-sm="80">
+						<span class="catalog-item__author">{{vm.googlebook.volumeInfo.averageRating}} ({{vm.googlebook.volumeInfo.ratingsCount}})</span>
+					</div>
+				</div>
+				<div ng-if="vm.googlebook.volumeInfo.infoLink " class="catalog-item__group" layout="column" layout-gt-sm="row">
+					<div class="catalog-item__label" flex flex-gt-sm="20">
+						Link
+					</div>
+					<div class="catalog-item__value" flex flex-gt-sm="80">
+						<span class="catalog-item__author"><a href="{{vm.googlebook.volumeInfo.infoLink}}" title="Informatie op Google van {{vm.googlebook.volumeInfo.title}}">{{vm.googlebook.volumeInfo.infoLink | renderHTML}}</span>
+					</div>
+				</div>
+			</section>
+		</section>
+	</md-card-content>
+</md-card>

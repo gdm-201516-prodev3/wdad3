@@ -146,7 +146,7 @@ namespace App.WWW.Areas.Backoffice.Controllers
                 if(!ModelState.IsValid)
                     throw new Exception("The Post model is not valid!");
                     
-                var originalModel = _libraryContext.Posts.FirstOrDefault(m => m.Id == model.Post.Id);
+                var originalModel = _libraryContext.Posts.Include(p => p.Categories).FirstOrDefault(m => m.Id == model.Post.Id);
                 
                 if(originalModel == null)
                     throw new Exception("The existing Post: " + model.Post.Title + " doesn't exists anymore!");
@@ -156,14 +156,14 @@ namespace App.WWW.Areas.Backoffice.Controllers
                 originalModel.Description = model.Post.Description;
                 originalModel.Body = model.Post.Body;
                 originalModel.LibraryId = model.Post.LibraryId;
-                /*if(originalModel.Categories != null) 
+                if(originalModel.Categories != null) 
                 {
                     originalModel.Categories.Clear();
                 }
                 else
                 {
                     originalModel.Categories = new List<PostCategory>();
-                }*/
+                }
                
                 var entityEntry = _libraryContext.Posts.Attach(originalModel);
                 _libraryContext.Entry(originalModel).State = EntityState.Modified;
@@ -172,28 +172,26 @@ namespace App.WWW.Areas.Backoffice.Controllers
                    throw new Exception("The Post model could not be saved!");
                 }
                 
-                /*var post = entityEntry.Entity;
-                
                 if(model.SelectedCategoryIds != null && model.SelectedCategoryIds.Count() > 0) 
                 {
                     foreach(var categoryId in model.SelectedCategoryIds)
                     {
-                        post.Categories.Add(new PostCategory{
+                        originalModel.Categories.Add(new PostCategory{
                            PostId = originalModel.Id,
                            CategoryId = categoryId 
                         });
                     }
                 }
                 
-                _libraryContext.Posts.Attach(post);
-                _libraryContext.Entry(post).State = EntityState.Modified;
+                _libraryContext.Posts.Attach(originalModel);
+                _libraryContext.Entry(originalModel).State = EntityState.Modified;
                 
                 if (_libraryContext.SaveChanges() == 0)
                 {
                    throw new Exception("The Post model could not be saved!");
-                } */
+                }
                 
-               //return RedirectToAction("Index");
+                return RedirectToAction("Index");
             
             }
             catch(Exception ex)

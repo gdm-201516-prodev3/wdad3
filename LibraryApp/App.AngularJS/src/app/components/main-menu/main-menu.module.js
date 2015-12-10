@@ -13,8 +13,8 @@
 (function () {
 	'use strict';
 
-	angular.module('ddsApp.mainMenu', [
-		'ddsApp.lodash'
+	angular.module('ddsApp.comp-mainMenu', [
+		'ddsApp.comp-lodash'
 	])
 
 })();

@@ -1,0 +1,40 @@
+<form name="searchForm">
+	<div layout layout-sm="column">
+		<md-input-container flex>
+			<label>Zoeken naar</label>
+			<input name="searchForm.searchField" ng-model="vm.searchItems.SearchField" required md-maxlength="128" minlength="2">
+			<div ng-messages="searchForm.searchField.$error" ng-show="searchForm.searchField.$dirty">
+			<div ng-message="required">Dit is vereist!</div>
+			<div ng-message="md-maxlength">De zoekstring is te lang!</div>
+			<div ng-message="minlength">De zoekstring moet minimaal twee karakters bevatten!</div>
+			</div>
+		</md-input-container>
+		<md-input-container>
+			<label>Ordenen op</label>
+			<md-select name="searchForm.sortOrder" ng-model="vm.searchItems.SortOrder">
+				<md-option ng-repeat="s in vm.sortOrders" value="{{s.value}}">
+				{{s.nameNL}}
+				</md-option>
+			</md-select>
+		</md-input-container>
+		<md-input-container>
+			<md-button class="md-raised md-primary" ng-click="vm.getCatalogItems()">Zoeken</md-button>
+		</md-input-container>
+	</div>
+</form>
+<md-card data-ng-repeat="item in vm.catalogItems" class="catalog-item catalog-item--small">
+	<md-card-title>
+		<md-card-title-text>
+		<span class="md-headline catalog-item__title">{{ item.titel }}</span>
+		</md-card-title-text>
+	</md-card-title>
+	<md-card-content class="catalog-item__content">
+		<span ng-if="item.auteur" class="catalog-item__author">{{ item.auteur }}</span>
+		<span class="catalog-item__type"><md-icon md-svg-icon="{{ item.uitgavenvorm  | iconForCatalogItemType }}"></md-icon>{{ item.uitgavenvorm }}</span>
+		<span class="catalog-item__year">{{ item.jaar }}</span>
+	</md-card-content>
+	<md-card-actions layout="row" layout-align="end center">
+		<md-button data-ui-sref="catalog.details({catalogItemId: {{ item.id }} })" md-no-ink class="md-primary">Read more</md-button>
+	</md-card-actions>
+</md-card>
+<md-button flex class="md-raised md-primary" ng-click="vm.getNextCatalogItems(vm.pagingItems.Page + 1)" ng-if="(vm.pagingItems.Page + 1) <= vm.pagingItems.PageCount">Laad meer items...</md-button>

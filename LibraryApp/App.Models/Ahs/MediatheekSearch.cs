@@ -23,6 +23,11 @@ namespace App.Models.Ahs
         [Display(Name = "Selectie volgorde")]
         SelectionOrder = 99
     }
+    
+    public class MediatheekDetailSearch
+    {
+        public string LibraryCode { get; set; }
+    }
 
     public class MediatheekSimpleSearch
     {

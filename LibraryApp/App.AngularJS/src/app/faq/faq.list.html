@@ -1,0 +1,13 @@
+<main-toolbar></main-toolbar>
+<md-content class="dds-container">
+	<!-- FAQ item -->
+	<md-card data-ng-repeat="faq in vm.faqs">
+		<md-card-title>
+			<md-card-title-text>
+				<span class="md-headline">{{ faq.question }}</span>
+			</md-card-title-text>
+		</md-card-title>
+		<md-card-content ng-bind-html="faq.answer | renderHTML">
+		</md-card-content>
+	</md-card><!-- End FAQ item -->
+</md-content>

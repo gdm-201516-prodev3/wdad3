@@ -1,0 +1,17 @@
+<!-- Catalog Arrival -->
+<md-card data-ng-repeat="arrival in vm.catalogArrivals" class="catalog-item catalog-item--small">
+	<md-card-title>
+		<md-card-title-text>
+		<span class="md-headline catalog-item__title" ng-bind-html="arrival.titel | renderHTML"></span>
+		</md-card-title-text>
+	</md-card-title>
+	<md-card-content ng-if="item.auteur  || item.jaar  || item.uitgavevorm">
+		<span ng-if="item.auteur" class="catalog-item__author">{{ item.auteur | renderHTML}}</span>
+		<span ng-if="item.jaar" class="catalog-item__year">{{ item.jaar | renderHTML }}</span>
+		<span ng-if="item.uitgavevorm" class="catalog-item__type">{{ item.uitgavenvorm | renderHTML}}</span>
+	</md-card-content>
+	<md-card-actions layout="row" layout-align="end center">
+		<md-button ui-sref="catalog.details({catalogItemId: {{ arrival.id }} })" md-no-ink class="md-primary">Read more</md-button>
+	</md-card-actions>
+</md-card><!-- End Catalog Arrival -->
+<md-button flex class="md-raised md-primary" ng-click="vm.getNextCatalogArrivals(vm.pagingArrivals.Page + 1)" ng-if="(vm.pagingArrivals.Page + 1) <= vm.pagingArrivals.PageCount">Laad meer items...</md-button>

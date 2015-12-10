@@ -22,10 +22,10 @@ namespace App.API.Controllers
         }
         
         // GET api/libraryitem/MAR/693221
-        [HttpGet("{libraryCode}/{libraryItemId}", Name = "GetLibraryItemById")]
-        public IActionResult GetLibraryItemById(string libraryCode, int libraryItemId)
+        [HttpGet("{libraryItemId}", Name = "GetLibraryItemById")]
+        public IActionResult GetLibraryItemById(int libraryItemId, [FromQuery]MediatheekDetailSearch search)
         {
-            var libraryItem = _mediatheekService.GetLibraryItemById(libraryCode, libraryItemId);
+            var libraryItem = _mediatheekService.GetLibraryItemById(search.LibraryCode, libraryItemId);
             if (libraryItem == null)
             {
                 return HttpNotFound();
